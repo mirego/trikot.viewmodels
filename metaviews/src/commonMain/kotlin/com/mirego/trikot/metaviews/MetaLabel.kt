@@ -3,6 +3,7 @@ package com.mirego.trikot.metaviews
 import com.mirego.trikot.metaviews.properties.Color
 import com.mirego.trikot.metaviews.properties.MetaSelector
 import com.mirego.trikot.metaviews.resource.Font
+import com.mirego.trikot.metaviews.text.RichText
 import org.reactivestreams.Publisher
 
 interface MetaLabel : MetaView {
@@ -14,7 +15,7 @@ interface MetaLabel : MetaView {
     /**
      * Label rich texts. Use this instead of {@link #text text} when not null
      */
-    val richTexts: Publisher<List<RichText>>?
+    val richTexts: Publisher<RichText>?
     /**
      * Label font. FontManager should be configured by platform.
      */
