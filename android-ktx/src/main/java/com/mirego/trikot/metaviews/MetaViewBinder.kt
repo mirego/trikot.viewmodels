@@ -7,7 +7,7 @@ import com.mirego.trikot.metaviews.properties.MetaAction
 import com.mirego.trikot.streams.android.ktx.observe
 
 private val NoMetaView = MutableMetaView()
-    .apply { hidden.value = true } as MetaView
+        .apply { hidden.value = true } as MetaView
 
 @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
 fun View.bindMetaView(metaView: MetaView?, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
@@ -28,14 +28,11 @@ fun View.bindOnTap(metaView: MetaView, lifecycleOwnerWrapper: LifecycleOwnerWrap
                 isClickable = false
             }
             else -> setOnClickListener { view ->
-                view.isClickable = false
-                view.postDelayed({
-                    try {
-                        view.isClickable = true
-                    } catch (e: Exception) {
-                    }
-                }, NEXT_CLICK_THRESHOLD)
-                action.execute(this)
+                with(view) {
+                    isClickable = false
+                    postDelayed({ isClickable = true }, NEXT_CLICK_THRESHOLD)
+                    action.execute(this)
+                }
             }
         }
     }
