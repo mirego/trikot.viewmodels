@@ -45,22 +45,20 @@ object MetaButtonBinder {
 
             CombineLatest.combine2(it.imageAlignment, it.imageResource)
                     .observe(lifecycleOwnerWrapper.lifecycleOwner) { (alignment, selector) ->
-                        alignment?.let {
-                            selector?.let {
-                                val drawable = selector.asDrawable(textView.context)
-                                with(textView) {
-                                    when (alignment) {
-                                        Alignment.LEFT -> drawableStart = drawable
-                                        Alignment.TOP -> drawableTop = drawable
-                                        Alignment.RIGHT -> drawableEnd = drawable
-                                        Alignment.BOTTOM -> drawableBottom = drawable
-                                        else -> {
-                                            drawableStart = null
-                                            drawableTop = null
-                                            drawableEnd = null
-                                            drawableBottom = null
-                                        }
-                                    }
+                        if (alignment == null || selector == null) return@observe
+
+                        val drawable = selector.asDrawable(textView.context)
+                        with(textView) {
+                            when (alignment) {
+                                Alignment.LEFT -> drawableStart = drawable
+                                Alignment.TOP -> drawableTop = drawable
+                                Alignment.RIGHT -> drawableEnd = drawable
+                                Alignment.BOTTOM -> drawableBottom = drawable
+                                else -> {
+                                    drawableStart = null
+                                    drawableTop = null
+                                    drawableEnd = null
+                                    drawableBottom = null
                                 }
                             }
                         }
