@@ -7,10 +7,13 @@ import com.mirego.trikot.metaviews.properties.MetaAction
 import com.mirego.trikot.streams.android.ktx.observe
 
 private val NoMetaView = MutableMetaView()
-        .apply { hidden.value = true } as MetaView
+    .apply { hidden.value = true } as MetaView
 
 @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
-fun View.bindMetaView(metaView: MetaView?, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
+fun View.bindMetaView(
+    metaView: MetaView?,
+    lifecycleOwnerWrapper: LifecycleOwnerWrapper
+) {
     (metaView ?: NoMetaView).let {
         it.hidden.observe(lifecycleOwnerWrapper.lifecycleOwner) { isHidden ->
             visibility = if (isHidden) View.GONE else View.VISIBLE

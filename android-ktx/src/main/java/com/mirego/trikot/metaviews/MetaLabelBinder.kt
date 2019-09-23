@@ -77,7 +77,15 @@ object MetaLabelBinder {
         hiddenVisibility: HiddenVisibility,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
-        textView.bindMetaView(metaLabel, lifecycleOwnerWrapper)
+        metaLabel.hidden.observe(lifecycleOwnerWrapper.lifecycleOwner) { hidden ->
+            textView.visibility = if (hidden) hiddenVisibility.value else View.VISIBLE
+        }
+
+        metaLabel.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
+            textView.alpha = alpha
+        }
+
+        textView.bindOnTap(metaLabel, lifecycleOwnerWrapper)
     }
 }
 
