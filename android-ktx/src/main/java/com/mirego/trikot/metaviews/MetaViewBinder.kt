@@ -16,6 +16,10 @@ fun View.bindMetaView(metaView: MetaView?, lifecycleOwnerWrapper: LifecycleOwner
             visibility = if (isHidden) View.GONE else View.VISIBLE
         }
 
+        it.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
+            setAlpha(alpha)
+        }
+
         bindOnTap(it, lifecycleOwnerWrapper)
     }
 }

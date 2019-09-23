@@ -60,6 +60,7 @@ object MetaInputTextBinder {
                 )
             }
         }
+        editText.bindMetaView(metaInputText, lifecycleOwnerWrapper)
     }
 
     private fun addTextWatcher(
