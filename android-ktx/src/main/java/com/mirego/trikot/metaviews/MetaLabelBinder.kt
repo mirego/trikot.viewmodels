@@ -78,7 +78,7 @@ object MetaLabelBinder {
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         metaLabel.hidden.observe(lifecycleOwnerWrapper.lifecycleOwner) { hidden ->
-            textView.visibility = if (hidden) hiddenVisibility.value else View.VISIBLE
+            with(textView) { visibility = if (hidden) hiddenVisibility.value else View.VISIBLE }
         }
 
         metaLabel.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
