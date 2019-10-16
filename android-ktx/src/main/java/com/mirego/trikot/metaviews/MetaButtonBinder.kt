@@ -146,10 +146,17 @@ object MetaButtonBinder {
                     }
                 }
 
-            it.backgroundColor.asLiveData()
+            it.textColor.asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                    selector.default?.let {
+                        button.setTextColor(it.toIntColor())
+                    }
+                }
+
+            it.backgroundImageResource.asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                     if (selector.hasAnyValue) {
-                        button.backgroundTintList = selector.toColorStateList()
+                        button.background = selector.asDrawable(button.context)
                     }
                 }
         }
@@ -194,3 +201,5 @@ fun ImageResource.resourceId(context: Context): Int? {
 fun ImageResource.asDrawable(context: Context): Drawable? {
     return resourceId(context)?.let { resourceId -> context.getDrawable(resourceId) }
 }
+
+val MetaSelector<ImageResource>.hasAnyValue: Boolean get() = default != null || selected != null || disabled != null || highlighted != null
