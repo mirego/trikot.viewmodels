@@ -1,6 +1,9 @@
 package com.mirego.trikot.metaviews
 
+import android.R
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
@@ -144,6 +147,28 @@ object MetaButtonBinder {
                             }
                         }
                     }
+                }
+
+            it.backgroundColor.asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                    val defaultColor =
+                        Color.parseColor(selector.default?.hexARGB("#") ?: "#00000000")
+                    val hoveredColor =
+                        selector.highlighted?.let { Color.parseColor(it.hexARGB("#")) }
+                            ?: defaultColor
+                    val selectedColor =
+                        selector.selected?.let { Color.parseColor(it.hexARGB("#")) } ?: defaultColor
+                    val disabledColor =
+                        selector.disabled?.let { Color.parseColor(it.hexARGB("#")) } ?: defaultColor
+                    button.backgroundTintList = ColorStateList(
+                        arrayOf(
+                            intArrayOf(R.attr.state_enabled),
+                            intArrayOf(R.attr.state_hovered),
+                            intArrayOf(R.attr.state_selected),
+                            intArrayOf(-R.attr.state_enabled)
+                        ),
+                        intArrayOf(defaultColor, hoveredColor, selectedColor, disabledColor)
+                    )
                 }
 
             it.textColor.asLiveData()
