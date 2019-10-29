@@ -8,5 +8,6 @@ enum class MetaInputType {
     PASSWORD,
     PHONE_NUMBER,
     TEXT,
-    TIME
+    TIME,
+    MULTILINE
 }
