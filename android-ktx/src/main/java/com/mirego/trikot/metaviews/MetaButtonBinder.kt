@@ -121,9 +121,15 @@ object MetaButtonBinder {
     ) {
         (metaButton ?: NoMetaButton).let { it ->
             bind(button as View, it, lifecycleOwnerWrapper)
-            it.text
-                .asLiveData()
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) { button.text = it }
+
+            it.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
+                button.text = richText.asSpannableString()
+            }
+
+            it.takeUnless { it.richText != null }?.text
+                ?.observe(lifecycleOwnerWrapper.lifecycleOwner) {
+                    button.text = it
+                }
 
 
             it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
