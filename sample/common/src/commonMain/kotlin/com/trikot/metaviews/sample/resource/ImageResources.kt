@@ -1,7 +1,7 @@
-package com.trikot.sample.resource
+package com.trikot.metaviews.sample.resource
 
 import com.mirego.trikot.metaviews.resource.ImageResource
 
 enum class ImageResources : ImageResource {
-    ADD_IMAGE
+    ICON
 }

@@ -1,9 +1,6 @@
 package com.trikot.metaviews.sample.navigation
 
-import com.trikot.metaviews.sample.viewmodels.home.LabelsViewModel
-import com.trikot.metaviews.sample.viewmodels.home.ListViewModel
-import com.trikot.metaviews.sample.viewmodels.home.ViewsViewModel
-import com.trikot.metaviews.sample.viewmodels.home.ButtonsViewModel
+import com.trikot.metaviews.sample.viewmodels.home.*
 
 interface NavigationDelegate {
     fun navigateTo(destination: Destination)
@@ -13,5 +10,7 @@ interface NavigationDelegate {
 enum class Destination(val getViewModel: (NavigationDelegate) -> ListViewModel) {
     VIEWS({ ViewsViewModel(it) } ),
     LABELS({ LabelsViewModel(it) } ),
-    BUTTONS({ ButtonsViewModel(it) } )
+    BUTTONS({ ButtonsViewModel(it) } ),
+    IMAGES({ ImagesViewModel(it) } ),
+    INPUT_TEXT({ InputTextViewModel(it) } )
 }

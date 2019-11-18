@@ -23,11 +23,14 @@ class ListView: UIView {
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
+        tableView.separatorStyle = .none
         tableView.register(AutosizingCell<NavigableListItem>.self, forCellReuseIdentifier: AutosizingCell<NavigableListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<LabelListItem>.self, forCellReuseIdentifier: AutosizingCell<LabelListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<HeaderListItem>.self, forCellReuseIdentifier: AutosizingCell<HeaderListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<ViewListItem>.self, forCellReuseIdentifier: AutosizingCell<ViewListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<ButtonListItem>.self, forCellReuseIdentifier: AutosizingCell<ButtonListItem>.self.defaultReuseIdentifier)
+        tableView.register(AutosizingCell<ImageListItem>.self, forCellReuseIdentifier: AutosizingCell<ImageListItem>.self.defaultReuseIdentifier)
+        tableView.register(AutosizingCell<InputTextListItem>.self, forCellReuseIdentifier: AutosizingCell<InputTextListItem>.self.defaultReuseIdentifier)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -54,6 +57,7 @@ extension ListView: UITableViewDataSource {
         if let metaListItem = metaListItem as? MetaNavigableListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<NavigableListItem>.self, for: indexPath)
             cell.view.item = metaListItem
+            cell.accessoryType = .disclosureIndicator
             return cell
         } else if let metaListItem = metaListItem as? MetaLabelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<LabelListItem>.self, for: indexPath)
@@ -71,6 +75,14 @@ extension ListView: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ButtonListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
+        } else if let metaListItem = metaListItem as? MetaImageListItem {
+            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ImageListItem>.self, for: indexPath)
+            cell.view.item = metaListItem
+            return cell
+        } else if let metaListItem = metaListItem as? MetaInputTextListItem {
+            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<InputTextListItem>.self, for: indexPath)
+            cell.view.item = metaListItem
+            return cell
         }
 
         return UITableViewCell(frame: .zero)
@@ -80,5 +92,9 @@ extension ListView: UITableViewDataSource {
 extension ListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let metaListItem = items?[indexPath.row]
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.endEditing(true)
     }
 }

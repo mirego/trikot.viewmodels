@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+        <activity android:name=".MainActivity" android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +23,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ListActivity" android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
+        <activity android:name=".ListActivity" android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
     </application>
 </manifest>

@@ -15,6 +15,8 @@ class MetaListItemAdapter :
             is MetaHeaderListItem -> R.layout.item_header
             is MetaViewListItem -> R.layout.item_view
             is MetaButtonListItem -> R.layout.item_button
+            is MetaImageListItem -> R.layout.item_image
+            is MetaInputTextListItem -> R.layout.item_input_text
             else -> TODO()
         }
     }

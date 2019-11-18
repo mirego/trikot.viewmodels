@@ -23,8 +23,17 @@ class HomeViewModelImpl(private val delegate: NavigationDelegate) :
         MutableMetaNavigableListItem().also {
             it.title.text = "Buttons".just()
             it.onTap = MetaAction { delegate.navigateTo(Destination.BUTTONS) }.just()
+        } as MetaListItem,
+
+        MutableMetaNavigableListItem().also {
+            it.title.text = "Images".just()
+            it.onTap = MetaAction { delegate.navigateTo(Destination.IMAGES) }.just()
+        } as MetaListItem,
+
+        MutableMetaNavigableListItem().also {
+            it.title.text = "Input text".just()
+            it.onTap = MetaAction { delegate.navigateTo(Destination.INPUT_TEXT) }.just()
         } as MetaListItem
     )
-
 }
 
