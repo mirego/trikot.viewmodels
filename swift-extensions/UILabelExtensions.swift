@@ -8,8 +8,9 @@ extension UILabel {
             metaView = value
             if let metaLabel = value {
                 if let richText = metaLabel.richText {
-                    observe(richText) {[weak self] in
-                        self?.updateRichText($0)
+                    observe(richText) {[weak self] (richText: RichText) in
+                        guard let self = self else { return }
+                        self.attributedText = self.richTextToAttributedString(richText, referenceFont: self.font)
                     }
                 } else {
                     bind(metaLabel.text, \UILabel.text)
