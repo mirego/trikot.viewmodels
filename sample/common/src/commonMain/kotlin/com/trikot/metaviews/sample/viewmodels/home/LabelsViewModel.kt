@@ -52,8 +52,8 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
         MutableHeaderListItem(".textColor"),
         MutableMetaLabelListItem().also {
             it.label.onTap = MetaAction { navigationDelegate.showAlert("Tapped $it") }.just()
-            it.label.text = "I am gray".just()
-            it.label.textColor = MetaSelector(Color(145, 145, 145)).just()
+            it.label.text = "I am red".just()
+            it.label.textColor = MetaSelector(Color(255, 0, 0)).just()
         }
     )
 }

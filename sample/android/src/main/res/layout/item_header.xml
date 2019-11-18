@@ -18,6 +18,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="15dp"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
         core:meta_view="@{item}">
 
@@ -28,7 +30,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:meta_view="@{item.text}"/>
+            core:meta_view="@{item.text}"
+            tools:text="Header" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -18,6 +18,8 @@ class ListView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        backgroundColor = .white
         addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -35,8 +37,8 @@ class ListView: UIView {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
 
@@ -57,7 +59,6 @@ extension ListView: UITableViewDataSource {
         if let metaListItem = metaListItem as? MetaNavigableListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<NavigableListItem>.self, for: indexPath)
             cell.view.item = metaListItem
-            cell.accessoryType = .disclosureIndicator
             return cell
         } else if let metaListItem = metaListItem as? MetaLabelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<LabelListItem>.self, for: indexPath)

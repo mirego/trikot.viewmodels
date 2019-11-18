@@ -14,7 +14,7 @@ class ViewsViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
     override val items: List<MetaListItem> = listOf(
         MutableHeaderListItem(".backgroundColor"),
         MutableMetaViewListItem().also {
-            it.view.backgroundColor = MetaSelector(Color(143, 143, 143)).just()
+            it.view.backgroundColor = MetaSelector(Color(255, 0, 0)).just()
         },
         MutableHeaderListItem(".alpha"),
         MutableMetaViewListItem().also {

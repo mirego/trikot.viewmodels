@@ -111,6 +111,13 @@ object MetaLabelBinder {
         }
 
         textView.bindOnTap(metaLabel, lifecycleOwnerWrapper)
+
+        metaLabel.backgroundColor.asLiveData()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                selector.default?.toIntColor()?.let {
+                    textView.setBackgroundColor(it)
+                }
+            }
     }
 }
 

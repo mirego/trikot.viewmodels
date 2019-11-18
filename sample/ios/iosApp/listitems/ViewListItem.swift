@@ -20,6 +20,7 @@ class ViewListItem: UIView {
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: topAnchor),
             view.bottomAnchor.constraint(equalTo: bottomAnchor),
+            view.centerXAnchor.constraint(equalTo: centerXAnchor),
             view.widthAnchor.constraint(equalToConstant: 50),
             view.heightAnchor.constraint(equalToConstant: 50)
         ])

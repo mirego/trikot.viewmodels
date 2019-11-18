@@ -15,7 +15,7 @@ import com.trikot.metaviews.sample.resource.ImageResources
 
 class ButtonsViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
     override val items: List<MetaListItem> = listOf(
-        MutableHeaderListItem(".backgroundColor"),
+        MutableHeaderListItem(".backgroundColor (normal + highlighted)"),
         MutableMetaButtonListItem().also {
             it.button.onTap = MetaAction { }.just()
             it.button.backgroundColor = MetaSelector(Color(143, 143, 143), Color(255, 0, 0)).just()

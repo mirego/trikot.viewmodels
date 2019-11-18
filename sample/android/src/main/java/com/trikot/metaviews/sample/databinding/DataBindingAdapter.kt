@@ -40,7 +40,7 @@ abstract class DataBindingAdapter<T>(
 }
 
 class DefaultDiffUtilCallback<T> : DiffUtil.ItemCallback<T>() {
-    override fun areItemsTheSame(oldItem: T, newItem: T) = oldItem == newItem
-    override fun areContentsTheSame(oldItem: T, newItem: T) = areItemsTheSame(oldItem, newItem)
+    override fun areItemsTheSame(oldItem: T, newItem: T) = false
+    override fun areContentsTheSame(oldItem: T, newItem: T) = false
 }
 

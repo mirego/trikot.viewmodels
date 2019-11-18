@@ -19,13 +19,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:background="#000000">
+        tools:context=".MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/datasets"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="#FFFFFF"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
