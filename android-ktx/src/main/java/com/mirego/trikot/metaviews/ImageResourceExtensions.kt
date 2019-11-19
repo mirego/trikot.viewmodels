@@ -55,7 +55,7 @@ fun ImageResource.asDrawable(
 ): Drawable? {
     return resourceId(context)?.let { resourceId -> context.getDrawable(resourceId) }?.also { drawable ->
         if (tintColors?.hasAnyValue == true) {
-            drawable.setTintList(tintColors.toColorStateList())
+            drawable.mutate().setTintList(tintColors.toColorStateList())
         }
     }
 }
