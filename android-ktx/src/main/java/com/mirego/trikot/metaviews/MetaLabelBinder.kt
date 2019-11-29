@@ -88,26 +88,7 @@ object MetaLabelBinder {
                     return@observe
                 }
 
-                val defaultColor =
-                    Color.parseColor(selector.default?.hexARGB("#") ?: "#00000000")
-                val hoveredColor =
-                    selector.highlighted?.let { Color.parseColor(it.hexARGB("#")) }
-                        ?: defaultColor
-                val selectedColor =
-                    selector.selected?.let { Color.parseColor(it.hexARGB("#")) }
-                        ?: defaultColor
-                val disabledColor =
-                    selector.disabled?.let { Color.parseColor(it.hexARGB("#")) }
-                        ?: defaultColor
-                textView.backgroundTintList = ColorStateList(
-                    arrayOf(
-                        intArrayOf(R.attr.state_enabled),
-                        intArrayOf(R.attr.state_hovered),
-                        intArrayOf(R.attr.state_selected),
-                        intArrayOf(-R.attr.state_enabled)
-                    ),
-                    intArrayOf(defaultColor, hoveredColor, selectedColor, disabledColor)
-                )
+                textView.backgroundTintList = selector.toColorStateList()
             }
 
         textView.bindOnTap(metaLabel, lifecycleOwnerWrapper)
