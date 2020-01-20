@@ -34,7 +34,7 @@ extension UIImageView {
             let cancellableManagerProvider = CancellableManagerProvider()
             cancellableManager.add(cancellable: cancellableManagerProvider)
 
-            self?.observe(cancellableManager: cancellableManager, publisher: metaImage.imageFlow(width: Int32(self?.frame.width ?? 0) * 2, height: Int32(self?.frame.height ?? 0) * 2)) {[weak self] (imageFlow: ImageFlow) in
+            self?.observe(cancellableManager: cancellableManager, publisher: metaImage.imageFlow(width: Int32(self?.frame.width ?? 0 * UIScreen.main.scale), height: Int32(self?.frame.height ?? 0 * UIScreen.main.scale))) {[weak self] (imageFlow: ImageFlow) in
                 self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow)
             }
         }
