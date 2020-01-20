@@ -71,12 +71,12 @@ extension UIImageView {
         MrFreeze().freeze(objectToFreeze: cancellableManager)
 
         URLSession.shared.dataTask(with: URL) {[weak self] data, response, error in
-            if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data) {
+            DispatchQueue.main.async {
+                if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                    let data = data, error == nil,
+                    let image = UIImage(data: data) {
 
-                DispatchQueue.main.async {
                     guard let self = self else { return }
                     self.contentMode = objc_getAssociatedObject(self, USER_CONTENT_MODE_KEY) as? ContentMode ?? .scaleToFill
                     self.image = image
@@ -84,9 +84,7 @@ extension UIImageView {
                     if let onSuccess = imageFlow.onSuccess {
                         self.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onSuccess)
                     }
-                }
-            } else if let onError = imageFlow.onError {
-                DispatchQueue.main.async {
+                } else if let onError = imageFlow.onError {
                     self?.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onError)
                 }
             }
