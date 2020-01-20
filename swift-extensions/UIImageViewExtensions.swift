@@ -108,12 +108,14 @@ public class DefaultMetaImageHandler: MetaImageHandler {
         if let meta = metaImage {
             let cancellableManagerProvider = CancellableManagerProvider()
 
+            let imageFlowPublisher = meta.imageFlow(width: Int32(imageView.frame.width ?? 0 * UIScreen.main.scale), height: Int32(imageView.frame.height ?? 0 * UIScreen.main.scale))
+
             imageView.restoreContentMode()
-            observeImageFlow(meta, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView)
+            observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView)
 
             if isImageDependantOnViewSize {
                 let sizeObservationCancellation = KeyValueObservationHolder(imageView.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
-                    if change.newValue?.size != change.oldValue?.size { self?.observeImageFlow(meta, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView) }
+                    if change.newValue?.size != change.oldValue?.size { self?.observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView) }
                 })
 
                 imageView.trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
@@ -125,11 +127,11 @@ public class DefaultMetaImageHandler: MetaImageHandler {
         }
     }
 
-    private func observeImageFlow(_ metaImage: MetaImage, cancellableManager: CancellableManager, imageView: UIImageView) {
+    private func observeImageFlow(_ imageFlowPublisher: Publisher, cancellableManager: CancellableManager, imageView: UIImageView) {
         let cancellableManagerProvider = CancellableManagerProvider()
         cancellableManager.add(cancellable: cancellableManagerProvider)
 
-        imageView.observe(cancellableManager: cancellableManager, publisher: metaImage.imageFlow(width: Int32(imageView.frame.width ?? 0 * UIScreen.main.scale), height: Int32(imageView.frame.height ?? 0 * UIScreen.main.scale))) {[weak self] (imageFlow: ImageFlow) in
+        imageView.observe(cancellableManager: cancellableManager, publisher: imageFlowPublisher) {[weak self] (imageFlow: ImageFlow) in
             self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow, imageView: imageView)
         }
     }
@@ -177,6 +179,12 @@ public class DefaultMetaImageHandler: MetaImageHandler {
                         self?.imageCache.setObject(image, forKey: url.absoluteString as NSString, cost: image.cacheCost)
                         imageView.restoreContentMode()
                         imageView.image = image
+
+                        if let onSuccess = imageFlow.onSuccess {
+                            self?.observeImageFlow(onSuccess, cancellableManager: cancellableManager, imageView: imageView)
+                        }
+                    } else if let onError = imageFlow.onError {
+                        self?.observeImageFlow(onError, cancellableManager: cancellableManager, imageView: imageView)
                     }
                 }
             }
