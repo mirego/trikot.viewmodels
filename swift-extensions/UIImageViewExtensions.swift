@@ -1,114 +1,26 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
+private let META_IMAGE_HANDLER_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+private let USER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+private let USER_PLACEHOLDER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+private let USER_IMAGERESOURCE_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+
+public protocol MetaImageHandler {
+    func handleImage(metaImage: MetaImage?, on imageView: UIImageView)
+}
+
 extension UIImageView {
-    public var metaImage: MetaImage? {
-        get { return trikotMetaView() }
+    public static var metaImageHandler: MetaImageHandler {
         set(value) {
-            metaView = value
-            if value != nil {
-                let cancellableManagerProvider = CancellableManagerProvider()
-
-                restoreContentMode()
-                downloadImageIfNeeded(cancellableManagerProvider.cancelPreviousAndCreate())
-
-                let sizeObservationCancellation = KeyValueObservationHolder(self.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
-                    if change.newValue?.size != change.oldValue?.size { self?.downloadImageIfNeeded(cancellableManagerProvider.cancelPreviousAndCreate()) }
-                })
-
-                trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
-                trikotInternalPublisherCancellableManager.add(cancellable: cancellableManagerProvider)
-            }
-        }
-    }
-
-    func downloadImageIfNeeded(_ cancellableManager: CancellableManager) {
-        guard let metaImage = metaImage else { return }
-        observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: metaImage.imageFlow(width: Int32(frame.width) * 2, height: Int32(frame.height) * 2))
-    }
-
-    func observeImageFlow(cancellableManager: CancellableManager, imageFlowPublisher: Publisher) {
-        guard let metaImage = metaImage else { return }
-
-        DispatchQueue.main.async {[weak self] in
-            let cancellableManagerProvider = CancellableManagerProvider()
-            cancellableManager.add(cancellable: cancellableManagerProvider)
-
-            self?.observe(cancellableManager: cancellableManager, publisher: metaImage.imageFlow(width: Int32(self?.frame.width ?? 0 * UIScreen.main.scale), height: Int32(self?.frame.height ?? 0 * UIScreen.main.scale))) {[weak self] (imageFlow: ImageFlow) in
-                self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow)
-            }
-        }
-    }
-
-    func doLoadImageFlow(cancellableManager: CancellableManager, imageFlow: ImageFlow) {
-        var unProcessedImage: UIImage?
-        if let imageResource = imageFlow.imageResource {
-            unProcessedImage = MetaImageResourceManager.shared.image(fromResource: imageResource)
-        }
-        if let imageResource = imageFlow.placeholderImageResource {
-            if let placeholderContentMode = placeholderContentMode {
-                self.saveContentMode()
-                self.contentMode = placeholderContentMode
-            }
-            unProcessedImage = MetaImageResourceManager.shared.image(fromResource: imageResource)
-        }
-        if let unProcessedImage = unProcessedImage {
-            if let tintColor = imageFlow.tintColor {
-                self.image = unProcessedImage.imageWithTintColor(tintColor.color())
-            } else {
-                self.image = unProcessedImage
-            }
-        }
-
-        downloadImageFlowIfNeeded(cancellableManager: cancellableManager, imageFlow: imageFlow)
-    }
-
-    func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, imageFlow: ImageFlow) {
-        guard let url = imageFlow.url, let URL = URL(string: url) else { return }
-        MrFreeze().freeze(objectToFreeze: cancellableManager)
-
-        let dataTask = URLSession.shared.dataTask(with: URL) { [weak self] data, response, error in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                    let data = data, error == nil,
-                    let image = UIImage(data: data) {
-
-                    self.restoreContentMode()
-                    self.image = image
-
-                    if let onSuccess = imageFlow.onSuccess {
-                        self.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onSuccess)
-                    }
-                } else if let onError = imageFlow.onError {
-                    self.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onError)
-                }
-            }
-        }
-
-        cancellableManager.add(cancellable: dataTask)
-        dataTask.resume()
-    }
-
-    private func saveContentMode() {
-        savedContentMode = contentMode
-    }
-
-    private func restoreContentMode() {
-        if let savedContentMode = savedContentMode {
-            self.contentMode = savedContentMode
-        } else {
-            self.savedContentMode = nil
-        }
-    }
-
-    private var savedContentMode: ContentMode? {
-        set(value) {
-            objc_setAssociatedObject(self, USER_CONTENT_MODE_KEY, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, META_IMAGE_HANDLER_KEY, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
         get {
-            return objc_getAssociatedObject(self, USER_CONTENT_MODE_KEY) as? ContentMode
+            if let customHandler = objc_getAssociatedObject(self, META_IMAGE_HANDLER_KEY) as? MetaImageHandler {
+                return customHandler
+            } else {
+                return DefaultMetaImageHandler.shared
+            }
         }
     }
 
@@ -130,10 +42,156 @@ extension UIImageView {
             return objc_getAssociatedObject(self, USER_PLACEHOLDER_CONTENT_MODE_KEY) as? ContentMode
         }
     }
+
+    private var savedContentMode: ContentMode? {
+        set(value) {
+            objc_setAssociatedObject(self, USER_CONTENT_MODE_KEY, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+        get {
+            return objc_getAssociatedObject(self, USER_CONTENT_MODE_KEY) as? ContentMode
+        }
+    }
+
+    public var metaImage: MetaImage? {
+        get { return trikotMetaView() }
+        set(value) {
+            metaView = value
+            UIImageView.metaImageHandler.handleImage(metaImage: value, on: self)
+        }
+    }
+
+    public func saveContentMode() {
+        savedContentMode = contentMode
+    }
+
+    public func restoreContentMode() {
+        if let savedContentMode = savedContentMode {
+            contentMode = savedContentMode
+        } else {
+            savedContentMode = nil
+        }
+    }
 }
 
-private let USER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
-private let USER_PLACEHOLDER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
-private let USER_IMAGERESOURCE_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+public class DefaultMetaImageHandler: MetaImageHandler {
+    public static let shared = DefaultMetaImageHandler()
+    private let imageCache = NSCache<NSString, UIImage>()
+
+    public var isImageCacheEnabled = true
+    public var isImageDependantOnViewSize = false
+
+    public var maxNumberOfImagesInCache: Int {
+        get {
+            return imageCache.countLimit
+        }
+        set {
+            imageCache.countLimit = newValue
+        }
+    }
+
+    public var maxNumberOfImagePixelsInCache: Int {
+        get {
+            return imageCache.totalCostLimit
+        }
+        set {
+            imageCache.totalCostLimit = newValue
+        }
+    }
+
+    private init() { }
+
+    public func clearImageCache() {
+        imageCache.removeAllObjects()
+    }
+
+    public func handleImage(metaImage: MetaImage?, on imageView: UIImageView) {
+        if let meta = metaImage {
+            let cancellableManagerProvider = CancellableManagerProvider()
+
+            imageView.restoreContentMode()
+            observeImageFlow(meta, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView)
+
+            if isImageDependantOnViewSize {
+                let sizeObservationCancellation = KeyValueObservationHolder(imageView.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
+                    if change.newValue?.size != change.oldValue?.size { self?.observeImageFlow(meta, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView) }
+                })
+
+                imageView.trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
+            }
+
+            imageView.trikotInternalPublisherCancellableManager.add(cancellable: cancellableManagerProvider)
+        } else {
+            imageView.trikotInternalPublisherCancellableManager.cancel()
+        }
+    }
+
+    private func observeImageFlow(_ metaImage: MetaImage, cancellableManager: CancellableManager, imageView: UIImageView) {
+        let cancellableManagerProvider = CancellableManagerProvider()
+        cancellableManager.add(cancellable: cancellableManagerProvider)
+
+        imageView.observe(cancellableManager: cancellableManager, publisher: metaImage.imageFlow(width: Int32(imageView.frame.width ?? 0 * UIScreen.main.scale), height: Int32(imageView.frame.height ?? 0 * UIScreen.main.scale))) {[weak self] (imageFlow: ImageFlow) in
+            self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow, imageView: imageView)
+        }
+    }
+
+    private func doLoadImageFlow(cancellableManager: CancellableManager, imageFlow: ImageFlow, imageView: UIImageView) {
+        var unProcessedImage: UIImage?
+        if let imageResource = imageFlow.imageResource {
+            unProcessedImage = MetaImageResourceManager.shared.image(fromResource: imageResource)
+        }
+        if let imageResource = imageFlow.placeholderImageResource {
+            if let placeholderContentMode = imageView.placeholderContentMode {
+                imageView.saveContentMode()
+                imageView.contentMode = placeholderContentMode
+            }
+            unProcessedImage = MetaImageResourceManager.shared.image(fromResource: imageResource)
+        }
+        if let unProcessedImage = unProcessedImage {
+            if let tintColor = imageFlow.tintColor {
+                imageView.image = unProcessedImage.imageWithTintColor(tintColor.color())
+            } else {
+                imageView.image = unProcessedImage
+            }
+        }
+
+        downloadImageFlowIfNeeded(cancellableManager: cancellableManager, imageFlow: imageFlow, imageView: imageView)
+    }
+
+    private func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, imageFlow: ImageFlow, imageView: UIImageView) {
+        guard let urlString = imageFlow.url, let url = URL(string: urlString) else { return }
+
+        if isImageCacheEnabled, let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            imageView.restoreContentMode()
+            imageView.image = cachedImage
+        } else {
+            MrFreeze().freeze(objectToFreeze: cancellableManager)
+
+            let dataTask = URLSession.shared.dataTask(with: url) { [weak imageView, weak self] data, response, error in
+                DispatchQueue.main.async {
+                    guard let imageView = imageView else { return }
+                    if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                        let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                        let data = data, error == nil,
+                        let image = UIImage(data: data) {
+
+                        self?.imageCache.setObject(image, forKey: url.absoluteString as NSString, cost: image.cacheCost)
+                        imageView.restoreContentMode()
+                        imageView.image = image
+                    }
+                }
+            }
+            cancellableManager.add(cancellable: dataTask)
+            dataTask.resume()
+        }
+    }
+}
 
 extension URLSessionTask: Cancellable {}
+
+extension UIImage {
+    var cacheCost: Int {
+        get {
+            return Int(size.width * size.height)
+        }
+    }
+}
