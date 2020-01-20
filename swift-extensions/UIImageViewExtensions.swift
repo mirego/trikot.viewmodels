@@ -196,7 +196,7 @@ public class DefaultMetaImageHandler: MetaImageHandler {
 
 extension URLSessionTask: Cancellable {}
 
-extension UIImage {
+private extension UIImage {
     var cacheCost: Int {
         get {
             return Int(size.width * size.height)
