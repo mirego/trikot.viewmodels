@@ -165,6 +165,10 @@ public class DefaultMetaImageHandler: MetaImageHandler {
         if isImageCacheEnabled, let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
             imageView.restoreContentMode()
             imageView.image = cachedImage
+
+            if let onSuccess = imageFlow.onSuccess {
+                observeImageFlow(onSuccess, cancellableManager: cancellableManager, imageView: imageView)
+            }
         } else {
             MrFreeze().freeze(objectToFreeze: cancellableManager)
 
