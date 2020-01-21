@@ -108,7 +108,7 @@ public class DefaultMetaImageHandler: MetaImageHandler {
         if let meta = metaImage {
             let cancellableManagerProvider = CancellableManagerProvider()
 
-            let imageFlowPublisher = meta.imageFlow(width: Int32(imageView.frame.width ?? 0 * UIScreen.main.scale), height: Int32(imageView.frame.height ?? 0 * UIScreen.main.scale))
+            let imageFlowPublisher = meta.imageFlow(width: Int32(imageView.frame.width * UIScreen.main.scale), height: Int32(imageView.frame.height * UIScreen.main.scale))
 
             imageView.restoreContentMode()
             observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView)
