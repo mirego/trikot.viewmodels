@@ -2,6 +2,8 @@ package com.mirego.trikot.metaviews
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
@@ -26,7 +28,10 @@ object MetaLabelBinder {
         val label = metaLabel ?: NoMetaLabel
 
         label.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-            textView.text = richText.asSpannableString()
+            textView.text = richText.asSpannableString(lifecycleOwnerWrapper)
+            if (richText.ranges.any { it.transform is ClickableSpan }) {
+                textView.applyLinkMovementMethod()
+            }
         }
 
         label.takeUnless { it.richText != null }?.text
@@ -102,3 +107,8 @@ enum class HiddenVisibility(val value: Int) {
     INVISIBLE(View.INVISIBLE);
 }
 
+private fun TextView.applyLinkMovementMethod() {
+    if (movementMethod == null && movementMethod !is LinkMovementMethod) {
+        movementMethod = LinkMovementMethod.getInstance()
+    }
+}
