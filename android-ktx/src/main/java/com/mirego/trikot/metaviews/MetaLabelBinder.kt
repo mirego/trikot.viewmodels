@@ -3,12 +3,12 @@ package com.mirego.trikot.metaviews
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaLabel
+import com.mirego.trikot.metaviews.text.ActionTransform
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
@@ -29,7 +29,7 @@ object MetaLabelBinder {
 
         label.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
             textView.text = richText.asSpannableString(lifecycleOwnerWrapper)
-            if (richText.ranges.any { it.transform is ClickableSpan }) {
+            if (richText.ranges.any { it.transform is ActionTransform }) {
                 textView.applyLinkMovementMethod()
             }
         }
