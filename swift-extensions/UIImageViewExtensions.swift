@@ -187,10 +187,12 @@ public class DefaultMetaImageHandler: MetaImageHandler {
 
                         if let onSuccess = imageFlow.onSuccess {
                             self?.observeImageFlow(onSuccess, cancellableManager: cancellableManager, metaImage: metaImage, imageView: imageView)
+                        } else {
                             metaImage.setImageState(imageState: ImageState.success)
                         }
                     } else if let onError = imageFlow.onError {
                         self?.observeImageFlow(onError, cancellableManager: cancellableManager, metaImage: metaImage, imageView: imageView)
+                    } else {
                         metaImage.setImageState(imageState: ImageState.error)
                     }
                 }

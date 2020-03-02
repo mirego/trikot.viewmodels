@@ -102,6 +102,7 @@ object MetaImageBinder {
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
+                        } ?: run {
                             metaImage.setImageState(ImageState.SUCCESS)
                         }
                     }
@@ -123,6 +124,7 @@ object MetaImageBinder {
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
+                        } ?: run {
                             metaImage.setImageState(ImageState.ERROR)
                         }
                     }
