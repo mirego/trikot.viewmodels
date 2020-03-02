@@ -76,7 +76,6 @@ object MetaImageBinder {
             metaImage.setImageState(ImageState.SUCCESS)
         } ?: run {
             imageFlow.url?.let { url ->
-                imageView.setImageDrawable(null)
                 var requestCreator: RequestCreator? = null
                 val resourceId = imageFlow.placeholderImageResource?.resourceId(imageView.context)
                 resourceId?.let { placeholderId ->
