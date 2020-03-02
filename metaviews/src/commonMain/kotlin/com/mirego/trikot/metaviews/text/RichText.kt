@@ -1,7 +1,6 @@
 package com.mirego.trikot.metaviews.text
 
-import com.mirego.trikot.metaviews.properties.MetaAction
-import org.reactivestreams.Publisher
+import com.mirego.trikot.metaviews.properties.Color
 
 data class RichText(val text: String, val ranges: List<RichTextRange>)
 
@@ -19,4 +18,4 @@ data class StyleTransform(val style: Style) : RichTextTransform() {
     }
 }
 
-data class ActionTransform(val action: Publisher<MetaAction>) : RichTextTransform()
+data class ColorTransform(val color: Color) : RichTextTransform()

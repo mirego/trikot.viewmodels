@@ -34,7 +34,7 @@ object MetaButtonBinder {
             bind(textView as View, it, lifecycleOwnerWrapper)
 
             it.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-                textView.text = richText.asSpannableString(lifecycleOwnerWrapper)
+                textView.text = richText.asSpannableString()
             }
 
             it.takeUnless { it.richText != null }?.text
@@ -124,7 +124,7 @@ object MetaButtonBinder {
             bind(button as View, it, lifecycleOwnerWrapper)
 
             it.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-                button.text = richText.asSpannableString(lifecycleOwnerWrapper)
+                button.text = richText.asSpannableString()
             }
 
             it.takeUnless { it.richText != null }?.text

@@ -2,24 +2,19 @@ package com.mirego.trikot.metaviews
 
 import android.graphics.Typeface
 import android.text.ParcelableSpan
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.style.ClickableSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
-import android.view.View
-import com.mirego.trikot.metaviews.text.ActionTransform
 import com.mirego.trikot.metaviews.text.RichText
 import com.mirego.trikot.metaviews.text.RichTextRange
 import com.mirego.trikot.metaviews.text.StyleTransform
-import com.mirego.trikot.streams.android.ktx.observe
 
-fun RichText.asSpannableString(lifecycleOwnerWrapper: LifecycleOwnerWrapper): SpannableString {
+fun RichText.asSpannableString(): SpannableString {
     return SpannableString(text).apply {
         ranges.forEach {
             setSpan(
-                it.asSpan(lifecycleOwnerWrapper),
+                it.asSpan(),
                 it.range.first,
                 it.range.last,
                 Spanned.SPAN_EXCLUSIVE_INCLUSIVE
@@ -28,7 +23,7 @@ fun RichText.asSpannableString(lifecycleOwnerWrapper: LifecycleOwnerWrapper): Sp
     }
 }
 
-private fun RichTextRange.asSpan(lifecycleOwnerWrapper: LifecycleOwnerWrapper): Any {
+private fun RichTextRange.asSpan(): ParcelableSpan {
     return when (transform) {
         is StyleTransform -> {
             when ((transform as StyleTransform).style) {
@@ -37,15 +32,6 @@ private fun RichTextRange.asSpan(lifecycleOwnerWrapper: LifecycleOwnerWrapper): 
                 StyleTransform.Style.ITALIC -> StyleSpan(Typeface.ITALIC)
                 StyleTransform.Style.UNDERLINE -> UnderlineSpan()
                 StyleTransform.Style.BOLD_ITALIC -> StyleSpan(Typeface.BOLD_ITALIC)
-            }
-        }
-        is ActionTransform -> {
-            object: ClickableSpan() {
-                override fun onClick(widget: View) {
-                    (transform as ActionTransform).action.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                        it.execute()
-                    }
-                }
             }
         }
         else -> TODO("RichTextRange $transform not implemented")

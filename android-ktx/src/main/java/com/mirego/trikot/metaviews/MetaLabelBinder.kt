@@ -2,13 +2,11 @@ package com.mirego.trikot.metaviews
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaLabel
-import com.mirego.trikot.metaviews.text.ActionTransform
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
@@ -28,10 +26,7 @@ object MetaLabelBinder {
         val label = metaLabel ?: NoMetaLabel
 
         label.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-            textView.text = richText.asSpannableString(lifecycleOwnerWrapper)
-            if (richText.ranges.any { it.transform is ActionTransform }) {
-                textView.applyLinkMovementMethod()
-            }
+            textView.text = richText.asSpannableString()
         }
 
         label.takeUnless { it.richText != null }?.text
@@ -105,10 +100,4 @@ object MetaLabelBinder {
 enum class HiddenVisibility(val value: Int) {
     GONE(View.GONE),
     INVISIBLE(View.INVISIBLE);
-}
-
-private fun TextView.applyLinkMovementMethod() {
-    if (movementMethod == null && movementMethod !is LinkMovementMethod) {
-        movementMethod = LinkMovementMethod.getInstance()
-    }
 }
