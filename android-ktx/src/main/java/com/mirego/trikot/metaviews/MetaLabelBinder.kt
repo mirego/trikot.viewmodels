@@ -101,3 +101,4 @@ enum class HiddenVisibility(val value: Int) {
     GONE(View.GONE),
     INVISIBLE(View.INVISIBLE);
 }
+
