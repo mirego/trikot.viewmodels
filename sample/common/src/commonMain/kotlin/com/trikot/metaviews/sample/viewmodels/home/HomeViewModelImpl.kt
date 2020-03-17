@@ -73,7 +73,7 @@ fun <T> Publisher<T>.incrementCounter(
     counter: PublishSubject<Int>
 ): Publisher<Int> {
     return map {
-        val currentCount = counter.value ?: -1
+        val currentCount = counter.value ?: 0
         val nextCount = currentCount + 1
         counter.value = nextCount
         nextCount
