@@ -1,6 +1,6 @@
-package com.trikot.viewModels.sample.viewModels
+package com.trikot.viewmodels.sample.viewmodels
 
-import com.mirego.trikot.viewModels.ImageViewModel
+import com.mirego.trikot.viewmodels.ImageViewModel
 
 interface ImageListItemViewModel : ListItemViewModel {
     val image: ImageViewModel

@@ -1,16 +1,16 @@
-package com.trikot.viewModels.sample.viewModels.home
+package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.ViewModelAction
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.text.RichText
-import com.mirego.trikot.viewModels.text.RichTextRange
-import com.mirego.trikot.viewModels.text.StyleTransform
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.text.RichText
+import com.mirego.trikot.viewmodels.text.RichTextRange
+import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.streams.reactive.just
-import com.trikot.viewModels.sample.viewModels.ListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableHeaderListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableLabelListItemViewModel
-import com.trikot.viewModels.sample.navigation.NavigationDelegate
+import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 
 class LabelsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
     override val items: List<ListItemViewModel> = listOf(

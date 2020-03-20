@@ -1,17 +1,17 @@
-package com.trikot.viewModels.sample.viewModels.home
+package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.mirego.trikot.viewModels.properties.Alignment
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.ViewModelAction
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.resource.ImageResource
-import com.mirego.trikot.viewModels.text.RichText
-import com.mirego.trikot.viewModels.text.RichTextRange
-import com.mirego.trikot.viewModels.text.StyleTransform
+import com.mirego.trikot.viewmodels.properties.Alignment
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.text.RichText
+import com.mirego.trikot.viewmodels.text.RichTextRange
+import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.streams.reactive.just
-import com.trikot.viewModels.sample.viewModels.*
-import com.trikot.viewModels.sample.navigation.NavigationDelegate
-import com.trikot.viewModels.sample.resource.ImageResources
+import com.trikot.viewmodels.sample.viewmodels.*
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
+import com.trikot.viewmodels.sample.resource.ImageResources
 
 class ButtonsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
     override val items: List<ListItemViewModel> = listOf(

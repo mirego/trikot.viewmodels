@@ -1,11 +1,11 @@
-package com.mirego.trikot.viewModels.mutable
+package com.mirego.trikot.viewmodels.mutable
 
-import com.mirego.trikot.viewModels.ButtonViewModel
-import com.mirego.trikot.viewModels.factory.PropertyFactory
-import com.mirego.trikot.viewModels.properties.Alignment
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.resource.ImageResource
+import com.mirego.trikot.viewmodels.ButtonViewModel
+import com.mirego.trikot.viewmodels.factory.PropertyFactory
+import com.mirego.trikot.viewmodels.properties.Alignment
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.resource.ImageResource
 
 open class MutableButtonViewModel : MutableLabelViewModel(), ButtonViewModel {
     override var backgroundImageResource = PropertyFactory.create(StateSelector<ImageResource>())

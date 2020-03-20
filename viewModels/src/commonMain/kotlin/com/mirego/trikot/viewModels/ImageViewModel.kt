@@ -1,8 +1,8 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.ImageState
-import com.mirego.trikot.viewModels.resource.ImageResource
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.ImageState
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")

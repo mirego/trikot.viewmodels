@@ -15,11 +15,11 @@ iOS UILabel             |  Android TextView
 ![](./documentation/ios-label.png)  |  ![](./documentation/android-textview.png)
 
 ### Interfaces provides documentation
-- [ViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewModels/src/commonMain/kotlin/com/mirego/trikot/viewModels/ViewModel.kt)
-- [ButtonViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewModels/src/commonMain/kotlin/com/mirego/trikot/viewModels/ButtonViewModel.kt)
-- [LabelViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewModels/src/commonMain/kotlin/com/mirego/trikot/viewModels/LabelViewModel.kt)
-- [ImageViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewModels/src/commonMain/kotlin/com/mirego/trikot/viewModels/ImageViewModel.kt)
-- [InputTextViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewModels/src/commonMain/kotlin/com/mirego/trikot/viewModels/InputTextViewModel.kt)
+- [ViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/ViewModel.kt)
+- [ButtonViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/ButtonViewModel.kt)
+- [LabelViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/LabelViewModel.kt)
+- [ImageViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/ImageViewModel.kt)
+- [InputTextViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/InputTextViewModel.kt)
 
 
 ## Multiplatform Sample
@@ -67,11 +67,11 @@ See [android extensions](./android-ktx/README.md) for more information.
 ## Installation
 ##### Import dependencies
 ```groovy
-    api "com.mirego.trikot:viewModels:$trikot_viewmodels_version"
-    jvm "com.mirego.trikot:viewModels-jvm:$trikot_viewmodels_version"
-    js "com.mirego.trikot:viewModels-js:$trikot_viewmodels_version"
-    iosx64 "com.mirego.trikot:viewModels-iosx64:$trikot_viewmodels_version"
-    iosarm64 "com.mirego.trikot:viewModels-iosarm64:$trikot_viewmodels_version"
+    api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
+    jvm "com.mirego.trikot:viewmodels-jvm:$trikot_viewmodels_version"
+    js "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
+    iosx64 "com.mirego.trikot:viewmodels-iosx64:$trikot_viewmodels_version"
+    iosarm64 "com.mirego.trikot:viewmodels-iosarm64:$trikot_viewmodels_version"
 ```
 ## License
 

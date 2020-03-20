@@ -1,13 +1,13 @@
-package com.mirego.trikot.viewModels.mutable
+package com.mirego.trikot.viewmodels.mutable
 
-import com.mirego.trikot.viewModels.ImageFlow
-import com.mirego.trikot.viewModels.ImageHeight
-import com.mirego.trikot.viewModels.ImageWidth
-import com.mirego.trikot.viewModels.ImageViewModel
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.ImageState
-import com.mirego.trikot.viewModels.properties.SimpleImageFlow
-import com.mirego.trikot.viewModels.resource.ImageResource
+import com.mirego.trikot.viewmodels.ImageFlow
+import com.mirego.trikot.viewmodels.ImageHeight
+import com.mirego.trikot.viewmodels.ImageWidth
+import com.mirego.trikot.viewmodels.ImageViewModel
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.ImageState
+import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import com.mirego.trikot.streams.reactive.Publishers
 import org.reactivestreams.Publisher
 

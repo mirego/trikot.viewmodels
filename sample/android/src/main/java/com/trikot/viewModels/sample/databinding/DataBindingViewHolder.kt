@@ -1,12 +1,12 @@
-package com.trikot.viewModels.sample.databinding
+package com.trikot.viewmodels.sample.databinding
 
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
-import com.mirego.trikot.viewModels.LifecycleOwnerWrapper
-import com.trikot.viewModels.sample.BR
+import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
+import com.trikot.viewmodels.sample.BR
 
 class DataBindingViewHolder<T>(
     private val binding: ViewDataBinding

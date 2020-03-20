@@ -1,9 +1,9 @@
-package com.mirego.trikot.viewModels.mutable
+package com.mirego.trikot.viewmodels.mutable
 
-import com.mirego.trikot.viewModels.InputTextViewModel
-import com.mirego.trikot.viewModels.factory.PropertyFactory
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.InputTextType
+import com.mirego.trikot.viewmodels.InputTextViewModel
+import com.mirego.trikot.viewmodels.factory.PropertyFactory
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.InputTextType
 import com.mirego.trikot.streams.reactive.Publishers
 
 open class MutableInputTextViewModel : MutableViewModel(), InputTextViewModel {

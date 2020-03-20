@@ -2,6 +2,19 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 extension UIButton {
+    private struct AssociatedKeys {
+        static var actionKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+    }
+
+    private var tapAction: ViewModelAction? {
+        get {
+             return objc_getAssociatedObject(self, AssociatedKeys.actionKey) as? MetaAction
+        }
+        set {
+            objc_setAssociatedObject(self, AssociatedKeys.actionKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+
     public var buttonViewModel: ButtonViewModel? {
         get { return trikotViewModel() }
         set(value) {
@@ -20,7 +33,15 @@ extension UIButton {
                     button.updateBackgroundColor()
                 }))
 
-                addTarget(self, action: #selector(onButtonTouchUp), for: .touchUpInside)
+                observe(buttonViewModel.action) { [weak self](tapAction: ViewModelAction) in
+                    guard let self = self else { return }
+                    self.tapAction = tapAction
+                    if tapAction == ViewModelAction.Companion().None {
+                        self.removeTarget(self, action: #selector(self.onButtonTouchUp), for: .touchUpInside)
+                    } else {
+                        self.addTarget(self, action: #selector(self.onButtonTouchUp), for: .touchUpInside)
+                    }
+                }
 
                 bind(buttonViewModel.enabled, \UIButton.isEnabled)
 
@@ -184,7 +205,7 @@ extension UIButton {
 
     @objc
     private func onButtonTouchUp() {
-        guard let buttonViewModel = buttonViewModel else { return }
-        observe(buttonViewModel.action.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self ?? nil) }
+        guard let tapAction = tapAction else { return }
+        tapAction.execute(actionContext: self ?? nil)
     }
 }

@@ -1,7 +1,7 @@
-package com.mirego.trikot.viewModels.resources
+package com.mirego.trikot.viewmodels.resources
 
 import android.content.Context
-import com.mirego.trikot.viewModels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resource.ImageResource
 
 interface ImageViewModelResourceProvider {
     fun resourceIdFromResource(resource: ImageResource, context: Context): Int?

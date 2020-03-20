@@ -1,7 +1,7 @@
-package com.trikot.viewModels.sample.navigation
+package com.trikot.viewmodels.sample.navigation
 
-import com.trikot.viewModels.sample.viewModels.home.ListViewModel
-import com.trikot.viewModels.sample.viewModels.home.*
+import com.trikot.viewmodels.sample.viewmodels.home.ListViewModel
+import com.trikot.viewmodels.sample.viewmodels.home.*
 
 interface NavigationDelegate {
     fun navigateTo(destination: Destination)

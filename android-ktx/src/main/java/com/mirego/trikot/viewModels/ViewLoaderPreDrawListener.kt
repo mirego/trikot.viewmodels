@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.view.View
 import android.view.ViewTreeObserver

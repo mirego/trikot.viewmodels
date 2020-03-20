@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels.factory
+package com.mirego.trikot.viewmodels.factory
 
 import com.mirego.trikot.streams.reactive.Publishers
 import org.reactivestreams.Publisher

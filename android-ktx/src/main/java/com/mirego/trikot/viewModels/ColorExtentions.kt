@@ -1,9 +1,9 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.content.res.ColorStateList
 import android.util.StateSet
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.StateSelector
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
 
 fun Color.toIntColor(): Int {
     try {

@@ -1,7 +1,7 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.InputTextType
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.InputTextType
 import org.reactivestreams.Publisher
 
 interface InputTextViewModel : ViewModel {

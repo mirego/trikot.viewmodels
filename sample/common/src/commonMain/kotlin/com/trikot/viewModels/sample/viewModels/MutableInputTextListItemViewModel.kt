@@ -1,7 +1,7 @@
-package com.trikot.viewModels.sample.viewModels
+package com.trikot.viewmodels.sample.viewmodels
 
-import com.mirego.trikot.viewModels.mutable.MutableInputTextViewModel
-import com.mirego.trikot.viewModels.mutable.MutableViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableViewModel
 
 class MutableInputTextListItemViewModel(override var comparableId: String = "") : InputTextListItemViewModel, MutableViewModel() {
     override val inputText = MutableInputTextViewModel()

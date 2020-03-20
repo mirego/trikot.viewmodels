@@ -1,4 +1,4 @@
-package com.trikot.viewModels.sample.databinding
+package com.trikot.viewmodels.sample.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

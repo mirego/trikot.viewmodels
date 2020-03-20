@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.graphics.Typeface
 import android.text.ParcelableSpan
@@ -7,10 +7,10 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
-import com.mirego.trikot.viewModels.text.ColorTransform
-import com.mirego.trikot.viewModels.text.RichText
-import com.mirego.trikot.viewModels.text.RichTextRange
-import com.mirego.trikot.viewModels.text.StyleTransform
+import com.mirego.trikot.viewmodels.text.ColorTransform
+import com.mirego.trikot.viewmodels.text.RichText
+import com.mirego.trikot.viewmodels.text.RichTextRange
+import com.mirego.trikot.viewmodels.text.StyleTransform
 
 fun RichText.asSpannableString(): SpannableString {
     return SpannableString(text).apply {

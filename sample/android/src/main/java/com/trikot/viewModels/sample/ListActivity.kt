@@ -1,15 +1,15 @@
-package com.trikot.viewModels.sample
+package com.trikot.viewmodels.sample
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.mirego.trikot.viewModels.LifecycleOwnerWrapper
-import com.trikot.viewModels.sample.databinding.ActivityListBinding
-import com.trikot.viewModels.sample.databinding.MetaListItemAdapter
-import com.trikot.viewModels.sample.navigation.Destination
-import com.trikot.viewModels.sample.navigation.NavigationDelegate
+import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
+import com.trikot.viewmodels.sample.databinding.ActivityListBinding
+import com.trikot.viewmodels.sample.databinding.ListItemViewModelAdapter
+import com.trikot.viewmodels.sample.navigation.Destination
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import androidx.appcompat.app.AlertDialog
 
 class ListActivity: AppCompatActivity(), NavigationDelegate {
@@ -28,7 +28,7 @@ class ListActivity: AppCompatActivity(), NavigationDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityListBinding>(this, R.layout.activity_list)
-        binding.datasets.adapter = MetaListItemAdapter()
+        binding.datasets.adapter = ListItemViewModelAdapter()
         binding.viewModel = Destination.values()[intent.getIntExtra(EXTRA_DESTINATION, 0)].getViewModel(this)
         binding.lifecycleOwner = this
         binding.lifecycleOwnerWrapper = LifecycleOwnerWrapper(this)

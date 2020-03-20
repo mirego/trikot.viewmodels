@@ -1,10 +1,10 @@
-package com.mirego.trikot.viewModels.mutable
+package com.mirego.trikot.viewmodels.mutable
 
-import com.mirego.trikot.viewModels.ViewModel
-import com.mirego.trikot.viewModels.factory.PropertyFactory
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.ViewModel
+import com.mirego.trikot.viewmodels.factory.PropertyFactory
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
 open class MutableViewModel : ViewModel {
     override var alpha = PropertyFactory.create(1f)

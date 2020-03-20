@@ -1,8 +1,8 @@
-package com.trikot.viewModels.sample.viewModels.home
+package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.mirego.trikot.viewModels.lifecycle.ApplicationState
-import com.mirego.trikot.viewModels.lifecycle.ApplicationStatePublisher
-import com.mirego.trikot.viewModels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.lifecycle.ApplicationState
+import com.mirego.trikot.viewmodels.lifecycle.ApplicationStatePublisher
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.streams.reactive.PublishSubject
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
@@ -10,12 +10,12 @@ import com.mirego.trikot.streams.reactive.filter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.shared
-import com.trikot.viewModels.sample.viewModels.ListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableHeaderListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableLabelListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableNavigableListItemViewModel
-import com.trikot.viewModels.sample.navigation.Destination
-import com.trikot.viewModels.sample.navigation.NavigationDelegate
+import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableNavigableListItemViewModel
+import com.trikot.viewmodels.sample.navigation.Destination
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import org.reactivestreams.Publisher
 
 class HomeViewModelImpl(private val delegate: NavigationDelegate) :

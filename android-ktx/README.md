@@ -4,7 +4,7 @@
 Add dependency
 ```groovy
 dependencies {
-    implementation "com.mirego.trikot.viewModels:android-ktx:$trikot_viewmodels_android_ktx_version"
+    implementation "com.mirego.trikot.viewmodels:android-ktx:$trikot_viewmodels_android_ktx_version"
 }
 ```
 
@@ -12,6 +12,6 @@ If class conflict arrives in your Android application. Add the following configu
 
 ```groovy
 configurations.all {
-    exclude module: "viewModels-jvm"
+    exclude module: "viewmodels-jvm"
 }
 ```

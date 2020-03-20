@@ -1,6 +1,6 @@
-package com.trikot.viewModels.sample.viewModels
+package com.trikot.viewmodels.sample.viewmodels
 
-import com.mirego.trikot.viewModels.InputTextViewModel
+import com.mirego.trikot.viewmodels.InputTextViewModel
 
 interface InputTextListItemViewModel : ListItemViewModel {
     val inputText: InputTextViewModel

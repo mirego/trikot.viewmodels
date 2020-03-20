@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels.lifecycle
+package com.mirego.trikot.viewmodels.lifecycle
 
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import org.reactivestreams.Publisher

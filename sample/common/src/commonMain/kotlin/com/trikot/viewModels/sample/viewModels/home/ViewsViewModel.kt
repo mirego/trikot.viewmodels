@@ -1,13 +1,13 @@
-package com.trikot.viewModels.sample.viewModels.home
+package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.ViewModelAction
-import com.mirego.trikot.viewModels.properties.StateSelector
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.streams.reactive.just
-import com.trikot.viewModels.sample.viewModels.ListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableHeaderListItemViewModel
-import com.trikot.viewModels.sample.viewModels.MutableViewListItemViewModel
-import com.trikot.viewModels.sample.navigation.NavigationDelegate
+import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableViewListItemViewModel
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 
 class ViewsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
     override val items: List<ListItemViewModel> = listOf(

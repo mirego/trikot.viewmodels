@@ -1,7 +1,7 @@
-package com.trikot.viewModels.sample.viewModels
+package com.trikot.viewmodels.sample.viewmodels
 
-import com.mirego.trikot.viewModels.mutable.MutableButtonViewModel
-import com.mirego.trikot.viewModels.mutable.MutableViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableViewModel
 
 class MutableButtonListItemViewModel(override var comparableId: String = "") : ButtonListItemViewModel, MutableViewModel() {
     override val button = MutableButtonViewModel()

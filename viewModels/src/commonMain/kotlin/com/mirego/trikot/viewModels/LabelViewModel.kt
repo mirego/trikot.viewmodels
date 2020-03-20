@@ -1,8 +1,8 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.text.RichText
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.text.RichText
 import org.reactivestreams.Publisher
 
 interface LabelViewModel : ViewModel {

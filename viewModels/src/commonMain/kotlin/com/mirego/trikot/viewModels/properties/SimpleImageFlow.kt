@@ -1,7 +1,7 @@
-package com.mirego.trikot.viewModels.properties
+package com.mirego.trikot.viewmodels.properties
 
-import com.mirego.trikot.viewModels.ImageFlow
-import com.mirego.trikot.viewModels.resource.ImageResource
+import com.mirego.trikot.viewmodels.ImageFlow
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
 open class SimpleImageFlow(

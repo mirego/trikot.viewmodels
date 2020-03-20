@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels.resource
+package com.mirego.trikot.viewmodels.resource
 
 import com.mirego.trikot.foundation.concurrent.freeze
 

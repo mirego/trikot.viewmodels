@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.text.Editable
 import android.text.InputType.TYPE_CLASS_DATETIME
@@ -19,10 +19,10 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
-import com.mirego.trikot.viewModels.android.ktx.R
-import com.mirego.trikot.viewModels.mutable.MutableInputTextViewModel
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.InputTextType
+import com.mirego.trikot.viewmodels.android.ktx.R
+import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.InputTextType
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
 

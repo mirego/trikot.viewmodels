@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.view.View
 import android.widget.Button
@@ -6,9 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.viewModels.mutable.MutableButtonViewModel
-import com.mirego.trikot.viewModels.properties.Alignment
-import com.mirego.trikot.viewModels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
+import com.mirego.trikot.viewmodels.properties.Alignment
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.*

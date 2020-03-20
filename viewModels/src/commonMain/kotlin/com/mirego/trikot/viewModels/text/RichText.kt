@@ -1,6 +1,6 @@
-package com.mirego.trikot.viewModels.text
+package com.mirego.trikot.viewmodels.text
 
-import com.mirego.trikot.viewModels.properties.Color
+import com.mirego.trikot.viewmodels.properties.Color
 
 data class RichText(val text: String, val ranges: List<RichTextRange>)
 

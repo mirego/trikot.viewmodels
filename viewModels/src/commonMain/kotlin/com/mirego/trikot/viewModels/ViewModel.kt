@@ -1,8 +1,8 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
 interface ViewModel {

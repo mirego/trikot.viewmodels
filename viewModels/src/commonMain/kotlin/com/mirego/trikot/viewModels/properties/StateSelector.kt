@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels.properties
+package com.mirego.trikot.viewmodels.properties
 
 data class StateSelector<T>(
     val default: T? = null,

@@ -1,6 +1,6 @@
-package com.trikot.viewModels.sample.viewModels.home
+package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.trikot.viewModels.sample.viewModels.ListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
 
 interface ListViewModel {
     val items: List<ListItemViewModel>

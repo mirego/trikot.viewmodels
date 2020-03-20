@@ -1,10 +1,10 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.viewModels.mutable.MutableImageViewModel
-import com.mirego.trikot.viewModels.properties.ImageState
-import com.mirego.trikot.viewModels.properties.StateSelector
+import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
+import com.mirego.trikot.viewmodels.properties.ImageState
+import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider

@@ -1,12 +1,12 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.viewModels.mutable.MutableViewModel
-import com.mirego.trikot.viewModels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.mutable.MutableViewModel
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just

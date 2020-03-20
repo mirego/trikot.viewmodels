@@ -32,7 +32,7 @@ job(context.jobFullName) {
         gradle {
             useWrapper()
             makeExecutable()
-            tasks(':viewModels:release')
+            tasks(':viewmodels:release')
             switches('-i -s')
         }
     }

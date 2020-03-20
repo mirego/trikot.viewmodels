@@ -1,6 +1,6 @@
-package com.trikot.viewModels.sample.viewModels
+package com.trikot.viewmodels.sample.viewmodels
 
-import com.mirego.trikot.viewModels.LabelViewModel
+import com.mirego.trikot.viewmodels.LabelViewModel
 
 interface NavigableListItemViewModel : ListItemViewModel {
     val title: LabelViewModel

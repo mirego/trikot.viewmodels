@@ -1,10 +1,10 @@
-package com.trikot.viewModels.sample
+package com.trikot.viewmodels.sample
 
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.mirego.trikot.viewModels.resources.ImageViewModelResourceManager
-import com.trikot.viewModels.sample.resource.SampleImageResourceProvider
+import com.mirego.trikot.viewmodels.resources.ImageViewModelResourceManager
+import com.trikot.viewmodels.sample.resource.SampleImageResourceProvider
 import com.trikot.sample.Environment
 import kotlinx.serialization.ImplicitReflectionSerializer
 

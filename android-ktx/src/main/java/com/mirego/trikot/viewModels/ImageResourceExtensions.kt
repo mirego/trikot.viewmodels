@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewModels
+package com.mirego.trikot.viewmodels
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -6,10 +6,10 @@ import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.mirego.trikot.viewModels.properties.Color
-import com.mirego.trikot.viewModels.properties.StateSelector
-import com.mirego.trikot.viewModels.resource.ImageResource
-import com.mirego.trikot.viewModels.resources.ImageViewModelResourceManager
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resources.ImageViewModelResourceManager
 
 fun StateSelector<ImageResource>.asDrawable(
     context: Context,

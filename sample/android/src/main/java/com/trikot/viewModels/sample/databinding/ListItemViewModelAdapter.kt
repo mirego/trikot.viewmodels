@@ -1,11 +1,11 @@
-package com.trikot.viewModels.sample.databinding
+package com.trikot.viewmodels.sample.databinding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.trikot.viewModels.sample.R
-import com.trikot.viewModels.sample.viewModels.*
+import com.trikot.viewmodels.sample.R
+import com.trikot.viewmodels.sample.viewmodels.*
 
-class MetaListItemAdapter :
+class ListItemViewModelAdapter :
     DataBindingAdapter<ListItemViewModel>(diffCallback = DefaultDiffUtilCallback()) {
 
     override fun getItemViewType(position: Int): Int {
@@ -25,6 +25,6 @@ class MetaListItemAdapter :
 @BindingAdapter("items")
 fun bind(recyclerView: RecyclerView, data: List<ListItemViewModel>?) {
     data?.let {
-        recyclerView.adapter?.let { (it as MetaListItemAdapter).submitList(data) }
+        recyclerView.adapter?.let { (it as ListItemViewModelAdapter).submitList(data) }
     }
 }
