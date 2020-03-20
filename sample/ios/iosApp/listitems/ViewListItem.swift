@@ -4,10 +4,10 @@ import MetaviewsSample
 class ViewListItem: UIView {
     private let view = UIView(frame: .zero)
 
-    var item: MetaViewListItem? {
+    var item: ViewModelListItem? {
         didSet {
-            metaView = item
-            view.metaView = item?.view
+            viewModel = item
+            view.viewModel = item?.view
         }
     }
 

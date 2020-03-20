@@ -6,8 +6,8 @@ class NavigableListItem: UIView {
 
     var item: MetaNavigableListItem? {
         didSet {
-            metaView = item
-            title.metaLabel = item?.title
+            viewModel = item
+            title.labelViewModel = item?.title
         }
     }
 

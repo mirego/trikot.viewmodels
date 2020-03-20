@@ -1,6 +1,6 @@
 import TRIKOT_FRAMEWORK_NAME
 
-extension MetaSelector {
+extension StateSelector {
     public func defaultValue<T>() -> T? {
         return default_ as? T
     }

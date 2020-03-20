@@ -4,10 +4,10 @@ import MetaviewsSample
 class ButtonListItem: UIView {
     private let button = UIButton(frame: .zero)
 
-    var item: MetaButtonListItem? {
+    var item: ButtonViewModelListItem? {
         didSet {
-            metaView = item
-            button.metaButton = item?.button
+            viewModel = item
+            button.buttonViewModel = item?.button
         }
     }
 

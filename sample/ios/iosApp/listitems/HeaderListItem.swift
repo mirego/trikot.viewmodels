@@ -6,8 +6,8 @@ class HeaderListItem: UIView {
 
     var item: MetaHeaderListItem? {
         didSet {
-            metaView = item
-            title.metaLabel = item?.text
+            viewModel = item
+            title.labelViewModel = item?.text
         }
     }
 

@@ -1,16 +1,16 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import MetaviewsSample
 
-public protocol MetaImageResourceProvider {
+public protocol ImageViewModelResourceProvider {
     func image(fromResource resource: ImageResource?) -> UIImage?
 }
 
-class DefaultMetaImageResourceProvider: MetaImageResourceProvider {
+class DefaultImageViewModelResourceProvider: ImageViewModelResourceProvider {
     func image(fromResource resource: ImageResource?) -> UIImage? {
         return nil
     }
 }
 
-public class MetaImageResourceManager {
-    public static var shared: MetaImageResourceProvider = DefaultMetaImageResourceProvider()
+public class ImageViewModelResourceManager {
+    public static var shared: ImageViewModelResourceProvider = DefaultImageViewModelResourceProvider()
 }

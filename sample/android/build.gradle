@@ -12,7 +12,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.trikot.metaviews.sample"
+        applicationId "com.trikot.viewmodels.sample"
         versionCode 1
         versionName "1.0"
         archivesBaseName = "MetaviewsSample-$versionCode"
@@ -96,7 +96,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.0.0'
 
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
-    implementation "com.mirego.trikot.metaviews:android-ktx:$trikot_metaviews_android_ktx_version"
+    implementation "com.mirego.trikot.viewModels:android-ktx:$trikot_viewmodels_android_ktx_version"
     implementation "com.mirego.trikot.http:android-ktx:$trikot_http_android_ktx_version"
 
     implementation 'com.google.android.material:material:1.0.0'

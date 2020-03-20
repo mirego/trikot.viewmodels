@@ -21,7 +21,7 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'trikot.metaviews'
+rootProject.name = 'trikot.viewModels'
 enableFeaturePreview("GRADLE_METADATA")
 
-include ':metaviews', ':android-ktx'
+include ':viewModels', ':android-ktx'

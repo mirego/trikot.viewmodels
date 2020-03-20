@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'MetaviewsSample'
+    spec.name                     = 'ViewModelsSample'
     spec.version                  = '0.0.1'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Awesome library'
 
     spec.static_framework         = true
-    spec.vendored_frameworks      = "build/bin/ios/MetaviewsSample.framework"
+    spec.vendored_frameworks      = "build/bin/ios/ViewModelsSample.framework"
     spec.libraries                = "c++", "System"
     spec.module_name              = "#{spec.name}_umbrella"
 

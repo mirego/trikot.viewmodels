@@ -4,10 +4,10 @@ import MetaviewsSample
 class LabelListItem: UIView {
     private let title = UILabel(frame: .zero)
 
-    var item: MetaLabelListItem? {
+    var item: LabelViewModelListItem? {
         didSet {
-            metaView = item
-            title.metaLabel = item?.label
+            viewModel = item
+            title.labelViewModel = item?.label
         }
     }
 

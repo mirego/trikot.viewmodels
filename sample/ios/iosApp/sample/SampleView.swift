@@ -60,7 +60,7 @@ extension ListView: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<NavigableListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaLabelListItem {
+        } else if let metaListItem = metaListItem as? LabelViewModelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<LabelListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
@@ -68,19 +68,19 @@ extension ListView: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<HeaderListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaViewListItem {
+        } else if let metaListItem = metaListItem as? ViewModelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ViewListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaButtonListItem {
+        } else if let metaListItem = metaListItem as? ButtonViewModelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ButtonListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaImageListItem {
+        } else if let metaListItem = metaListItem as? ImageViewModelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ImageListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaInputTextListItem {
+        } else if let metaListItem = metaListItem as? InputTextViewModelListItem {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<InputTextListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell

@@ -4,10 +4,10 @@ import MetaviewsSample
 class InputTextListItem: UIView {
     private let textField = UITextField(frame: .zero)
 
-    var item: MetaInputTextListItem? {
+    var item: InputTextViewModelListItem? {
         didSet {
-            metaView = item
-            textField.metaInputText = item?.inputText
+            viewModel = item
+            textField.inputTextViewModel = item?.inputText
         }
     }
 
