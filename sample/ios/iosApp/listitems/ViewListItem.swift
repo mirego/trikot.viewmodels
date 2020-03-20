@@ -1,10 +1,10 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class ViewListItem: UIView {
     private let view = UIView(frame: .zero)
 
-    var item: ViewModelListItem? {
+    var item: ViewListItemViewModel? {
         didSet {
             viewModel = item
             view.viewModel = item?.view

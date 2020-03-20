@@ -18,30 +18,30 @@ import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Transformation
 
 object ImageViewModelBinder {
-    private val NoMetaImage = MutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
+    private val NoImageViewModel = MutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
         .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         imageView: ImageView,
-        metaImage: ImageViewModel?,
+        imageViewModel: ImageViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
-        bind(imageView, metaImage, null, lifecycleOwnerWrapper)
+        bind(imageView, imageViewModel, null, lifecycleOwnerWrapper)
     }
 
     @JvmStatic
     @BindingAdapter("view_model", "transformation", "lifecycleOwnerWrapper")
     fun bind(
         imageView: ImageView,
-        metaImage: ImageViewModel?,
+        imageViewModel: ImageViewModel?,
         transformation: Transformation?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
-        (metaImage ?: NoMetaImage).let {
+        (imageViewModel ?: NoImageViewModel).let {
 
-            imageView.bindViewModel(metaImage, lifecycleOwnerWrapper)
+            imageView.bindViewModel(imageViewModel, lifecycleOwnerWrapper)
 
             imageView.viewTreeObserver.addOnPreDrawListener(
                 ViewLoaderPreDrawListener(imageView) { width: ImageWidth, height: ImageHeight ->
@@ -62,7 +62,7 @@ object ImageViewModelBinder {
     }
 
     private fun processImageFlow(
-        metaImage: ImageViewModel,
+        imageViewModel: ImageViewModel,
         imageFlow: ImageFlow,
         imageView: ImageView,
         transformation: Transformation?,
@@ -73,7 +73,7 @@ object ImageViewModelBinder {
             imageFlow.tintColor?.let { StateSelector(imageFlow.tintColor) })?.let {
             imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             imageView.setImageDrawable(it)
-            metaImage.setImageState(ImageState.SUCCESS)
+            imageViewModel.setImageState(ImageState.SUCCESS)
         } ?: run {
             imageFlow.url?.let { url ->
                 var requestCreator: RequestCreator? = null
@@ -95,7 +95,7 @@ object ImageViewModelBinder {
                                     }
                             onSuccessPublisher.subscribe(cancellableManager) {
                                 processImageFlow(
-                                    metaImage,
+                                    imageViewModel,
                                     it,
                                     imageView,
                                     transformation,
@@ -103,7 +103,7 @@ object ImageViewModelBinder {
                                 )
                             }
                         } ?: run {
-                            metaImage.setImageState(ImageState.SUCCESS)
+                            imageViewModel.setImageState(ImageState.SUCCESS)
                         }
                     }
 
@@ -117,7 +117,7 @@ object ImageViewModelBinder {
 
                             onErrorPublisher.subscribe(cancellableManager) {
                                 processImageFlow(
-                                    metaImage,
+                                    imageViewModel,
                                     it,
                                     imageView,
                                     transformation,
@@ -125,7 +125,7 @@ object ImageViewModelBinder {
                                 )
                             }
                         } ?: run {
-                            metaImage.setImageState(ImageState.ERROR)
+                            imageViewModel.setImageState(ImageState.ERROR)
                         }
                     }
                 })

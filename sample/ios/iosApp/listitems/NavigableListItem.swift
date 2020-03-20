@@ -1,10 +1,10 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class NavigableListItem: UIView {
     private let title = UILabel(frame: .zero)
 
-    var item: MetaNavigableListItem? {
+    var item: NavigableListItemViewModel? {
         didSet {
             viewModel = item
             title.labelViewModel = item?.title

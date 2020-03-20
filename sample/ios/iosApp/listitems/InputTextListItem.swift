@@ -1,10 +1,10 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class InputTextListItem: UIView {
     private let textField = UITextField(frame: .zero)
 
-    var item: InputTextViewModelListItem? {
+    var item: InputTextListItemViewModel? {
         didSet {
             viewModel = item
             textField.inputTextViewModel = item?.inputText

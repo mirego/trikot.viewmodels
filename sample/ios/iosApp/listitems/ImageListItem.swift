@@ -1,10 +1,10 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class ImageListItem: UIView {
     private let image = UIImageView(frame: .zero)
 
-    var item: ImageViewModelListItem? {
+    var item: ImageListItemViewModel? {
         didSet {
             viewModel = item
             image.imageViewModel = item?.image

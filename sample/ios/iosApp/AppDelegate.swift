@@ -1,6 +1,6 @@
 import UIKit
-import MetaviewsSample
-import Trikot_metaviews
+import ViewModelsSample
+import Trikot_viewmodels
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {

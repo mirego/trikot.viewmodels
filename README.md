@@ -2,7 +2,7 @@
 ViewModels expose properties that can be binded to Android or iOS UI components. It allows 2 way interactions between Kotlin Multiplatform Common Code and platform UI.
 
 ## The basics
-Both iOS and Android comes with a binding library that supports basics UI components (View, Label, Button, Input, Image) designed to be bound to their ViewModel equivalent (`ViewModel`, `LabelViewModel`, `ButtonViewModel`, `ImageViewModel`, ect...). Since `ViewModels` are interfaces that are not meant to be modified, Mutable implementations are included to create each type of MetaView (`MutableViewModel`, `MutableLabelViewModel`, `MutableButtonViewModel`, `MutableImageViewModel`, ect...). We suggest that custom ViewModel definition and implementation follow the same pattern.
+Both iOS and Android comes with a binding library that supports basics UI components (View, Label, Button, Input, Image) designed to be bound to their ViewModel equivalent (`ViewModel`, `LabelViewModel`, `ButtonViewModel`, `ImageViewModel`, ect...). Since `ViewModels` are interfaces that are not meant to be modified, Mutable implementations are included to create each type of ViewModel (`MutableViewModel`, `MutableLabelViewModel`, `MutableButtonViewModel`, `MutableImageViewModel`, ect...). We suggest that custom ViewModel definition and implementation follow the same pattern.
 
 All properties are reactive and observed by the platforms. They are ReactiveStreams `Publisher<T>`. See [Trikot.streams](https://github.com/mirego/trikot.streams) for more inforamtion about Publishers.
 

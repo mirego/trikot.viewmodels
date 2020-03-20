@@ -15,7 +15,7 @@ android {
         applicationId "com.trikot.viewmodels.sample"
         versionCode 1
         versionName "1.0"
-        archivesBaseName = "MetaviewsSample-$versionCode"
+        archivesBaseName = "ViewModelsSample-$versionCode"
 
         minSdkVersion 21
         targetSdkVersion 28
