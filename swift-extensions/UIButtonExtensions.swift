@@ -8,7 +8,7 @@ extension UIButton {
 
     private var tapAction: ViewModelAction? {
         get {
-             return objc_getAssociatedObject(self, AssociatedKeys.actionKey) as? MetaAction
+             return objc_getAssociatedObject(self, AssociatedKeys.actionKey) as? ViewModelAction
         }
         set {
             objc_setAssociatedObject(self, AssociatedKeys.actionKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
