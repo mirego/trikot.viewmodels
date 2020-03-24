@@ -2,40 +2,12 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 import Trikot_streams
 
-extension UIView {
-    public var viewModel: ViewModel? {
-        get { return trikotViewModel() }
-        set(viewModel) {
-            unsubscribeFromAllPublisher()
-            setTrikotViewModel(viewModel: viewModel)
-            guard let viewModel = viewModel else { return }
+protocol ViewModelView {
+    associatedtype ViewModelType: ViewModel
+    var viewModel: ViewModelType { get set }
+}
 
-            bind(viewModel.alpha, \UIView.alpha)
-
-            bindColorSelectorDefaultValue(viewModel.backgroundColor, \UIView.backgroundColor)
-
-            bind(viewModel.hidden, \UIView.isHidden)
-
-            let onTapResetableCancelableManager = CancellableManagerProvider()
-            trikotInternalPublisherCancellableManager.add(cancellable: onTapResetableCancelableManager)
-
-            if !(self is UIControl) {
-                observe(viewModel.action) {[weak self] (value: ViewModelAction) in
-                    guard let self = self else { return }
-                    let newCancellableManager = onTapResetableCancelableManager.cancelPreviousAndCreate()
-
-                    if value != ViewModelAction.Companion().None {
-                        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(self.trikotOnViewTouchUp))
-                        self.addGestureRecognizer(tapGestureReconizer)
-                        newCancellableManager.add {[weak self] in
-                            self?.removeGestureRecognizer(tapGestureReconizer)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+extension UIView: ViewModelView {
     private struct AssociatedKeys {
         static var viewModelKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
@@ -49,7 +21,7 @@ extension UIView {
     }
 
     @objc
-    private func trikotOnViewTouchUp() {
+    fileprivate func trikotOnViewTouchUp() {
         let localViewModel: ViewModel? = trikotViewModel()
         guard let viewModelModel = localViewModel else { return }
         observe(viewModelModel.action.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
@@ -86,5 +58,39 @@ extension UIView {
         } else {
             return referenceFont
         }
-    }    
+    }
+}
+
+extension ViewModelView where Self: UIView {
+    var viewModel: ViewModel {
+        get { return trikotViewModel()!! }
+        set {
+            unsubscribeFromAllPublisher()
+            setTrikotViewModel(viewModel: newValue)
+
+            bind(viewModel.alpha, \UIView.alpha)
+
+            bindColorSelectorDefaultValue(newValue.backgroundColor, \UIView.backgroundColor)
+
+            bind(newValue.hidden, \UIView.isHidden)
+
+            let onTapResetableCancelableManager = CancellableManagerProvider()
+            trikotInternalPublisherCancellableManager.add(cancellable: onTapResetableCancelableManager)
+
+            if !(self is UIControl) {
+                observe(newValue.action) {[weak self] (value: ViewModelAction) in
+                    guard let self = self else { return }
+                    let newCancellableManager = onTapResetableCancelableManager.cancelPreviousAndCreate()
+
+                    if value != ViewModelAction.Companion().None {
+                        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(self.trikotOnViewTouchUp))
+                        self.addGestureRecognizer(tapGestureReconizer)
+                        newCancellableManager.add {[weak self] in
+                            self?.removeGestureRecognizer(tapGestureReconizer)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -5,41 +5,23 @@ private let USER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity
 private let USER_PLACEHOLDER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 private let USER_IMAGERESOURCE_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 
-extension UIImageView {
-    public var imageViewModel: ImageViewModel? {
-        get { return trikotViewModel() }
-        set(value) {
-            viewModel = value
-            if value != nil {
-                let cancellableManagerProvider = CancellableManagerProvider()
+protocol ViewModelImage: ViewModelView {
+    associatedtype ViewModelType = ImageViewModel
+}
 
-                downloadImageIfNeeded(cancellableManagerProvider.cancelPreviousAndCreate())
-
-                let sizeObservationCancellation = KeyValueObservationHolder(self.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
-                    if change.newValue?.size != change.oldValue?.size { self?.downloadImageIfNeeded(cancellableManagerProvider.cancelPreviousAndCreate()) }
-                })
-
-                trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
-                trikotInternalPublisherCancellableManager.add(cancellable: cancellableManagerProvider)
-
-                objc_setAssociatedObject(self, USER_CONTENT_MODE_KEY, contentMode, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-            }
-        }
-    }
+extension UIImageView: ViewModelImage {
 
     func downloadImageIfNeeded(_ cancellableManager: CancellableManager) {
-        guard let imageViewModel = imageViewModel else { return }
-        observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: imageViewModel.imageFlow(width: Int32(frame.width) * 2, height: Int32(frame.height) * 2))
+        observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: viewModel.imageFlow(width: Int32(frame.width) * 2, height: Int32(frame.height) * 2))
     }
 
     func observeImageFlow(cancellableManager: CancellableManager, imageFlowPublisher: Publisher) {
-        guard let imageViewModel = imageViewModel else { return }
-
         DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
             let cancellableManagerProvider = CancellableManagerProvider()
             cancellableManager.add(cancellable: cancellableManagerProvider)
 
-            self?.observe(cancellableManager: cancellableManager, publisher: imageViewModel.imageFlow(width: Int32(self?.frame.width ?? 0) * 2, height: Int32(self?.frame.height ?? 0) * 2)) {[weak self] (imageFlow: ImageFlow) in
+            self.observe(cancellableManager: cancellableManager, publisher: self.viewModel.imageFlow(width: Int32(self.frame.width) * 2, height: Int32(self.frame.height) * 2)) {[weak self] (imageFlow: ImageFlow) in
                 self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow)
             }
         }
@@ -108,6 +90,29 @@ extension UIImageView {
         }
         get {
             return objc_getAssociatedObject(self, USER_PLACEHOLDER_CONTENT_MODE_KEY) as? ContentMode ?? .center
+        }
+    }
+}
+
+extension ViewModelImage where Self: UIImageView {
+    var viewModel: ImageViewModel {
+        get { return trikotViewModel()!! }
+        set {
+            var view = self as UIView
+            view.viewModel = newValue
+
+            let cancellableManagerProvider = CancellableManagerProvider()
+
+            downloadImageIfNeeded(cancellableManagerProvider.cancelPreviousAndCreate())
+
+            let sizeObservationCancellation = KeyValueObservationHolder(view.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
+                if change.newValue?.size != change.oldValue?.size { self?.downloadImageIfNeeded(cancellableManagerProvider.cancelPreviousAndCreate()) }
+            })
+
+            trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
+            trikotInternalPublisherCancellableManager.add(cancellable: cancellableManagerProvider)
+
+            objc_setAssociatedObject(self, USER_CONTENT_MODE_KEY, contentMode, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 }
