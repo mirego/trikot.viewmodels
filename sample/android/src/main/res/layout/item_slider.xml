@@ -24,8 +24,7 @@
 
         <SeekBar
             android:id="@+id/progress_bar"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            style="@style/sliderStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
