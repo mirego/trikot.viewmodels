@@ -8,7 +8,7 @@ import com.mirego.trikot.viewmodels.mutable.MutableViewModel
 class MutableSliderListItemViewModel(
     override var comparableId: String = ""
 ) : SliderListItemViewModel, MutableViewModel() {
-    override val slider = MutableSliderViewModel()
+    override val slider = MutableSliderViewModel(initialValue = 2)
     override val valueLabel =
         MutableLabelViewModel().apply { text = slider.selectedValue.map { it.toString() } }
 
