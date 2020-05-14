@@ -27,7 +27,6 @@ object SliderViewModelBinder {
                 seekBar.min = viewModel.minValue
             }
 
-            seekBar.incrementProgressBy(viewModel.stepValue)
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                     viewModel.setSelectedValue(progress)

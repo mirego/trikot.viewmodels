@@ -12,10 +12,6 @@ interface SliderViewModel: ViewModel {
      */
     val maxValue: Int
     /**
-     * Amount to increase every step
-     */
-    val stepValue: Int
-    /**
      * Currently selected value on the slider
      */
     val selectedValue: Publisher<Int>

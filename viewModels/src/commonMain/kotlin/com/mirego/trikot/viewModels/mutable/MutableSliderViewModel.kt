@@ -5,9 +5,8 @@ import com.mirego.trikot.viewmodels.SliderViewModel
 import org.reactivestreams.Publisher
 
 open class MutableSliderViewModel(
-    override val minValue: Int = 0,
-    override val maxValue: Int = 5,
-    override val stepValue: Int = 1
+    final override val minValue: Int = 0,
+    override val maxValue: Int = 5
 ) : MutableViewModel(), SliderViewModel {
     private val internalPublisher = Publishers.behaviorSubject(minValue)
 
