@@ -1,9 +1,8 @@
 import UIKit
 import ViewModelsSample
-import Trikot_viewmodels
 
 class SliderListItem: UIView {
-    private let slider = Slider(frame: .zero)
+    private let slider = UISlider()
     private let label = UILabel(frame: .zero)
 
     var item: SliderListItemViewModel? {
