@@ -1,15 +1,19 @@
 package com.mirego.trikot.viewmodels
 
+import com.mirego.trikot.foundation.CommonJSExport
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
+@CommonJSExport
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
 inline class ImageWidth(val value: Int)
+@CommonJSExport
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
 inline class ImageHeight(val value: Int)
 
+@CommonJSExport
 interface ImageViewModel : ViewModel {
     fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow>
     val imageState: Publisher<ImageState>
@@ -17,6 +21,7 @@ interface ImageViewModel : ViewModel {
     fun setImageState(imageState: ImageState)
 }
 
+@CommonJSExport
 interface ImageFlow {
     /**
      * Image resource to display

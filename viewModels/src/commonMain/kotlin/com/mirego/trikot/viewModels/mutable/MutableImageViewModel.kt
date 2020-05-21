@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.mutable
 
+import com.mirego.trikot.foundation.CommonJSExport
 import com.mirego.trikot.viewmodels.ImageFlow
 import com.mirego.trikot.viewmodels.ImageHeight
 import com.mirego.trikot.viewmodels.ImageWidth
@@ -16,6 +17,7 @@ import org.reactivestreams.Publisher
  */
 typealias ImageFlowProvider = (width: ImageWidth, height: ImageHeight) -> Publisher<ImageFlow>
 
+@CommonJSExport
 open class MutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : MutableViewModel(), ImageViewModel {
     override fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow> {
         return imageFlowProvider(width, height)

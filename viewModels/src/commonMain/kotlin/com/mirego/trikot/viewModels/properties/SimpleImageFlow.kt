@@ -1,9 +1,11 @@
 package com.mirego.trikot.viewmodels.properties
 
+import com.mirego.trikot.foundation.CommonJSExport
 import com.mirego.trikot.viewmodels.ImageFlow
 import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
+@CommonJSExport
 open class SimpleImageFlow(
     override val imageResource: ImageResource? = null,
     override val placeholderImageResource: ImageResource? = null,

@@ -1,5 +1,8 @@
 package com.mirego.trikot.viewmodels.properties
 
+import com.mirego.trikot.foundation.CommonJSExport
+
+@CommonJSExport
 data class StateSelector<T>(
     val default: T? = null,
     val highlighted: T? = null,
