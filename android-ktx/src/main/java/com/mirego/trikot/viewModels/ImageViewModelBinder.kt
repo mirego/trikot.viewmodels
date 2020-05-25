@@ -22,22 +22,13 @@ object ImageViewModelBinder {
         .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic
-    @BindingAdapter("view_model", "lifecycleOwnerWrapper")
+    @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
     fun bind(
         imageView: ImageView,
         imageViewModel: ImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper
-    ) {
-        bind(imageView, imageViewModel, null, lifecycleOwnerWrapper)
-    }
-
-    @JvmStatic
-    @BindingAdapter("view_model", "transformation", "lifecycleOwnerWrapper")
-    fun bind(
-        imageView: ImageView,
-        imageViewModel: ImageViewModel?,
-        transformation: Transformation?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper,
+        transformation: Transformation? = null,
+        placeholderScaleType: ImageView.ScaleType? = null
     ) {
         (imageViewModel ?: NoImageViewModel).let {
 
@@ -53,6 +44,7 @@ object ImageViewModelBinder {
                                 imageFlow,
                                 imageView,
                                 transformation,
+                                placeholderScaleType,
                                 manager
                             )
                         }
@@ -66,6 +58,7 @@ object ImageViewModelBinder {
         imageFlow: ImageFlow,
         imageView: ImageView,
         transformation: Transformation?,
+        placeholderScaleType: ImageView.ScaleType?,
         cancellableManager: CancellableManager
     ) {
         imageFlow.imageResource?.asDrawable(
@@ -98,6 +91,7 @@ object ImageViewModelBinder {
                                     it,
                                     imageView,
                                     transformation,
+                                    placeholderScaleType,
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
@@ -120,6 +114,7 @@ object ImageViewModelBinder {
                                     it,
                                     imageView,
                                     transformation,
+                                    placeholderScaleType,
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
@@ -130,6 +125,7 @@ object ImageViewModelBinder {
                 })
             } ?: run {
                 imageFlow.placeholderImageResource?.asDrawable(imageView.context)?.let {
+                    placeholderScaleType?.let { imageView.scaleType = it }
                     imageView.setImageDrawable(it)
                 }
             }
