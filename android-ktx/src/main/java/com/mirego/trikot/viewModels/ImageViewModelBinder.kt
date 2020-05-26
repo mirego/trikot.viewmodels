@@ -34,6 +34,8 @@ object ImageViewModelBinder {
 
             imageView.bindViewModel(imageViewModel, lifecycleOwnerWrapper)
 
+            val originalScaleType = imageView.scaleType
+
             imageView.viewTreeObserver.addOnPreDrawListener(
                 ViewLoaderPreDrawListener(imageView) { width: ImageWidth, height: ImageHeight ->
                     it.imageFlow(width, height)
@@ -44,6 +46,7 @@ object ImageViewModelBinder {
                                 imageFlow,
                                 imageView,
                                 transformation,
+                                originalScaleType,
                                 placeholderScaleType,
                                 manager
                             )
@@ -58,6 +61,7 @@ object ImageViewModelBinder {
         imageFlow: ImageFlow,
         imageView: ImageView,
         transformation: Transformation?,
+        originalScaleType: ImageView.ScaleType,
         placeholderScaleType: ImageView.ScaleType?,
         cancellableManager: CancellableManager
     ) {
@@ -71,6 +75,7 @@ object ImageViewModelBinder {
                 var requestCreator: RequestCreator? = null
                 val resourceId = imageFlow.placeholderImageResource?.resourceId(imageView.context)
                 resourceId?.let { placeholderId ->
+                    placeholderScaleType?.let { imageView.scaleType = it }
                     requestCreator = Picasso.get().load(url).placeholder(placeholderId)
                 } ?: run {
                     requestCreator = Picasso.get().load(url)
@@ -79,6 +84,7 @@ object ImageViewModelBinder {
                 transformation?.let { requestCreator?.transform(it) }
                 requestCreator?.into(imageView, object : Callback {
                     override fun onSuccess() {
+                        imageView.scaleType = originalScaleType
                         imageFlow.onSuccess?.let { onSuccessPublisher ->
                             val cancellableManagerProvider =
                                 CancellableManagerProvider()
@@ -91,6 +97,7 @@ object ImageViewModelBinder {
                                     it,
                                     imageView,
                                     transformation,
+                                    originalScaleType,
                                     placeholderScaleType,
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
@@ -114,6 +121,7 @@ object ImageViewModelBinder {
                                     it,
                                     imageView,
                                     transformation,
+                                    originalScaleType,
                                     placeholderScaleType,
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
