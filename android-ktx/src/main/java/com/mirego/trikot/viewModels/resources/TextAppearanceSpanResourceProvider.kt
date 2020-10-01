@@ -1,14 +1,14 @@
 package com.mirego.trikot.viewmodels.resources
 
 import android.content.Context
-import android.text.style.TextAppearanceSpan
+import android.text.ParcelableSpan
 import com.mirego.trikot.viewmodels.resource.TextAppearanceResource
 
 interface TextAppearanceSpanResourceProvider {
-    fun resourceIdFromResource(
+    fun spanFromResource(
         resource: TextAppearanceResource,
         context: Context
-    ): TextAppearanceSpan?
+    ): ParcelableSpan?
 }
 
 object TextAppearanceSpanResourceManager {
@@ -17,10 +17,10 @@ object TextAppearanceSpanResourceManager {
 }
 
 class DefaultTextAppearanceSpanResourceProvider : TextAppearanceSpanResourceProvider {
-    override fun resourceIdFromResource(
+    override fun spanFromResource(
         resource: TextAppearanceResource,
         context: Context
-    ): TextAppearanceSpan? {
+    ): ParcelableSpan? {
         return null
     }
 }

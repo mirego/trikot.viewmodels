@@ -15,7 +15,7 @@ import com.mirego.trikot.viewmodels.text.RichTextRange
 import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.viewmodels.text.TextAppearanceResourceTransform
 
-fun RichText.asSpannableString(context: Context? = null): SpannableString {
+fun RichText.asSpannableString(context: Context): SpannableString {
     return SpannableString(text).apply {
         ranges.forEach { range ->
             range.asSpan(context)?.let {
@@ -30,7 +30,7 @@ fun RichText.asSpannableString(context: Context? = null): SpannableString {
     }
 }
 
-private fun RichTextRange.asSpan(context: Context? = null): ParcelableSpan? {
+private fun RichTextRange.asSpan(context: Context): ParcelableSpan? {
     return when (transform) {
         is StyleTransform -> {
             when ((transform as StyleTransform).style) {
@@ -45,9 +45,10 @@ private fun RichTextRange.asSpan(context: Context? = null): ParcelableSpan? {
             ForegroundColorSpan((transform as ColorTransform).color.toIntColor())
         }
         is TextAppearanceResourceTransform -> {
-            TextAppearanceSpanResourceManager.provider.resourceIdFromResource(
-                (transform as? TextAppearanceResourceTransform)?.textAppearanceResource ?: throw IllegalArgumentException(),
-                context ?: throw IllegalArgumentException()
+            TextAppearanceSpanResourceManager.provider.spanFromResource(
+                (transform as? TextAppearanceResourceTransform)?.textAppearanceResource
+                    ?: throw IllegalArgumentException("transform is not an instance of TextAppearanceResourceTransform"),
+                context
             )
         }
         else -> TODO("RichTextRange $transform not implemented")
