@@ -60,7 +60,8 @@ extension UIView {
         richText.ranges.forEach { (richTextRange) in
 
             let range = NSRange(location: richTextRange.range.start.intValue, length: richTextRange.range.endInclusive.intValue - richTextRange.range.start.intValue)
-            if let transform = richTextRange.transform as? StyleTransform {
+            switch richTextRange.transform {
+            case let transform as StyleTransform:
                 switch transform.style {
                 case .bold:
                     attributedString.addAttribute(.font, value: fontWithTrait(.traitBold, referenceFont: referenceFont), range: range)
@@ -75,12 +76,24 @@ extension UIView {
                 default:
                     fatalError("LabelViewModel RichText StyleTransform unsupported: \(transform.style)")
                 }
-            }
 
-            if let transform = richTextRange.transform as? ColorTransform {
+            case let transform as ColorTransform:
                 attributedString.addAttribute(.foregroundColor, value: transform.color.safeColor(), range: range)
+
+            case let transform as TextAppearanceResourceTransform:
+                switch transform.textAppearanceResource {
+                case let resource as BellMediaTextAppearanceResource:
+                    attributedString.addAttribute(.font, value: FontViewModelResourceManager.shared.font(fromResource: resource), range: range)
+                    attributedString.addAttribute(.foregroundColor, value: ColorViewModelResourceManager.shared.foregroundColor(fromResource: resource), range: range)
+                    attributedString.addAttribute(.backgroundColor, value: ColorViewModelResourceManager.shared.backgroundColor(fromResource: resource), range: range)
+                default:
+                    break
+                }
+            default:
+                break
             }
         }
+
         return attributedString
     }
 
