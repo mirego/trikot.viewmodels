@@ -81,10 +81,14 @@ extension UIView {
                 attributedString.addAttribute(.foregroundColor, value: transform.color.safeColor(), range: range)
 
             case let transform as TextAppearanceResourceTransform:
-                let resource =  transform.textAppearanceResource
-                attributedString.addAttribute(.font, value: FontViewModelResourceManager.shared.font(fromResource: resource), range: range)
-                attributedString.addAttribute(.foregroundColor, value: ColorViewModelResourceManager.shared.foregroundColor(fromResource: resource), range: range)
-                attributedString.addAttribute(.backgroundColor, value: ColorViewModelResourceManager.shared.backgroundColor(fromResource: resource), range: range)
+                let resource = transform.textAppearanceResource
+                if let textAppearanceAttributes = TextAppearanceViewModelResourceManager.shared.textAppearance(fromResource: resource) {
+                    attributedString.addAttributes([
+                        .font: textAppearanceAttributes.font,
+                        .foregroundColor: textAppearanceAttributes.foregroundColor,
+                        .backgroundColor: textAppearanceAttributes.backgroundColor
+                    ], range: range)
+                }
 
             default:
                 break
