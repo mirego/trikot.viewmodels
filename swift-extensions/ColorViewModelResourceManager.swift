@@ -1,5 +1,5 @@
 import UIKit
-import SportsAppCore
+import TRIKOT_FRAMEWORK_NAME
 
 public protocol ColorViewModelResourceProvider {
     func foregroundColor(fromResource resource: TextAppearanceResource) -> UIColor?

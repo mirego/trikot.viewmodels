@@ -1,5 +1,5 @@
 import UIKit
-import SportsAppCore
+import TRIKOT_FRAMEWORK_NAME
 
 public protocol FontViewModelResourceProvider {
     func font(fromResource resource: TextAppearanceResource) -> UIFont?
@@ -12,5 +12,5 @@ class DefaultFontViewModelResourceProvider: FontViewModelResourceProvider {
 }
 
 public class FontViewModelResourceManager {
-    public static var shaded: FontViewModelResourceProvider = DefaultFontViewModelResourceProvider
+    public static var shared: FontViewModelResourceProvider = DefaultFontViewModelResourceProvider()
 }
