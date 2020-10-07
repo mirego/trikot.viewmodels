@@ -15,7 +15,7 @@ class SampleTextAppearanceResourceProvider: TextAppearanceSpanResourceProvider {
             SampleTextAppearanceResource.TEXT_APPEARANCE_ITALIC -> R.style.SampleTextAppearanceItalic
             SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED -> R.style.SampleTextAppearanceColored
             SampleTextAppearanceResource.TEXT_APPEARANCE_GRAYED -> R.style.SampleTextAppearanceGrayed
-            SampleTextAppearanceResource.TEXT_APPEARANCE_HIGHLIGHTED -> R.style.SampleTextAppearanceHighlighted
+            SampleTextAppearanceResource.TEXT_APPEARANCE_HIGHLIGHTED -> 0 //Not supported on Android
         }.toSpan(context)
     }
 

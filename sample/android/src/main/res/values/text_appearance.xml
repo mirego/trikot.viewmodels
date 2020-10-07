@@ -18,8 +18,4 @@
         <item name="android:textColor">@color/colorLightGray</item>
     </style>
 
-    <style name="SampleTextAppearanceHighlighted">
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:background">@color/colorYellow</item>
-    </style>
 </resources>
