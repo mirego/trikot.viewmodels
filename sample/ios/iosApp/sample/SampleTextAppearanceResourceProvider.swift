@@ -1,7 +1,7 @@
 import Trikot_viewmodels
 import ViewModelsSample
 
-class TextAppearanceResourceManager: TextAppearanceViewModelResourceProvider {
+class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvider {
     func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes? {
         if let sampleResource = resource as? SampleTextAppearanceResource {
             switch sampleResource {
