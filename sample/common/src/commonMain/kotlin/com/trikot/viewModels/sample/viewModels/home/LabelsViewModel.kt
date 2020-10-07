@@ -8,7 +8,7 @@ import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.ListViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
 import com.mirego.trikot.viewmodels.text.*
-import com.trikot.viewModels.sample.resource.SampleTextAppearanceResource
+import com.trikot.viewmodels.sample.resource.SampleTextAppearanceResource
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
@@ -60,11 +60,12 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewM
         },
         MutableHeaderListItemViewModel(".richTextTransform"),
         MutableLabelListItemViewModel().also {
-            it.label.richText = RichText("Text appearance defined by the client app", listOf(
-                RichTextRange(IntRange(0,9), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_BOLD)),
-                RichTextRange(IntRange(10,19), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)),
-                RichTextRange(IntRange(20,29), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_ITALIC)),
-                RichTextRange(IntRange(30,40), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_GRAY)),
+            it.label.richText = RichText("Text appearance defined by the Client App Theme", listOf(
+                RichTextRange(IntRange(0,10), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_BOLD)),
+                RichTextRange(IntRange(10,20), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)),
+                RichTextRange(IntRange(20,30), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_ITALIC)),
+                RichTextRange(IntRange(30,38), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_GRAYED)),
+                RichTextRange(IntRange(38,47), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_HIGHLIGHTED))
             )).just()
         }
     ).just()
