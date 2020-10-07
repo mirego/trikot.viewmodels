@@ -3,13 +3,12 @@ package com.trikot.viewmodels.sample.viewmodels.home
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.viewmodels.text.RichText
-import com.mirego.trikot.viewmodels.text.RichTextRange
-import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.ListViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
+import com.mirego.trikot.viewmodels.text.*
+import com.trikot.viewModels.sample.resource.SampleTextAppearanceResource
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
@@ -58,6 +57,15 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewM
             it.label.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
             it.label.text = "I am red".just()
             it.label.textColor = StateSelector(Color(255, 0, 0)).just()
+        },
+        MutableHeaderListItemViewModel(".richTextTransform"),
+        MutableLabelListItemViewModel().also {
+            it.label.richText = RichText("Text appearance defined by the client app", listOf(
+                RichTextRange(IntRange(0,9), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_BOLD)),
+                RichTextRange(IntRange(10,19), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)),
+                RichTextRange(IntRange(20,29), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_ITALIC)),
+                RichTextRange(IntRange(30,40), TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_GRAY)),
+            )).just()
         }
     ).just()
 }
