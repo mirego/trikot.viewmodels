@@ -20,7 +20,5 @@ class DefaultTextAppearanceSpanResourceProvider : TextAppearanceSpanResourceProv
     override fun spanFromResource(
         resource: TextAppearanceResource,
         context: Context
-    ): ParcelableSpan? {
-        return null
-    }
+    ): ParcelableSpan? = null
 }
