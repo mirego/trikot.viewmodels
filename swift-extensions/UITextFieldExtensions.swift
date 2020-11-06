@@ -9,19 +9,19 @@ extension UITextField {
             viewModel = value
             if let inputTextViewModel = value {
                 addTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
-
+                
                 bindColor(inputTextViewModel.textColor, \UITextField.textColor)
-
+                
                 observe(inputTextViewModel.userInput) {[weak self] (text: String) in
                     if self?.text != text {
                         self?.text = text
                     }
                 }
-
+                
                 observe(inputTextViewModel.placeholderText) {[weak self] (placeholder: String) in
                     self?.placeholder = placeholder
                 }
-
+                
                 observe(inputTextViewModel.inputType) {[weak self] (inputType: InputTextType) in
                     switch inputType {
                     case InputTextType.email:
@@ -45,6 +45,16 @@ extension UITextField {
                         self?.isSecureTextEntry = false
                     default:
                         break
+                    }
+                }
+                
+                observe(inputTextViewModel.editorAction) { [weak self] (action: InputTextEditorAction) in
+                    if action != ViewModelAction.Companion.init().None {
+                        self?.addAction(events: .editingDidEndOnExit, { _ in
+                            action.execute()
+                        })
+                    } else {
+                        self?.removeAction(events: .editingDidEndOnExit)
                     }
                 }
             }
