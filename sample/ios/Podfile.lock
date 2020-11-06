@@ -13,7 +13,7 @@ PODS:
 DEPENDENCIES:
   - SwiftLint
   - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`)"
-  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.viewmodels.git`, branch `input_text_editor_action`)"
+  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.viewmodels.git`)"
   - ViewModelsSample (from `../common`)
 
 SPEC REPOS:
@@ -24,7 +24,6 @@ EXTERNAL SOURCES:
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
   Trikot.viewmodels:
-    :branch: input_text_editor_action
     :git: "git@github.com:mirego/trikot.viewmodels.git"
   ViewModelsSample:
     :path: "../common"
@@ -34,7 +33,7 @@ CHECKOUT OPTIONS:
     :commit: ebbd2af8e85f982652bbbad5b7ca6df26ec72bf5
     :git: "git@github.com:mirego/trikot.streams.git"
   Trikot.viewmodels:
-    :commit: 105072e4c9d80aead322369b0ebcef4d86db4ee9
+    :commit: 87c9f442077236f4271b334a20dcd4766e752728
     :git: "git@github.com:mirego/trikot.viewmodels.git"
 
 SPEC CHECKSUMS:
@@ -43,6 +42,6 @@ SPEC CHECKSUMS:
   Trikot.viewmodels: 6666c31b2e5a02aca1637b5cbd1e6b5beec42a98
   ViewModelsSample: 29f81b212b7a50e8594c43aba05578c83b8eb4d6
 
-PODFILE CHECKSUM: 9b622c7a5fb699f2cf09ff2d045d6edbe07f28a0
+PODFILE CHECKSUM: 2205ff78669d15fd3d2349490c9ff827a892fd2d
 
 COCOAPODS: 1.7.3
