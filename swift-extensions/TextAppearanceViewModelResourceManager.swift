@@ -10,12 +10,12 @@ public struct TextAppearanceAttributes {
 }
 
 public protocol TextAppearanceViewModelResourceProvider {
-    func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes
+    func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes?
 }
 
 class DefaultTextAppearanceViewModelResourceProvider: TextAppearanceViewModelResourceProvider {
-    func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes {
-        TextAppearanceAttributes()
+    func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes? {
+        nil
     }
 }
 

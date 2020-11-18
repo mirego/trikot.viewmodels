@@ -2,7 +2,7 @@ import Trikot_viewmodels
 import ViewModelsSample
 
 class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvider {
-    func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes {
+    func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes? {
         if let sampleResource = resource as? SampleTextAppearanceResource {
             switch sampleResource {
             case .textAppearanceBold:
