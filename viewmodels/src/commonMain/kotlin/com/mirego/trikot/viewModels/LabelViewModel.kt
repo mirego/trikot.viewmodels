@@ -3,8 +3,10 @@ package com.mirego.trikot.viewmodels
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.text.RichText
+import kotlin.js.JsExport
 import org.reactivestreams.Publisher
 
+@JsExport
 interface LabelViewModel : ViewModel {
     /**
      * Label text

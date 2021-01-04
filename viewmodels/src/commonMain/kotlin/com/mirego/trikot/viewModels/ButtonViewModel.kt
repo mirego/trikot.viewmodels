@@ -4,8 +4,10 @@ import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.resource.ImageResource
+import kotlin.js.JsExport
 import org.reactivestreams.Publisher
 
+@JsExport
 interface ButtonViewModel : LabelViewModel {
     /**
      * Resource for the background image of the button

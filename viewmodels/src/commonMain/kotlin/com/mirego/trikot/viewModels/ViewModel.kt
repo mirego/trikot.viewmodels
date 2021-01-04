@@ -3,8 +3,10 @@ package com.mirego.trikot.viewmodels
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import kotlin.js.JsExport
 import org.reactivestreams.Publisher
 
+@JsExport
 interface ViewModel {
     /**
      * Alpha value of the view. 0.0 to 1.0
