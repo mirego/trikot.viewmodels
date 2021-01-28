@@ -1,3 +1,4 @@
+import Kingfisher
 import UIKit
 import ViewModelsSample
 import Trikot_viewmodels
@@ -11,6 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {
         Environment().flavor = CurrentFlavor()
         ImageViewModelResourceManager.shared = SampleImageResourceProvider()
         TextAppearanceViewModelResourceManager.shared = SampleTextAppearanceResourceProvider()
+
+        initializeKingfisher()
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
@@ -49,5 +52,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         navigationController.present(alert, animated: true)
+    }
+
+    // MARK: - Kingfisher
+
+    private func initializeKingfisher() {
+        ImageCache.default.memoryStorage.config.totalCostLimit =
+            min(ImageCache.default.memoryStorage.config.totalCostLimit, 300 * 1_024 * 1_024) // Max to 300 MB
+        ImageCache.default.diskStorage.config.sizeLimit = 500 * 1_024 * 1_024 // 500 MB
+
+        let imageHandler = KFImageViewModelHandler()
+        imageHandler.delegate = self
+        UIImageView.imageViewModelHandler = imageHandler
+    }
+}
+
+// MAR: - KFImageUrlRequestModifierDelegate
+
+extension AppDelegate: KFImageUrlRequestModifierDelegate {
+
+    func requestModifier(for url: URL) -> ImageDownloadRequestModifier {
+        AnyModifier { request in
+            var authenticatedRequest = request
+
+            let accessToken = "get your current access token if needed"
+            if url.absoluteString.lowercased().hasPrefix("https://") {
+                authenticatedRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            }
+
+            return authenticatedRequest
+        }
     }
 }
