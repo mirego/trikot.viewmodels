@@ -6,24 +6,24 @@ class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvi
         if let sampleResource = resource as? SampleTextAppearanceResource {
             switch sampleResource {
             case .textAppearanceBold:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.boldSystemFont(ofSize: 12), .foregroundColor: UIColor.black])
+                return TextAppearanceAttributes(font: UIFont.boldSystemFont(ofSize: 12), foregroundColor: UIColor.black)
             case .textAppearanceItalic:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.italicSystemFont(ofSize: 12), .foregroundColor: UIColor.black])
+                return TextAppearanceAttributes(font: UIFont.italicSystemFont(ofSize: 12), foregroundColor: UIColor.black)
             case .textAppearanceColored:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green])
+                return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 12), foregroundColor: UIColor.green)
             case .textAppearanceGrayed:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.gray])
+                return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 12), foregroundColor: UIColor.gray)
             case .textAppearanceHighlighted:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.black, .backgroundColor: UIColor.yellow])
+                return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 12), foregroundColor: UIColor.black, backgroundColor: UIColor.yellow)
             case .textAppearanceBold:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.black, .backgroundColor: UIColor.yellow])
+                return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 12), foregroundColor: UIColor.black, backgroundColor: UIColor.yellow)
             case .textAppearanceSuperscript:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 7), .foregroundColor: UIColor.black, .baselineOffset: 6])
+                return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 7), foregroundColor: UIColor.black)
             default:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.black])
+                return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 12), foregroundColor: UIColor.black)
             }
         } else {
-            return TextAppearanceAttributes()
+            return TextAppearanceAttributes(font: UIFont.systemFont(ofSize: 12), foregroundColor: UIColor.black)
         }
     }
 }
