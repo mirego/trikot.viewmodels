@@ -9,7 +9,7 @@ typealias ViewModelActionBlock = (actionContext: Any?) -> Unit
 @JsExport
 open class ViewModelAction(private var action: ViewModelActionBlock) {
     fun execute() {
-        execute(null)
+        action(null)
     }
 
     @JsName("executeWithActionContext")
