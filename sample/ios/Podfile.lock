@@ -17,7 +17,7 @@ DEPENDENCIES:
   - ViewModelsSample (from `../common`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - SwiftLint
 
 EXTERNAL SOURCES:
