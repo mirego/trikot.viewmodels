@@ -1,7 +1,7 @@
 package com.mirego.trikot.viewmodels
 
+import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.BindingAdapter
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.mutable.MutableSwitchViewModel
@@ -13,7 +13,7 @@ object SwitchViewModelBinder {
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
-        switch: SwitchMaterial,
+        switch: SwitchCompat,
         switchViewModel: SwitchViewModel,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {

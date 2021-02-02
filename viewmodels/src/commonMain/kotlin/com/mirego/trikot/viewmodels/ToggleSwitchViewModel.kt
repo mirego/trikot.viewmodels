@@ -2,7 +2,7 @@ package com.mirego.trikot.viewmodels
 
 import org.reactivestreams.Publisher
 
-interface SwitchViewModel : ViewModel {
+interface ToggleSwitchViewModel : ViewModel {
     /**
      * Currently selected state of the view
      */
@@ -11,5 +11,5 @@ interface SwitchViewModel : ViewModel {
     /**
      * Set the state defined by the platform switch
      */
-    fun changeState(state: Boolean)
+    fun setIsOn(on: Boolean)
 }
