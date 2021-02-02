@@ -33,7 +33,7 @@ CHECKOUT OPTIONS:
     :commit: 09fe72e21ed09381f269d7e14601379a0522fbed
     :git: "git@github.com:mirego/trikot.streams.git"
   Trikot.viewmodels:
-    :commit: 5ed2ffdc7168c54cdf3e2aa060f5adaa05355c41
+    :commit: 25396cb54eda5701e0bf181eaa17d3a1572887c3
     :git: "git@github.com:mirego/trikot.viewmodels.git"
 
 SPEC CHECKSUMS:
