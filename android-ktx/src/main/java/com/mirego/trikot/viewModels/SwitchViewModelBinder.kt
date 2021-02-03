@@ -29,7 +29,6 @@ object SwitchViewModelBinder {
             }
 
             viewModel.enabled
-                .distinctUntilChanged()
                 .asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { switch.isEnabled = it }
         }

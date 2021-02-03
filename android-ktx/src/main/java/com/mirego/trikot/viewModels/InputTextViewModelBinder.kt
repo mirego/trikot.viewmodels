@@ -61,7 +61,6 @@ object InputTextViewModelBinder {
                 }
 
                 it.enabled
-                    .distinctUntilChanged()
                     .asLiveData()
                     .observe(lifecycleOwnerWrapper.lifecycleOwner) { editText.isEnabled = it }
 
