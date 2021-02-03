@@ -22,5 +22,5 @@ open class MutableInputTextViewModel : MutableViewModel(), InputTextViewModel {
         userInput.value = value
     }
 
-    override val enabled = PropertyFactory.never<Boolean>()
+    override var enabled = PropertyFactory.never<Boolean>()
 }
