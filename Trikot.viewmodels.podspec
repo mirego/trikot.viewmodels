@@ -10,6 +10,7 @@ Pod::Spec.new do |spec|
   spec.source_files  = "swift-extensions/*.swift"
   spec.tvos.source_files = "swift-extensions/*.swift"
   spec.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift"
+  spec.tvos.exclude_files = "swift-extensions/UISwitchExtensions.swift"
 
   spec.static_framework = true
   spec.ios.deployment_target = '9.0'
