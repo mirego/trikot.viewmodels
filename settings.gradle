@@ -22,4 +22,4 @@ pluginManagement {
 }
 rootProject.name = 'trikot.viewmodels'
 
-include ':viewmodels', ':android-ktx'
+include ':viewmodels'
