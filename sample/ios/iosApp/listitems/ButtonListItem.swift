@@ -2,17 +2,21 @@ import UIKit
 import ViewModelsSample
 
 class ButtonListItem: UIView {
-    private let button = UIButton(frame: .zero)
+    private var button: UIButton?
 
     var item: ButtonListItemViewModel? {
         didSet {
+            if let button = button {
+                button.removeFromSuperview()
+            }
+            recreateButton()
             viewModel = item
-            button.buttonViewModel = item?.button
+            button?.buttonViewModel = item?.button
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private func recreateButton() {
+        let button = UIButton(frame: .zero)
         addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
 
@@ -32,9 +36,6 @@ class ButtonListItem: UIView {
             button.centerXAnchor.constraint(equalTo: centerXAnchor),
             widthAnchor.constraint(greaterThanOrEqualTo: button.widthAnchor)
         ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.button = button
     }
 }

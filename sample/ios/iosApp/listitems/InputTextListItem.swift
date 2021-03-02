@@ -6,6 +6,7 @@ class InputTextListItem: UIView {
 
     var item: InputTextListItemViewModel? {
         didSet {
+            textField.backgroundColor = nil
             viewModel = item
             textField.inputTextViewModel = item?.inputText
         }

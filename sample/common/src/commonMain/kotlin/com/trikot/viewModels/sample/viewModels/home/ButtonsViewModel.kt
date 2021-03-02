@@ -75,7 +75,7 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListView
             it.button.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
             it.button.text = "Tap me".just()
         },
-        MutableHeaderListItemViewModel(".enabled"),
+        MutableHeaderListItemViewModel(".!enabled"),
         MutableButtonListItemViewModel().also {
             it.button.enabled = false.just()
             it.button.text = "I am disabled".just()
@@ -116,7 +116,7 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListView
         MutableHeaderListItemViewModel("click to toggle image"),
         MutableButtonListItemViewModel().also {
             it.button.imageResource = iconVisible.map { visible ->
-                StateSelector(if (visible) ImageResources.ICON else null)
+                StateSelector(if (visible) ImageResources.ICON else ImageResource.None)
             }
             it.button.tintColor = StateSelector(Color(255, 0, 0), Color(123, 123, 123)).just()
             it.button.action = ViewModelAction {
