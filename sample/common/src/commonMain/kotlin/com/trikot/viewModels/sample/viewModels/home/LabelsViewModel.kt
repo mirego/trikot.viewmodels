@@ -94,10 +94,6 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
                     ),
                     RichTextRange(
                         IntRange(71, 72),
-                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)
-                    ),
-                    RichTextRange(
-                        IntRange(72, 73),
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_SUPERSCRIPT)
                     )
                 )

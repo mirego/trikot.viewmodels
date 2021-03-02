@@ -17,10 +17,10 @@ class ButtonListItem: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
 
         button.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.2196078431, blue: 0.6784313725, alpha: 1)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.yellow, for: .normal)
         button.setTitleColor(.red, for: .highlighted)
         button.setTitleColor(.blue, for: .disabled)
-        button.setTitleColor(.white, for: .selected)
+        button.setTitleColor(.green, for: .selected)
         button.titleLabel?.numberOfLines = 2
         button.titleLabel?.minimumScaleFactor = 0.4
 
