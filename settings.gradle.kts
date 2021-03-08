@@ -20,4 +20,4 @@ pluginManagement {
 }
 rootProject.name = "trikot.viewmodels"
 
-include(":viewmodels")
+include(":viewModels")
