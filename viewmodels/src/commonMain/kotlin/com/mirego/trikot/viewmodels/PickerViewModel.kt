@@ -2,24 +2,25 @@ package com.mirego.trikot.viewmodels
 
 import org.reactivestreams.Publisher
 
-interface PickerViewModel<T : PickerItemViewModel> : ViewModel {
+interface PickerViewModel<T> {
     /**
      * List of elements in the spinner
      */
-    val elements: Publisher<List<T>>
+    val elements: Publisher<List<PickerItemViewModel<T>>>
 
     /**
      * Appearing value on the spinner
      */
-    val selectedValue: Publisher<Int>
+    val selectedValueIndex: Publisher<Int>
 
     /**
      * Set the appearing value on the spinner
      */
-    fun setSelectedValue(value: T)
+    fun setSelectedValueIndex(index: Int)
 
     /**
      * If the spinner is enabled or disabled
      */
     val enabled: Publisher<Boolean>
+
 }

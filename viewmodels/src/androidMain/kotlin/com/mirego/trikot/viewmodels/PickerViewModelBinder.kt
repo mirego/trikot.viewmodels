@@ -1,5 +1,7 @@
 package com.mirego.trikot.viewmodels
 
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
@@ -11,23 +13,34 @@ object PickerViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         picker: Spinner,
-        pickerViewModel: PickerViewModel<PickerItemViewModel>?,
+        pickerViewModel: PickerViewModel<*>?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         pickerViewModel?.let { viewModel ->
-            viewModel.elements.observe(lifecycleOwnerWrapper.lifecycleOwner) {
+            viewModel.elements.observe(lifecycleOwnerWrapper.lifecycleOwner) { list ->
                 picker.adapter =
-                    ArrayAdapter(picker.context, android.R.layout.simple_spinner_item, it)
+                    ArrayAdapter(picker.context, android.R.layout.simple_spinner_item, list.map { it.displayName })
             }
-            viewModel.selectedValue.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                picker.setSelection(it)
+            viewModel.selectedValueIndex.observe(lifecycleOwnerWrapper.lifecycleOwner) {
+                picker.setSelection(it, false)
             }
-            picker.setOnItemClickListener { _, _, position, _ ->
-                viewModel.elements.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                    viewModel.setSelectedValue(it[position])
+            picker.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.elements.observe(lifecycleOwnerWrapper.lifecycleOwner) {
+                        viewModel.setSelectedValueIndex(position)
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    //NO-OP
                 }
             }
-            picker.bindViewModel(viewModel as ViewModel, lifecycleOwnerWrapper)
         }
     }
 }

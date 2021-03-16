@@ -2,6 +2,7 @@ package com.trikot.viewmodels.sample.databinding
 
 import androidx.lifecycle.LifecycleOwner
 import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.PickerItemViewModel
 import com.mirego.trikot.viewmodels.PickerViewModel
 import com.mirego.trikot.viewmodels.adapter.GenericViewModelDiffCallback
 import com.mirego.trikot.viewmodels.adapter.ViewModelAdapter
@@ -13,6 +14,7 @@ import com.trikot.viewmodels.sample.viewmodels.ImageListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.InputTextListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.LabelListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.NavigableListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.PickerListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.SliderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.ToggleSwitchListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.ViewListItemViewModel
@@ -34,7 +36,7 @@ class ListItemViewModelAdapter(lifecycleOwner: LifecycleOwner) :
                 is InputTextListItemViewModel -> R.layout.item_input_text
                 is SliderListItemViewModel -> R.layout.item_slider
                 is ToggleSwitchListItemViewModel -> R.layout.item_switch
-                is PickerViewModel<*> -> R.layout.item_picker
+                is PickerListItemViewModel -> R.layout.item_picker
                 else -> TODO()
             }
         }
