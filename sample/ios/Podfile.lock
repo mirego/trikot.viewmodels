@@ -13,7 +13,7 @@ PODS:
 DEPENDENCIES:
   - SwiftLint
   - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`)"
-  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.viewmodels.git`)"
+  - Trikot.viewmodels (from `../../`)
   - ViewModelsSample (from `../common`)
 
 SPEC REPOS:
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
   Trikot.viewmodels:
-    :git: "git@github.com:mirego/trikot.viewmodels.git"
+    :path: "../../"
   ViewModelsSample:
     :path: "../common"
 
@@ -32,9 +32,6 @@ CHECKOUT OPTIONS:
   Trikot.streams:
     :commit: 14ecc3063f70f3bd5386308e64588f257f7f112f
     :git: "git@github.com:mirego/trikot.streams.git"
-  Trikot.viewmodels:
-    :commit: 5b732a659feb5675c50bb55586f82c207ec4cab6
-    :git: "git@github.com:mirego/trikot.viewmodels.git"
 
 SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
@@ -42,6 +39,6 @@ SPEC CHECKSUMS:
   Trikot.viewmodels: 9ac5d99289edcac8fc7391a37c29ecb250569736
   ViewModelsSample: 29f81b212b7a50e8594c43aba05578c83b8eb4d6
 
-PODFILE CHECKSUM: 785bd6160b7f5efa838834a21f591c487ea090f1
+PODFILE CHECKSUM: a8d630578c721be74c5cafb41186fab07d03eae6
 
 COCOAPODS: 1.9.3
