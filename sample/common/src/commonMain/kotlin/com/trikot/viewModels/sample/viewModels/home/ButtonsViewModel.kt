@@ -10,6 +10,7 @@ import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.text.ColorTransform
 import com.mirego.trikot.viewmodels.text.RichText
 import com.mirego.trikot.viewmodels.text.RichTextRange
 import com.mirego.trikot.viewmodels.text.StyleTransform
@@ -46,7 +47,23 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListView
                 )
             ).just()
         },
-        MutableHeaderListItemViewModel(".richText with color"),
+
+        MutableHeaderListItemViewModel(".richText with color range"),
+        MutableButtonListItemViewModel().also {
+            it.button.richText = RichText(
+                "normal, bold, underlined, italic, bold italic",
+                listOf(
+                    RichTextRange(0..8, StyleTransform(StyleTransform.Style.NORMAL)),
+                    RichTextRange(8..14, StyleTransform(StyleTransform.Style.BOLD)),
+                    RichTextRange(14..26, StyleTransform(StyleTransform.Style.UNDERLINE)),
+                    RichTextRange(IntRange(14, 26), ColorTransform(Color(200,0,0))),
+                    RichTextRange(26..34, StyleTransform(StyleTransform.Style.ITALIC)),
+                    RichTextRange(34..45, StyleTransform(StyleTransform.Style.BOLD_ITALIC))
+                )
+            ).just()
+        },
+
+        MutableHeaderListItemViewModel(".richText with color selector"),
         MutableButtonListItemViewModel().also {
             it.button.textColor = StateSelector(Color(123, 123, 123), Color(0, 0, 0)).just()
             it.button.richText = RichText(
@@ -55,6 +72,21 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListView
                     RichTextRange(IntRange(0, 8), StyleTransform(StyleTransform.Style.NORMAL)),
                     RichTextRange(IntRange(8, 14), StyleTransform(StyleTransform.Style.BOLD)),
                     RichTextRange(IntRange(14, 26), StyleTransform(StyleTransform.Style.UNDERLINE)),
+                    RichTextRange(IntRange(26, 34), StyleTransform(StyleTransform.Style.ITALIC)),
+                    RichTextRange(IntRange(34, 45), StyleTransform(StyleTransform.Style.BOLD_ITALIC))
+                )
+            ).just()
+        },
+        MutableHeaderListItemViewModel(".richText with color selector + color range"),
+        MutableButtonListItemViewModel().also {
+            it.button.textColor = StateSelector(Color(123, 123, 123), Color(0, 0, 0)).just()
+            it.button.richText = RichText(
+                "normal, bold, underlined, italic, bold italic",
+                listOf(
+                    RichTextRange(IntRange(0, 8), StyleTransform(StyleTransform.Style.NORMAL)),
+                    RichTextRange(IntRange(8, 14), StyleTransform(StyleTransform.Style.BOLD)),
+                    RichTextRange(IntRange(14, 26), StyleTransform(StyleTransform.Style.UNDERLINE)),
+                    RichTextRange(IntRange(14, 26), ColorTransform(Color(200,0,0))),
                     RichTextRange(IntRange(26, 34), StyleTransform(StyleTransform.Style.ITALIC)),
                     RichTextRange(IntRange(34, 45), StyleTransform(StyleTransform.Style.BOLD_ITALIC))
                 )
