@@ -2,8 +2,6 @@ package com.trikot.viewmodels.sample.databinding
 
 import androidx.lifecycle.LifecycleOwner
 import com.mirego.trikot.viewmodels.ListItemViewModel
-import com.mirego.trikot.viewmodels.PickerItemViewModel
-import com.mirego.trikot.viewmodels.PickerViewModel
 import com.mirego.trikot.viewmodels.adapter.GenericViewModelDiffCallback
 import com.mirego.trikot.viewmodels.adapter.ViewModelAdapter
 import com.trikot.viewmodels.sample.BR

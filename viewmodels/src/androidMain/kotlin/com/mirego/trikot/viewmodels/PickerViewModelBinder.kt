@@ -5,6 +5,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
+import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.observe
 
 object PickerViewModelBinder {
@@ -22,8 +23,12 @@ object PickerViewModelBinder {
                     ArrayAdapter(picker.context, android.R.layout.simple_spinner_item, list.map { it.displayName })
             }
             viewModel.selectedValueIndex.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                picker.setSelection(it, false)
+                picker.setSelection(it)
             }
+            viewModel.enabled
+                .asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { picker.isEnabled = it }
+
             picker.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
                 override fun onItemSelected(

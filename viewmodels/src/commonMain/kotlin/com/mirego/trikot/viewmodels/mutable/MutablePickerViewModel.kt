@@ -17,5 +17,5 @@ open class MutablePickerViewModel<T> : PickerViewModel<T> {
         listOf()
     )
 
-    override var enabled = PropertyFactory.never<Boolean>()
+    override var enabled = Publishers.behaviorSubject(true)
 }

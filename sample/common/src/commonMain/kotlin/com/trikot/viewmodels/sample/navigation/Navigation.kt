@@ -6,10 +6,10 @@ import com.trikot.viewmodels.sample.viewmodels.home.ButtonsViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.ImagesViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.InputTextViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.LabelsViewModel
+import com.trikot.viewmodels.sample.viewmodels.home.PickersViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.SlidersViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.SwitchesViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.ViewsViewModel
-import com.trikot.viewmodels.sample.viewmodels.home.PickersViewModel
 
 interface NavigationDelegate {
     fun navigateTo(destination: Destination)
