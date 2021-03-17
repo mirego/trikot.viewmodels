@@ -139,13 +139,13 @@ extension UIButton {
             coloredAttribuedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attributedString.length))
             setAttributedTitle(coloredAttribuedString, for: state)
         } else if let color = titleColor(for: state) {
-            setAttributedTitle(getAtributedString(attributedString, coloringCompletedWith: color), for: state)
+            setAttributedTitle(getAttributedString(attributedString, coloringCompletedWith: color), for: state)
         } else {
             setAttributedTitle(attributedString, for: state)
         }
     }
     
-    private func getAtributedString(_ attributedString: NSAttributedString, coloringCompletedWith color: UIColor) -> NSAttributedString {
+    private func getAttributedString(_ attributedString: NSAttributedString, coloringCompletedWith color: UIColor) -> NSAttributedString {
         let coloredAttribuedString = NSAttributedString(string: attributedString.string, attributes: [.foregroundColor: color])
         let completedAttributedString = NSMutableAttributedString(attributedString: coloredAttribuedString)
         attributedString.enumerateAttributes(in: NSRange(location: 0, length: attributedString.length), options: []) { (attributes, range, _) in
