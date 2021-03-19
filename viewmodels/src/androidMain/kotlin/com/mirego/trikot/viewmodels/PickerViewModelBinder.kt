@@ -43,7 +43,7 @@ object PickerViewModelBinder {
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    //NO-OP
+                    // NO-OP
                 }
             }
         }
