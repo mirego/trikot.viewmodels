@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.mutable
 
+import com.mirego.trikot.streams.reactive.BehaviorSubject
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.viewmodels.PickerItemViewModel
 import com.mirego.trikot.viewmodels.PickerViewModel
@@ -18,7 +19,7 @@ open class MutablePickerViewModel<T> : MutableViewModel(), PickerViewModel<T> {
         listOf()
     )
 
-    override var enabled = Publishers.behaviorSubject(true)
+    override var enabled = PropertyFactory.create(true)
 
     override var action = Publishers.never<ViewModelAction>()
 }

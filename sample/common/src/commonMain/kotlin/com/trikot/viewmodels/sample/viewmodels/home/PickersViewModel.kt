@@ -15,7 +15,7 @@ class PickersViewModel(navigationDelegate: NavigationDelegate) :
         MutablePickerListItemViewModel(),
         MutableHeaderListItemViewModel(".!enabled"),
         MutablePickerListItemViewModel().apply {
-            picker.enabled.value = false
+            picker.enabled = false.just()
         },
         MutableHeaderListItemViewModel("alpha"),
         MutablePickerListItemViewModel().apply {
