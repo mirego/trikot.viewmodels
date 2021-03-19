@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import ViewModelsSample
 import Trikot_streams
 
 extension UIView {

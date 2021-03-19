@@ -23,6 +23,7 @@
 		40C6799F2304B3CE003BB391 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799E2304B3CE003BB391 /* SampleView.swift */; };
 		40C679A123059D75003BB391 /* SampleImageResourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */; };
 		4542068DAB97886DA4B0F847 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8EFE2083E492C1637F8C1F /* Pods_iosApp.framework */; };
+		4E5218262603CF7D004FE1C4 /* PickerListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5218252603CF7D004FE1C4 /* PickerListItem.swift */; };
 		4E9D517125C887E800A9BD0C /* ToggleSwitchListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D517025C887E800A9BD0C /* ToggleSwitchListItem.swift */; };
 		B995FF0C600CB7AC95155E4B /* SampleTextAppearanceResourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995FE9E5B59DC20AC9D20F7 /* SampleTextAppearanceResourceProvider.swift */; };
 		F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861D7E0207FA40F0085E80D /* AppDelegate.swift */; };
@@ -79,6 +80,7 @@
 		40C6799C2304B3C5003BB391 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		40C6799E2304B3CE003BB391 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
 		40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageResourceProvider.swift; sourceTree = "<group>"; };
+		4E5218252603CF7D004FE1C4 /* PickerListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerListItem.swift; sourceTree = "<group>"; };
 		4E9D517025C887E800A9BD0C /* ToggleSwitchListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSwitchListItem.swift; sourceTree = "<group>"; };
 		5B852640BBE683C45B6B9836 /* Pods-iosAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAppTests.debug.xcconfig"; path = "Target Support Files/Pods-iosAppTests/Pods-iosAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5D8EFE2083E492C1637F8C1F /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 				400126FC23822780008FF41E /* InputTextListItem.swift */,
 				3D3013CC246D6E0600D0E540 /* SliderListItem.swift */,
 				4E9D517025C887E800A9BD0C /* ToggleSwitchListItem.swift */,
+				4E5218252603CF7D004FE1C4 /* PickerListItem.swift */,
 			);
 			path = listitems;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				40C6799D2304B3C5003BB391 /* SampleViewController.swift in Sources */,
 				40C679A123059D75003BB391 /* SampleImageResourceProvider.swift in Sources */,
 				4E9D517125C887E800A9BD0C /* ToggleSwitchListItem.swift in Sources */,
+				4E5218262603CF7D004FE1C4 /* PickerListItem.swift in Sources */,
 				40C4B649237B578A00E86A76 /* TableViewCellUtils.swift in Sources */,
 				40C4B64D237B661800E86A76 /* LabelListItem.swift in Sources */,
 				B995FF0C600CB7AC95155E4B /* SampleTextAppearanceResourceProvider.swift in Sources */,

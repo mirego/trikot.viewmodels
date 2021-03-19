@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import ViewModelsSample
 
 extension UISlider {
     private struct AssosiatedKeys {
