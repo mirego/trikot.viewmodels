@@ -4,9 +4,10 @@ import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.viewmodels.PickerItemViewModel
 import com.mirego.trikot.viewmodels.PickerViewModel
 import com.mirego.trikot.viewmodels.factory.PropertyFactory
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
-open class MutablePickerViewModel<T> : PickerViewModel<T> {
+open class MutablePickerViewModel<T> : MutableViewModel(), PickerViewModel<T> {
     override val selectedValueIndex = Publishers.behaviorSubject(0)
 
     override fun setSelectedValueIndex(index: Int) {
@@ -18,4 +19,6 @@ open class MutablePickerViewModel<T> : PickerViewModel<T> {
     )
 
     override var enabled = Publishers.behaviorSubject(true)
+
+    override var action = Publishers.never<ViewModelAction>()
 }

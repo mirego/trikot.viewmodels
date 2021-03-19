@@ -5,7 +5,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.observe
 
 object PickerViewModelBinder {
@@ -18,16 +17,24 @@ object PickerViewModelBinder {
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         pickerViewModel?.let { viewModel ->
+            picker.bindViewModel(viewModel as ViewModel, lifecycleOwnerWrapper)
+
+            val arrayAdapter = ArrayAdapter<String>(
+                picker.context,
+                android.R.layout.simple_spinner_item
+            ).also { picker.adapter = it }
+
             viewModel.elements.observe(lifecycleOwnerWrapper.lifecycleOwner) { list ->
-                picker.adapter =
-                    ArrayAdapter(picker.context, android.R.layout.simple_spinner_item, list.map { it.displayName })
+                arrayAdapter.clear()
+                arrayAdapter.addAll(list.map { it.displayName })
             }
-            viewModel.selectedValueIndex.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                picker.setSelection(it)
-            }
-            viewModel.enabled
-                .asLiveData()
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) { picker.isEnabled = it }
+
+            viewModel.selectedValueIndex.observe(
+                lifecycleOwnerWrapper.lifecycleOwner,
+                picker::setSelection
+            )
+
+            viewModel.enabled.observe(lifecycleOwnerWrapper.lifecycleOwner, picker::setEnabled)
 
             picker.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
@@ -36,15 +43,9 @@ object PickerViewModelBinder {
                     view: View?,
                     position: Int,
                     id: Long
-                ) {
-                    viewModel.elements.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                        viewModel.setSelectedValueIndex(position)
-                    }
-                }
+                ) = viewModel.setSelectedValueIndex(position)
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // NO-OP
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) = Unit
             }
         }
     }

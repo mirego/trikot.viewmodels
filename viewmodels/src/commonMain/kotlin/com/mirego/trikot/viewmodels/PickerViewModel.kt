@@ -2,7 +2,7 @@ package com.mirego.trikot.viewmodels
 
 import org.reactivestreams.Publisher
 
-interface PickerViewModel<T> {
+interface PickerViewModel<T> : ViewModel {
     /**
      * List of elements in the spinner
      */
@@ -22,5 +22,4 @@ interface PickerViewModel<T> {
      * If the spinner is enabled or disabled
      */
     val enabled: Publisher<Boolean>
-
 }

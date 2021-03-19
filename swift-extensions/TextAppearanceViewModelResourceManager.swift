@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 public struct TextAppearanceAttributes {
     public let attributes: [NSAttributedString.Key: Any]

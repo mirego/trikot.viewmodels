@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 extension UILabel {
     public var labelViewModel: LabelViewModel? {

@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 extension UIPickerView {
     private struct AssociatedKeys {
@@ -18,6 +18,9 @@ extension UIPickerView {
     public var pickerViewModel: PickerViewModel? {
         get { return trikotViewModel() }
         set(value) {
+            
+            viewModel = value
+            
             guard let pickerViewModel = value else { return }
 
             self.delegate = self
