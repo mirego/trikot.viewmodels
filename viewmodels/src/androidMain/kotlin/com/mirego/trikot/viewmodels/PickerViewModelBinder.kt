@@ -29,7 +29,7 @@ object PickerViewModelBinder {
                 arrayAdapter.addAll(list.map { it.displayName })
             }
 
-            viewModel.selectedValueIndex.observe(
+            viewModel.selectedElementIndex.observe(
                 lifecycleOwnerWrapper.lifecycleOwner,
                 picker::setSelection
             )
@@ -43,7 +43,7 @@ object PickerViewModelBinder {
                     view: View?,
                     position: Int,
                     id: Long
-                ) = viewModel.setSelectedValueIndex(position)
+                ) = viewModel.setSelectedElementIndex(position)
 
                 override fun onNothingSelected(parent: AdapterView<*>?) = Unit
             }

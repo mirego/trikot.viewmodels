@@ -24,7 +24,7 @@ extension UIPickerView {
             guard let pickerViewModel = value else { return }
 
             self.delegate = self
-            observe(pickerViewModel.selectedValueIndex) { [weak self] (value: Int) in
+            observe(pickerViewModel.selectedElementIndex) { [weak self] (value: Int) in
                 self?.selectRow(value, inComponent: 0, animated: false)
             }
 
@@ -41,7 +41,7 @@ extension UIPickerView {
 
 extension UIPickerView : UIPickerViewDelegate {
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.pickerViewModel?.setSelectedValueIndex(index: Int32(row))
+        self.pickerViewModel?.setSelectedElementIndex(index: Int32(row))
     }
 }
 

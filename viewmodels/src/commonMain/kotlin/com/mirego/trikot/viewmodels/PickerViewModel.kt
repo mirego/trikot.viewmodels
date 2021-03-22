@@ -11,12 +11,12 @@ interface PickerViewModel<T> : ViewModel {
     /**
      * Appearing value on the spinner
      */
-    val selectedValueIndex: Publisher<Int>
+    val selectedElementIndex: Publisher<Int>
 
     /**
      * Set the appearing value on the spinner
      */
-    fun setSelectedValueIndex(index: Int)
+    fun setSelectedElementIndex(index: Int)
 
     /**
      * If the spinner is enabled or disabled
