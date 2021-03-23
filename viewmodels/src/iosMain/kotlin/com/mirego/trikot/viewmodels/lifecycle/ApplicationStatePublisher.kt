@@ -12,10 +12,15 @@ import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import platform.darwin.sel_registerName
 import kotlin.native.concurrent.freeze
+import kotlinx.cinterop.ObjCAction
+import platform.darwin.NSObject
 
 actual class ApplicationStatePublisher :
     BehaviorSubjectImpl<ApplicationState>(),
     Publisher<ApplicationState> {
+
+    private val observer = ApplicationStateObserver()
+
     init {
         if (NSThread.isMainThread) {
             setInitialValue()
@@ -38,32 +43,50 @@ actual class ApplicationStatePublisher :
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
-        NSNotificationCenter.defaultCenter.addObserver(
-            this,
-            sel_registerName("willEnterForeground"),
-            UIApplicationWillEnterForegroundNotification,
-            null
-        )
-        NSNotificationCenter.defaultCenter.addObserver(
-            this,
-            sel_registerName("didEnterBackground"),
-            UIApplicationDidEnterBackgroundNotification,
-            null
-        )
+        observer.start {
+            value = it
+        }
     }
 
     override fun onNoSubscription() {
-        NSNotificationCenter.defaultCenter.removeObserver(this)
+        observer.stop()
         super.onNoSubscription()
     }
 
-    @Suppress("unused")
-    fun willEnterForeground() {
-        value = ApplicationState.FOREGROUND
-    }
+    private class ApplicationStateObserver: NSObject() {
+        private var callback: ((ApplicationState) -> Unit)? = null
 
-    @Suppress("unused")
-    fun didEnterBackground() {
-        value = ApplicationState.BACKGROUND
+        fun start(closure: (ApplicationState) -> Unit) {
+            callback = closure
+            NSNotificationCenter.defaultCenter.addObserver(
+                this,
+                sel_registerName("willEnterForeground"),
+                UIApplicationWillEnterForegroundNotification,
+                null
+            )
+            NSNotificationCenter.defaultCenter.addObserver(
+                this,
+                sel_registerName("didEnterBackground"),
+                UIApplicationDidEnterBackgroundNotification,
+                null
+            )
+        }
+
+        fun stop() {
+            callback = null
+            NSNotificationCenter.defaultCenter.removeObserver(this)
+        }
+
+        @ObjCAction
+        @Suppress("unused")
+        fun willEnterForeground() {
+            callback?.let { it(ApplicationState.FOREGROUND) }
+        }
+
+        @ObjCAction
+        @Suppress("unused")
+        fun didEnterBackground() {
+            callback?.let { it(ApplicationState.BACKGROUND) }
+        }
     }
 }
