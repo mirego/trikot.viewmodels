@@ -37,7 +37,6 @@ object PickerViewModelBinder {
             viewModel.enabled.observe(lifecycleOwnerWrapper.lifecycleOwner, picker::setEnabled)
 
             picker.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
