@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.lifecycle
 
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
 import platform.Foundation.NSNotificationCenter
 import platform.Foundation.NSThread
@@ -8,12 +9,11 @@ import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationDidEnterBackgroundNotification
 import platform.UIKit.UIApplicationState
 import platform.UIKit.UIApplicationWillEnterForegroundNotification
+import platform.darwin.NSObject
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import platform.darwin.sel_registerName
 import kotlin.native.concurrent.freeze
-import kotlinx.cinterop.ObjCAction
-import platform.darwin.NSObject
 
 actual class ApplicationStatePublisher :
     BehaviorSubjectImpl<ApplicationState>(),
@@ -53,7 +53,7 @@ actual class ApplicationStatePublisher :
         super.onNoSubscription()
     }
 
-    private class ApplicationStateObserver: NSObject() {
+    private class ApplicationStateObserver : NSObject() {
         private var callback: ((ApplicationState) -> Unit)? = null
 
         fun start(closure: (ApplicationState) -> Unit) {
