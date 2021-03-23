@@ -20,5 +20,6 @@ open class MutablePickerViewModel<T> : MutableViewModel(), PickerViewModel<T> {
 
     override var enabled = PropertyFactory.create(true)
 
+    // We can't add an onClickListener to a Spinner in Android, therefore a ViewModelAction cannot be used
     override var action = Publishers.never<ViewModelAction>()
 }
