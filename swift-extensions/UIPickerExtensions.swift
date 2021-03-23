@@ -18,7 +18,6 @@ extension UIPickerView {
     public var pickerViewModel: PickerViewModel? {
         get { return trikotViewModel() }
         set(value) {
-            
             viewModel = value
             
             guard let pickerViewModel = value else { return }
