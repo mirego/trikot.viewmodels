@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.lifecycle
 
-import com.mirego.trikot.foundation.concurrent.atomicNullable
+import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.setOrThrow
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
@@ -56,10 +57,10 @@ actual class ApplicationStatePublisher :
     }
 
     private class ApplicationStateObserver : NSObject() {
-        private var callback: ((ApplicationState) -> Unit)? by atomicNullable(null)
+        private var callback: AtomicReference<((ApplicationState) -> Unit)?> = AtomicReference(null)
 
         fun start(closure: (ApplicationState) -> Unit) {
-            callback = closure.freeze()
+            callback.setOrThrow(closure)
             NSNotificationCenter.defaultCenter.addObserver(
                 this,
                 sel_registerName("willEnterForeground"),
@@ -75,20 +76,20 @@ actual class ApplicationStatePublisher :
         }
 
         fun stop() {
-            callback = null
+            callback.setOrThrow(null)
             NSNotificationCenter.defaultCenter.removeObserver(this)
         }
 
         @ObjCAction
         @Suppress("unused")
         fun willEnterForeground() {
-            callback?.let { it(ApplicationState.FOREGROUND) }
+            callback.value?.let { it(ApplicationState.FOREGROUND) }
         }
 
         @ObjCAction
         @Suppress("unused")
         fun didEnterBackground() {
-            callback?.let { it(ApplicationState.BACKGROUND) }
+            callback.value?.let { it(ApplicationState.BACKGROUND) }
         }
     }
 }
