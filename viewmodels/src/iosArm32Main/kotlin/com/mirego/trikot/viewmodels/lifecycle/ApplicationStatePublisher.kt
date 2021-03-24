@@ -59,7 +59,7 @@ actual class ApplicationStatePublisher :
         private var callback: ((ApplicationState) -> Unit)? by atomic(null)
 
         fun start(closure: (ApplicationState) -> Unit) {
-            callback = closure
+            callback = closure.freeze()
             NSNotificationCenter.defaultCenter.addObserver(
                 this,
                 sel_registerName("willEnterForeground"),
