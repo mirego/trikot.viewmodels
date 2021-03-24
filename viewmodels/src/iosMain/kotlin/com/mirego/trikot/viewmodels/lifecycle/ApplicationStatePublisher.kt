@@ -1,6 +1,6 @@
 package com.mirego.trikot.viewmodels.lifecycle
 
-import com.mirego.trikot.foundation.concurrent.atomic
+import com.mirego.trikot.foundation.concurrent.atomicNullable
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
@@ -56,7 +56,7 @@ actual class ApplicationStatePublisher :
     }
 
     private class ApplicationStateObserver : NSObject() {
-        private var callback: ((ApplicationState) -> Unit)? by atomic(null)
+        private var callback: ((ApplicationState) -> Unit)? by atomicNullable(null)
 
         fun start(closure: (ApplicationState) -> Unit) {
             callback = closure.freeze()
