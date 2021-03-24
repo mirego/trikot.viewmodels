@@ -58,8 +58,7 @@ actual class ApplicationStatePublisher :
     private class ApplicationStateObserver : NSObject() {
         private var callback: ((ApplicationState) -> Unit)? by atomic(null)
 
-        fun start(closure: (ApplicationState) -> Unit) {
-            callback = closure.freeze()
+        init {
             NSNotificationCenter.defaultCenter.addObserver(
                 this,
                 sel_registerName("willEnterForeground"),
@@ -74,9 +73,12 @@ actual class ApplicationStatePublisher :
             )
         }
 
+        fun start(closure: (ApplicationState) -> Unit) {
+            callback = closure.freeze()
+        }
+
         fun stop() {
             callback = null
-            NSNotificationCenter.defaultCenter.removeObserver(this)
         }
 
         @ObjCAction
