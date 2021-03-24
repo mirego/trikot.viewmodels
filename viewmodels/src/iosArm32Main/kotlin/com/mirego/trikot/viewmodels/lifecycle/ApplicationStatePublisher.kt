@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.lifecycle
 
+import com.mirego.trikot.foundation.concurrent.atomic
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
@@ -15,6 +16,7 @@ import platform.darwin.dispatch_get_main_queue
 import platform.darwin.sel_registerName
 import kotlin.native.concurrent.freeze
 
+@Suppress("unused")
 actual class ApplicationStatePublisher :
     BehaviorSubjectImpl<ApplicationState>(),
     Publisher<ApplicationState> {
@@ -54,7 +56,7 @@ actual class ApplicationStatePublisher :
     }
 
     private class ApplicationStateObserver : NSObject() {
-        private var callback: ((ApplicationState) -> Unit)? = null
+        private var callback: ((ApplicationState) -> Unit)? by atomic(null)
 
         fun start(closure: (ApplicationState) -> Unit) {
             callback = closure
