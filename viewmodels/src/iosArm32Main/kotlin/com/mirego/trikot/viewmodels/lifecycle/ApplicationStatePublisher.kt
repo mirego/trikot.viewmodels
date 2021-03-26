@@ -1,6 +1,8 @@
 package com.mirego.trikot.viewmodels.lifecycle
 
+import com.mirego.trikot.foundation.concurrent.atomicNullable
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
 import platform.Foundation.NSNotificationCenter
 import platform.Foundation.NSThread
@@ -8,14 +10,19 @@ import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationDidEnterBackgroundNotification
 import platform.UIKit.UIApplicationState
 import platform.UIKit.UIApplicationWillEnterForegroundNotification
+import platform.darwin.NSObject
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import platform.darwin.sel_registerName
 import kotlin.native.concurrent.freeze
 
+@Suppress("unused")
 actual class ApplicationStatePublisher :
     BehaviorSubjectImpl<ApplicationState>(),
     Publisher<ApplicationState> {
+
+    private val observer = ApplicationStateObserver()
+
     init {
         if (NSThread.isMainThread) {
             setInitialValue()
@@ -38,32 +45,50 @@ actual class ApplicationStatePublisher :
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
-        NSNotificationCenter.defaultCenter.addObserver(
-            this,
-            sel_registerName("willEnterForeground"),
-            UIApplicationWillEnterForegroundNotification,
-            null
-        )
-        NSNotificationCenter.defaultCenter.addObserver(
-            this,
-            sel_registerName("didEnterBackground"),
-            UIApplicationDidEnterBackgroundNotification,
-            null
-        )
+        observer.start {
+            value = it
+        }
     }
 
     override fun onNoSubscription() {
-        NSNotificationCenter.defaultCenter.removeObserver(this)
+        observer.stop()
         super.onNoSubscription()
     }
 
-    @Suppress("unused")
-    fun willEnterForeground() {
-        value = ApplicationState.FOREGROUND
-    }
+    private class ApplicationStateObserver : NSObject() {
+        private var callback: ((ApplicationState) -> Unit)? by atomicNullable(null)
 
-    @Suppress("unused")
-    fun didEnterBackground() {
-        value = ApplicationState.BACKGROUND
+        fun start(closure: (ApplicationState) -> Unit) {
+            callback = closure.freeze()
+            NSNotificationCenter.defaultCenter.addObserver(
+                this,
+                sel_registerName("willEnterForeground"),
+                UIApplicationWillEnterForegroundNotification,
+                null
+            )
+            NSNotificationCenter.defaultCenter.addObserver(
+                this,
+                sel_registerName("didEnterBackground"),
+                UIApplicationDidEnterBackgroundNotification,
+                null
+            )
+        }
+
+        fun stop() {
+            callback = null
+            NSNotificationCenter.defaultCenter.removeObserver(this)
+        }
+
+        @ObjCAction
+        @Suppress("unused")
+        fun willEnterForeground() {
+            callback?.let { it(ApplicationState.FOREGROUND) }
+        }
+
+        @ObjCAction
+        @Suppress("unused")
+        fun didEnterBackground() {
+            callback?.let { it(ApplicationState.BACKGROUND) }
+        }
     }
 }
