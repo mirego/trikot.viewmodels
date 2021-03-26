@@ -9,9 +9,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.ListItemViewModel
-import com.mirego.trikot.viewmodels.bindViewModel
+import com.mirego.trikot.viewmodels.binding.bindViewModel
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 
 typealias LayoutMapper<MLI> = (viewModel: MLI) -> Int
 
@@ -62,7 +62,10 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
     diffCallback: DiffUtil.ItemCallback<MLI> = NoDiffCallback(),
     private val layoutMapper: LayoutMapper<MLI>
 ) :
-    LifecycleAdapter<MLI, ViewModelAdapter<MLI>.ViewHolder<ViewDataBinding>>(lifecycleOwner, diffCallback) {
+    LifecycleAdapter<MLI, ViewModelAdapter<MLI>.ViewHolder<ViewDataBinding>>(
+        lifecycleOwner,
+        diffCallback
+    ) {
 
     constructor(
         @LayoutRes layoutId: Int,

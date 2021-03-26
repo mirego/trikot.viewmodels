@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.widget.ImageView
 import androidx.core.view.OneShotPreDrawListener
@@ -10,6 +10,13 @@ import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.withCancellableManager
+import com.mirego.trikot.viewmodels.ImageFlow
+import com.mirego.trikot.viewmodels.ImageHeight
+import com.mirego.trikot.viewmodels.ImageViewModel
+import com.mirego.trikot.viewmodels.ImageWidth
+import com.mirego.trikot.viewmodels.extension.asDrawable
+import com.mirego.trikot.viewmodels.extension.resourceId
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.properties.StateSelector
@@ -23,7 +30,10 @@ object ImageViewModelBinder {
         .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic
-    @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
+    @BindingAdapter(
+        value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"],
+        requireAll = false
+    )
     fun bind(
         imageView: ImageView,
         imageViewModel: ImageViewModel?,

@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.view.View
 import android.widget.Button
@@ -6,21 +6,29 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.Publishers
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.streams.reactive.processors.combine
+import com.mirego.trikot.viewmodels.ButtonViewModel
+import com.mirego.trikot.viewmodels.extension.asDrawable
+import com.mirego.trikot.viewmodels.extension.asSpannableString
+import com.mirego.trikot.viewmodels.extension.drawableBottom
+import com.mirego.trikot.viewmodels.extension.drawableEnd
+import com.mirego.trikot.viewmodels.extension.drawableStart
+import com.mirego.trikot.viewmodels.extension.drawableTop
+import com.mirego.trikot.viewmodels.extension.toColorStateList
+import com.mirego.trikot.viewmodels.extension.toIntColor
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
 import com.mirego.trikot.viewmodels.properties.Alignment
-import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
+@Suppress("unused")
 object ButtonViewModelBinder {
 
-    val NoButtonViewModel = MutableButtonViewModel().apply { hidden = true.just() } as ButtonViewModel
-    val NoViewModelAction = Publishers.behaviorSubject(ViewModelAction {})
+    val NoButtonViewModel =
+        MutableButtonViewModel().apply { hidden = true.just() } as ButtonViewModel
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
@@ -37,9 +45,7 @@ object ButtonViewModelBinder {
             }
 
             it.takeUnless { it.richText != null }?.text
-                ?.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                    textView.text = it
-                }
+                ?.observe(lifecycleOwnerWrapper.lifecycleOwner, textView::setText)
 
             it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { observeResult ->
@@ -67,7 +73,7 @@ object ButtonViewModelBinder {
                     }
                 }
 
-            it.textColor.asLiveData()
+            it.textColor
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                     selector.default?.let {
                         textView.setTextColor(it.toIntColor())
@@ -78,20 +84,22 @@ object ButtonViewModelBinder {
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
-    fun bind(view: View, buttonViewModel: ButtonViewModel?, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
+    fun bind(
+        view: View,
+        buttonViewModel: ButtonViewModel?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper
+    ) {
         (buttonViewModel ?: NoButtonViewModel).let { it ->
 
             view.bindViewModel(it, lifecycleOwnerWrapper)
 
             it.enabled
                 .distinctUntilChanged()
-                .asLiveData()
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isEnabled = it }
+                .observe(lifecycleOwnerWrapper.lifecycleOwner, view::setEnabled)
 
             it.selected
                 .distinctUntilChanged()
-                .asLiveData()
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isSelected = it }
+                .observe(lifecycleOwnerWrapper.lifecycleOwner, view::setSelected)
         }
     }
 
@@ -106,9 +114,7 @@ object ButtonViewModelBinder {
             bind(imageView as View, it, lifecycleOwnerWrapper)
             it.imageResource.combine(it.tintColor)
                 .map { it.first?.asDrawable(imageView.context, it.second) }
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                    imageView.setImageDrawable(it)
-                }
+                .observe(lifecycleOwnerWrapper.lifecycleOwner, imageView::setImageDrawable)
         }
     }
 
@@ -127,9 +133,7 @@ object ButtonViewModelBinder {
             }
 
             it.takeUnless { it.richText != null }?.text
-                ?.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                    button.text = it
-                }
+                ?.observe(lifecycleOwnerWrapper.lifecycleOwner, button::setText)
 
             it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { observeResult ->

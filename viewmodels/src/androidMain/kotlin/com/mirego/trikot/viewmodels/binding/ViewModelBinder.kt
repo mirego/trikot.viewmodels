@@ -1,13 +1,15 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.ViewModel
+import com.mirego.trikot.viewmodels.extension.toColorStateList
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.mutable.MutableViewModel
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
@@ -24,24 +26,21 @@ fun View.bindViewModel(
             visibility = if (isHidden) View.GONE else View.VISIBLE
         }
 
-        it.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
-            setAlpha(alpha)
-        }
+        it.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner, ::setAlpha)
 
         bindAction(it, lifecycleOwnerWrapper)
 
-        it.backgroundColor.asLiveData()
-            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
-                if (selector.isEmpty) {
-                    return@observe
-                }
-
-                background ?: run {
-                    ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
-                }
-
-                ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
+        it.backgroundColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+            if (selector.isEmpty) {
+                return@observe
             }
+
+            background ?: run {
+                ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
+            }
+
+            ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
+        }
     }
 }
 

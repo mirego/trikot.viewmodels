@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.text.Editable
 import android.text.InputType.TYPE_CLASS_DATETIME
@@ -19,10 +19,12 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.InputTextViewModel
 import com.mirego.trikot.viewmodels.android.R
+import com.mirego.trikot.viewmodels.extension.toIntColor
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextType
@@ -30,7 +32,8 @@ import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
 object InputTextViewModelBinder {
 
-    val NoInputTextViewModel = MutableInputTextViewModel().apply { hidden = true.just() } as InputTextViewModel
+    val NoInputTextViewModel =
+        MutableInputTextViewModel().apply { hidden = true.just() } as InputTextViewModel
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
@@ -43,9 +46,7 @@ object InputTextViewModelBinder {
         (InputTextViewModel ?: NoInputTextViewModel).let {
             it.let {
                 addTextWatcher(it, editText)
-                it.placeholderText.observe(lifecycleOwnerWrapper.lifecycleOwner) { hint ->
-                    editText.hint = hint
-                }
+                it.placeholderText.observe(lifecycleOwnerWrapper.lifecycleOwner, editText::setHint)
 
                 it.userInput.observe(lifecycleOwnerWrapper.lifecycleOwner) { textValue ->
                     editText.noTextWatcher {
@@ -59,9 +60,7 @@ object InputTextViewModelBinder {
                     }
                 }
 
-                it.enabled
-                    .asLiveData()
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { editText.isEnabled = it }
+                it.enabled.observe(lifecycleOwnerWrapper.lifecycleOwner, editText::setEnabled)
 
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->
                     editText.noTextWatcher {
@@ -108,7 +107,7 @@ object InputTextViewModelBinder {
                         ViewModelAction.None -> {
                             editText.setOnEditorActionListener(null)
                         }
-                        else -> editText.setOnEditorActionListener { v, actionId, event ->
+                        else -> editText.setOnEditorActionListener { v, _, _ ->
                             action.execute(v)
                         }
                     }

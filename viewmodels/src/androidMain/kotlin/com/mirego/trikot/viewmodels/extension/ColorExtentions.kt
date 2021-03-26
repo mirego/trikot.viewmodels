@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.extension
 
 import android.content.res.ColorStateList
 import android.util.StateSet

@@ -1,10 +1,13 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.os.Build
 import android.widget.SeekBar
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.SliderViewModel
+import com.mirego.trikot.viewmodels.ViewModel
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.mutable.MutableSliderViewModel
 
 object SliderViewModelBinder {
@@ -26,7 +29,11 @@ object SliderViewModelBinder {
 
             seekBar.setOnSeekBarChangeListener(
                 object : SeekBar.OnSeekBarChangeListener {
-                    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    override fun onProgressChanged(
+                        seekBar: SeekBar?,
+                        progress: Int,
+                        fromUser: Boolean
+                    ) {
                         viewModel.setSelectedValue(progress)
                     }
 

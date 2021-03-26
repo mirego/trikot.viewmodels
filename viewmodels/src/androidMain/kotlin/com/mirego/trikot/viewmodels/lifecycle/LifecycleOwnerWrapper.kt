@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.lifecycle
 
 import androidx.lifecycle.LifecycleOwner
 

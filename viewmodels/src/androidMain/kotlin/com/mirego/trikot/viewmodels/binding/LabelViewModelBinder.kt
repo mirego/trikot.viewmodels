@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -6,14 +6,19 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.LabelViewModel
+import com.mirego.trikot.viewmodels.extension.asSpannableString
+import com.mirego.trikot.viewmodels.extension.toColorStateList
+import com.mirego.trikot.viewmodels.extension.toIntColor
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
 
 object LabelViewModelBinder {
 
-    private val NoLabelViewModel = MutableLabelViewModel().apply { hidden = true.just() } as LabelViewModel
+    private val NoLabelViewModel =
+        MutableLabelViewModel().apply { hidden = true.just() } as LabelViewModel
 
     @JvmStatic
     @BindingAdapter("view_model", "hiddenVisibility", "lifecycleOwnerWrapper")
@@ -30,11 +35,9 @@ object LabelViewModelBinder {
         }
 
         label.takeUnless { it.richText != null }?.text
-            ?.observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                textView.text = it
-            }
+            ?.observe(lifecycleOwnerWrapper.lifecycleOwner, textView::setText)
 
-        label.textColor.asLiveData()
+        label.textColor
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 selector.default?.let {
                     textView.setTextColor(it.toIntColor())
@@ -79,11 +82,9 @@ object LabelViewModelBinder {
             with(textView) { visibility = if (hidden) hiddenVisibility.value else View.VISIBLE }
         }
 
-        labelViewModel.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
-            textView.alpha = alpha
-        }
+        labelViewModel.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner, textView::setAlpha)
 
-        labelViewModel.backgroundColor.asLiveData()
+        labelViewModel.backgroundColor
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (selector.isEmpty) {
                     return@observe

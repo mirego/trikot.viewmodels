@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.binding
 
 import android.view.View
 import android.widget.AdapterView
@@ -6,6 +6,9 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.PickerViewModel
+import com.mirego.trikot.viewmodels.ViewModel
+import com.mirego.trikot.viewmodels.lifecycle.LifecycleOwnerWrapper
 
 object PickerViewModelBinder {
     @Suppress("UNCHECKED_CAST")

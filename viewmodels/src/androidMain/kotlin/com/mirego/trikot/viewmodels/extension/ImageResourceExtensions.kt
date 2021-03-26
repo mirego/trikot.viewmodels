@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels
+package com.mirego.trikot.viewmodels.extension
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -53,9 +53,10 @@ fun ImageResource.asDrawable(
     context: Context,
     tintColors: StateSelector<Color>? = null
 ): Drawable? {
-    return resourceId(context)?.let { resourceId -> ContextCompat.getDrawable(context, resourceId) }?.also { drawable ->
-        if (tintColors?.isEmpty == false) {
-            DrawableCompat.setTintList(drawable.mutate(), tintColors.toColorStateList())
+    return resourceId(context)?.let { resourceId -> ContextCompat.getDrawable(context, resourceId) }
+        ?.also { drawable ->
+            if (tintColors?.isEmpty == false) {
+                DrawableCompat.setTintList(drawable.mutate(), tintColors.toColorStateList())
+            }
         }
-    }
 }

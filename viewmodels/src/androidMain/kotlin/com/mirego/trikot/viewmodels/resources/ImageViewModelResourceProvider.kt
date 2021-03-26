@@ -8,12 +8,9 @@ interface ImageViewModelResourceProvider {
 }
 
 object ImageViewModelResourceManager {
-    var provider: ImageViewModelResourceProvider =
-        DefaulImageViewModelResourceProvider()
+    var provider: ImageViewModelResourceProvider = DefaultImageViewModelResourceProvider()
 }
 
-class DefaulImageViewModelResourceProvider : ImageViewModelResourceProvider {
-    override fun resourceIdFromResource(resource: ImageResource, context: Context): Int? {
-        return null
-    }
+class DefaultImageViewModelResourceProvider : ImageViewModelResourceProvider {
+    override fun resourceIdFromResource(resource: ImageResource, context: Context): Int? = null
 }
