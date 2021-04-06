@@ -19,17 +19,12 @@ open class DefaultClusterFactory : ClusterFactory<DefaultClusterItem> {
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun createClusterItem(
-        position: MapViewModel.Position,
-        textLabel: String?,
-        iconUrl: String?,
-        onClick: () -> Unit
-    ): DefaultClusterItem {
+    override fun createClusterItem(marker: MapViewModel.Marker): DefaultClusterItem {
         return DefaultClusterItem(
-            LatLng(position.latitude, position.longitude),
-            textLabel,
-            iconUrl,
-            onClick = onClick
+            LatLng(marker.position.latitude, marker.position.longitude),
+            marker.label,
+            marker.iconUrl,
+            onClick = marker.onSelect
         )
     }
 }

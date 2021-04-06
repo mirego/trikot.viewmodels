@@ -84,12 +84,7 @@ object MapViewModelBinder {
 
             mapViewModel.markers.observe(lifecycleOwner) { markers ->
                 val items = markers.map {
-                    clusterFactory.createClusterItem(
-                        position = it.position,
-                        textLabel = it.label,
-                        iconUrl = it.iconUrl,
-                        onClick = it.onSelect
-                    )
+                    clusterFactory.createClusterItem(it)
                 }
 
                 clusterManager.apply {
