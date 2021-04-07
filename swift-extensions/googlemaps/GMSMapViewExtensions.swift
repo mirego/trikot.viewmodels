@@ -19,9 +19,20 @@ extension GMSMapView {
         unsubscribeFromAllPublisher()
         guard let mapViewModel = mapViewModel else { return }
 
-        setMinZoom(mapViewModel.minimumZoomLevel, maxZoom: maxZoom)
-
         let clusterManager = setupClusterManager()
+
+        observe(mapViewModel.minimumZoomLevel) {[weak self] (minimumZoomLevel: Float) in
+            guard let self = self else { return }
+
+            self.setMinZoom(minimumZoomLevel, maxZoom: self.maxZoom)
+        }
+
+        observe(mapViewModel.userSetCamera.first()) { [weak self] (camera: MapViewModelCamera) in
+            let initialCameraTarget = camera.targets.first!.asCoordinate()
+            let initialZoom = camera.zoom as! Float
+
+            self?.moveCamera(GMSCameraUpdate.setTarget(initialCameraTarget, zoom: initialZoom))
+        }
 
         observe(mapViewModel.isInteractive) {[weak self] (interactive: Bool) in
             self?.isUserInteractionEnabled = interactive

@@ -1,16 +1,16 @@
 package com.mirego.trikot.viewmodels
 
-import android.content.Context
 import com.google.android.libraries.maps.GoogleMap
+import com.google.android.libraries.maps.MapView
 import com.google.android.libraries.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 
 open class DefaultClusterFactory : ClusterFactory<DefaultClusterItem> {
     override fun createClusterManager(
-        context: Context,
+        mapView: MapView,
         googleMap: GoogleMap
     ): ClusterManager<DefaultClusterItem> {
-        return ClusterManager<DefaultClusterItem>(context, googleMap).apply {
+        return ClusterManager<DefaultClusterItem>(mapView.context, googleMap).apply {
             setOnClusterItemClickListener { marker ->
                 marker.onClick()
                 true

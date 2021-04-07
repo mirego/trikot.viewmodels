@@ -14,6 +14,7 @@ import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.ktx.CameraIdleEvent
 import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.cameraEvents
+import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.observe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -39,16 +40,20 @@ object MapViewModelBinder {
         lifecycle.coroutineScope.launchWhenCreated {
             val googleMap = mapView.awaitMap()
             val clusterManager = clusterFactory.createClusterManager(
-                mapView.context,
+                mapView,
                 googleMap
             ) as ClusterManager<ClusterItem>
 
-            mapViewModel.minimumZoomLevel.let(googleMap::setMinZoomPreference)
+            mapViewModel.minimumZoomLevel.observe(lifecycleOwner) {
+                googleMap.setMinZoomPreference(it)
+            }
 
-            CameraUpdateFactory.newLatLngZoom(
-                mapViewModel.initialCamera.targets.first().asLatLng(),
-                mapViewModel.initialCamera.zoom!!
-            ).let(googleMap::moveCamera)
+            mapViewModel.userSetCamera.first().observe(lifecycleOwner) {
+                CameraUpdateFactory.newLatLngZoom(
+                    it.targets.first().asLatLng(),
+                    it.zoom!!
+                ).let(googleMap::moveCamera)
+            }
 
             googleMap.uiSettings.apply {
                 isMyLocationButtonEnabled = false

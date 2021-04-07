@@ -3,8 +3,8 @@ package com.mirego.trikot.viewmodels
 import org.reactivestreams.Publisher
 
 interface MapViewModel : ViewModel {
-    val minimumZoomLevel: Float
-    val initialCamera: Camera
+    val minimumZoomLevel: Publisher<Float>
+    val userSetCamera: Publisher<Camera>
     fun didChangeCamera(camera: Camera)
 
     val isInteractive: Publisher<Boolean>
