@@ -18,9 +18,9 @@ Pod::Spec.new do |spec|
   spec.default_subspec = 'viewmodels'
 
   spec.subspec 'viewmodels' do |vms|
-   spec.source_files  = "swift-extensions/*.swift"
-   spec.tvos.source_files = "swift-extensions/*.swift"
-   spec.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift"
+   vms.source_files  = "swift-extensions/*.swift"
+   vms.tvos.source_files = "swift-extensions/*.swift"
+   vms.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift"
   end
 
   spec.subspec 'GoogleMaps' do |gms|
