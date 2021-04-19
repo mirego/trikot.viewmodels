@@ -9,12 +9,7 @@ interface ToggleSwitchViewModel : ViewModel {
     val isOn: Publisher<Boolean>
 
     /**
-     * Set the state defined by the platform switch
-     */
-    fun setIsOn(on: Boolean)
-
-    /**
      * If the ToggleSwitch is enabled or disabled
      */
-    val enabled: Publisher<Boolean>
+    val isEnabled: Publisher<Boolean>
 }

@@ -15,7 +15,7 @@ class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
         MutableHeaderListItemViewModel("Switch"),
         MutableToggleSwitchListItemViewModel().apply {
             toggleSwitch.action = ViewModelAction {
-                println(toggleSwitch.isOn.value)
+                println(toggleSwitch.isOn)
             }.just()
         },
         MutableHeaderListItemViewModel(".hidden"),
@@ -24,12 +24,14 @@ class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
         },
         MutableHeaderListItemViewModel(".!enabled"),
         MutableToggleSwitchListItemViewModel().apply {
-            toggleSwitch.enabled = false.just()
+            toggleSwitch.isEnabled = false.just()
         },
         MutableHeaderListItemViewModel(".alpha"),
         MutableToggleSwitchListItemViewModel().apply {
             toggleSwitch.alpha = 0.5f.just()
-            toggleSwitch.action = ViewModelAction.None.just()
+            toggleSwitch.action = ViewModelAction {
+                println(toggleSwitch.isOn)
+            }.just()
         }
     ).just()
 }
