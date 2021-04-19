@@ -15,21 +15,14 @@ extension UISwitch {
             viewModel = value
             guard let toggleSwitchViewModel = value else { return }
 
-            self.addTarget(self, action: #selector(UISwitch.onValueChanged), for: .valueChanged)
             observe(toggleSwitchViewModel.isOn) { [weak self] (value: Bool) in
-                self?.isOn = value
+                if(self?.isOn != value) {
+                    self?.isOn = value
+                }
             }
 
-            bind(toggleSwitchViewModel.enabled, \UISwitch.isEnabled)
+            bind(toggleSwitchViewModel.isEnabled, \UISwitch.isEnabled)
         }
-    }
-
-    @objc
-    func onValueChanged(sender: UISwitch) {
-        if #available(iOS 10.0, *), let style = impactFeedbackStyle() {
-            UIImpactFeedbackGenerator(style: getFeedbackStyle(style: style)).impactOccurred()
-        }
-        toggleSwitchViewModel?.setIsOn(on: self.isOn)
     }
 
     private func impactFeedbackStyle() -> FeedbackStyle? {
