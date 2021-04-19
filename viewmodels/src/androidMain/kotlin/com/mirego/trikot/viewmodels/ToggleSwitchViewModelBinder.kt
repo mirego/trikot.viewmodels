@@ -6,27 +6,27 @@ import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
 
-object ToggleViewModelBinder {
+object ToggleSwitchViewModelBinder {
     private val noSwitchViewModel =
         MutableToggleSwitchViewModel().apply { hidden = true.just() } as ToggleSwitchViewModel
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
-        toggle: SwitchCompat,
-        toggleViewModel: ToggleSwitchViewModel,
+        toggleSwitch: SwitchCompat,
+        toggleSwitchViewModel: ToggleSwitchViewModel,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
-        toggle.bindViewModel(toggleViewModel, lifecycleOwnerWrapper)
+        toggleSwitch.bindViewModel(toggleSwitchViewModel, lifecycleOwnerWrapper)
 
-        toggleViewModel.isOn.observe(lifecycleOwnerWrapper.lifecycleOwner) { isOn ->
-            if (toggle.isChecked != isOn) {
-                toggle.isChecked = isOn
+        toggleSwitchViewModel.isOn.observe(lifecycleOwnerWrapper.lifecycleOwner) { isOn ->
+            if (toggleSwitch.isChecked != isOn) {
+                toggleSwitch.isChecked = isOn
             }
         }
 
-        toggleViewModel.isEnabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { isEnabled ->
-            toggle.isEnabled = isEnabled
+        toggleSwitchViewModel.isEnabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { isEnabled ->
+            toggleSwitch.isEnabled = isEnabled
         }
     }
 }
