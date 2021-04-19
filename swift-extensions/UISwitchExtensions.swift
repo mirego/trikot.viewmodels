@@ -16,7 +16,7 @@ extension UISwitch {
             guard let toggleSwitchViewModel = value else { return }
 
             observe(toggleSwitchViewModel.isOn) { [weak self] (value: Bool) in
-                if(self?.isOn != value) {
+                if (self?.isOn != value) {
                     self?.isOn = value
                 }
             }
