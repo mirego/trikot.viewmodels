@@ -32,7 +32,7 @@ object ToggleSwitchViewModelBinder {
                     with(buttonView) {
                         action.execute(this)
                         Promise.from(toggleSwitchViewModel.isOn).onSuccess {
-                            if(isChecked != it){
+                            if (isChecked != it) {
                                 toggleSwitch.isChecked = it
                             }
                         }
