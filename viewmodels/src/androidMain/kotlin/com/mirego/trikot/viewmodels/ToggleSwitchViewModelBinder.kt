@@ -2,6 +2,7 @@ package com.mirego.trikot.viewmodels
 
 import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.BindingAdapter
+import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
@@ -19,11 +20,10 @@ object ToggleSwitchViewModelBinder {
     ) {
         toggleSwitch.bindViewModel(toggleSwitchViewModel, lifecycleOwnerWrapper)
 
-        toggleSwitchViewModel.isOn.observe(lifecycleOwnerWrapper.lifecycleOwner) { isOn ->
-            if (toggleSwitch.isChecked != isOn) {
+        toggleSwitchViewModel.isOn.distinctUntilChanged()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { isOn ->
                 toggleSwitch.isChecked = isOn
             }
-        }
 
         toggleSwitchViewModel.isEnabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { isEnabled ->
             toggleSwitch.isEnabled = isEnabled

@@ -15,10 +15,8 @@ extension UISwitch {
             viewModel = value
             guard let toggleSwitchViewModel = value else { return }
 
-            observe(toggleSwitchViewModel.isOn) { [weak self] (value: Bool) in
-                if(self?.isOn != value) {
-                    self?.isOn = value
-                }
+            observe(PublisherExtensionsKt.distinctUntilChanged(toggleSwitchViewModel.isOn)) { [weak self] (value: Bool) in
+                self?.isOn = value
             }
 
             bind(toggleSwitchViewModel.isEnabled, \UISwitch.isEnabled)
