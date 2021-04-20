@@ -5,7 +5,9 @@ import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.streams.reactive.promise.Promise
 import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
 object ToggleSwitchViewModelBinder {
     private val noSwitchViewModel =
@@ -19,6 +21,25 @@ object ToggleSwitchViewModelBinder {
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         toggleSwitch.bindViewModel(toggleSwitchViewModel, lifecycleOwnerWrapper)
+
+        toggleSwitchViewModel.toggleSwitchAction.observe(lifecycleOwnerWrapper.lifecycleOwner) { action ->
+            when (action) {
+                ViewModelAction.None -> {
+                    toggleSwitch.setOnClickListener(null)
+                    toggleSwitch.isClickable = false
+                }
+                else -> toggleSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                    with(buttonView) {
+                        action.execute(this)
+                        Promise.from(toggleSwitchViewModel.isOn).onSuccess {
+                            if(isChecked != it){
+                                toggleSwitch.isChecked = it
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         toggleSwitchViewModel.isOn.distinctUntilChanged()
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { isOn ->

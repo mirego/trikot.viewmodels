@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
@@ -11,11 +12,14 @@ import org.reactivestreams.Publisher
 
 class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
     MutableListViewModel<ListItemViewModel>() {
+    private val mockUseCasePublisher1 = Publishers.behaviorSubject(false)
+    private val mockUseCasePublisher2 = Publishers.behaviorSubject(false)
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel("Switch"),
         MutableToggleSwitchListItemViewModel().apply {
-            toggleSwitch.action = ViewModelAction {
-                // Insert Action Here
+            toggleSwitch.isOn = mockUseCasePublisher1
+            toggleSwitch.toggleSwitchAction = ViewModelAction {
+                mockUseCasePublisher1.value = mockUseCasePublisher1.value?.let { !it }
             }.just()
         },
         MutableHeaderListItemViewModel(".hidden"),
@@ -29,8 +33,9 @@ class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
         MutableHeaderListItemViewModel(".alpha"),
         MutableToggleSwitchListItemViewModel().apply {
             toggleSwitch.alpha = 0.5f.just()
-            toggleSwitch.action = ViewModelAction {
-                // Insert Action Here
+            toggleSwitch.isOn = mockUseCasePublisher2
+            toggleSwitch.toggleSwitchAction = ViewModelAction {
+                mockUseCasePublisher2.value = mockUseCasePublisher2.value?.let { !it }
             }.just()
         }
     ).just()

@@ -20,7 +20,34 @@ extension UISwitch {
             }
 
             bind(toggleSwitchViewModel.isEnabled, \UISwitch.isEnabled)
+            
+            observe(toggleSwitchViewModel.toggleSwitchAction) {[weak self] (value: ViewModelAction) in
+                guard let self = self else { return }
+                self.removePreviousRegisteredTapAction()
+                if value != ViewModelAction.Companion().None {
+                    self.addTarget(self, action: #selector(UISwitch.onValueChanged), for: .valueChanged)
+                }
+            }
         }
+    }
+    
+    private func removePreviousRegisteredTapAction() {
+        self.removeTarget(self, action: nil, for: .valueChanged)
+    }
+    
+    @objc
+    func onValueChanged(sender: UISwitch) {
+        if #available(iOS 10.0, *), let style = impactFeedbackStyle() {
+            UIImpactFeedbackGenerator(style: getFeedbackStyle(style: style)).impactOccurred()
+        }
+        guard let toggleSwitchViewModel = toggleSwitchViewModel else { return }
+        observe(toggleSwitchViewModel.toggleSwitchAction.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
+        PromiseCompanion().from(single: toggleSwitchViewModel.isOn, cancellableManager: nil).onSuccess(accept: { value in
+            let isOn = (value as! Bool)
+            if self.isOn != isOn {
+                self.setOn(isOn, animated: true)
+            }
+        })
     }
 
     private func impactFeedbackStyle() -> FeedbackStyle? {
