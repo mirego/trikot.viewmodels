@@ -12,7 +12,7 @@ import org.reactivestreams.Publisher
 
 class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
     MutableListViewModel<ListItemViewModel>() {
-    private val mockUseCasePublisher1 = Publishers.behaviorSubject(false)
+    private val mockUseCasePublisher1 = Publishers.behaviorSubject(true)
     private val mockUseCasePublisher2 = Publishers.behaviorSubject(false)
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel("Switch"),

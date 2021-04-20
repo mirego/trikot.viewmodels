@@ -30,10 +30,10 @@ object ToggleSwitchViewModelBinder {
                 }
                 else -> toggleSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
                     with(buttonView) {
-                        action.execute(this)
                         Promise.from(toggleSwitchViewModel.isOn).onSuccess {
                             if (isChecked != it) {
                                 toggleSwitch.isChecked = it
+                                action.execute(this)
                             }
                         }
                     }
