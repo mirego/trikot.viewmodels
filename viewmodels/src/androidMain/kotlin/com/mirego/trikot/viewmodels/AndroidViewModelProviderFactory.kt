@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
  *              but it could be any view model.
  * Usage:
  * <pre>
- * fragment.getViewModelController(viewModelControllerFactory, ViewModel::class, arg)
+ * [fragment|activity].getViewModelController(viewModelControllerFactory, ViewModel::class)
  * </pre>
  *
  * Note: When using proguard, add exclusion rules for your ViewModelControllerFactory
