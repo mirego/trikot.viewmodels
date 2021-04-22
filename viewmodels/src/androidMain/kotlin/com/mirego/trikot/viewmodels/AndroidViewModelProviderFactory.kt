@@ -2,8 +2,8 @@ package com.mirego.trikot.viewmodels
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kotlin.reflect.KClass
@@ -49,14 +49,14 @@ fun <T : ViewModel> Fragment.getViewModelController(
         .get(serializedData, requestedClass.java)
 }
 
-fun <T : ViewModel> FragmentActivity.getViewModelController(
+fun <T : ViewModel> ComponentActivity.getViewModelController(
     viewModelControllerFactory: Any,
     requestedClass: KClass<T>
 ): T =
     AndroidViewModelProviderFactory.with(viewModelControllerFactory, this, extraSerializedData)
         .get(requestedClass.java)
 
-fun <T : ViewModel> FragmentActivity.getViewModelController(
+fun <T : ViewModel> ComponentActivity.getViewModelController(
     viewModelControllerFactory: Any,
     requestedClass: KClass<T>,
     serializedData: String
@@ -64,7 +64,7 @@ fun <T : ViewModel> FragmentActivity.getViewModelController(
     AndroidViewModelProviderFactory.with(viewModelControllerFactory, this, serializedData)
         .get(serializedData, requestedClass.java)
 
-val FragmentActivity.extraSerializedData: String?
+val ComponentActivity.extraSerializedData: String?
     get() = intent.getStringExtra(KEY_SERIALIZED_DATA)
 
 fun Intent.extraSerializedData(serializedData: String) = apply {
@@ -84,7 +84,7 @@ class AndroidViewModelProviderFactory {
         @JvmStatic
         fun with(
             viewModelControllerFactory: Any,
-            activity: FragmentActivity,
+            activity: ComponentActivity,
             constructorParam: Any?
         ) = constructorParam?.let {
             with(viewModelControllerFactory, activity, listOf(it))
@@ -99,7 +99,7 @@ class AndroidViewModelProviderFactory {
         @JvmStatic
         fun <T : ViewModel> get(
             viewModelControllerFactory: Any,
-            activity: FragmentActivity,
+            activity: ComponentActivity,
             serializedData: String?,
             clazz: Class<T>
         ) =
@@ -128,7 +128,7 @@ class AndroidViewModelProviderFactory {
 
         private fun with(
             viewModelControllerFactory: Any,
-            activity: FragmentActivity,
+            activity: ComponentActivity,
             constructorParams: List<Any> = listOf()
         ) =
             ViewModelProvider(
