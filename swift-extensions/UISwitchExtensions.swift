@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import ViewModelsSample
 
 extension UISwitch {
 
@@ -15,7 +15,7 @@ extension UISwitch {
             viewModel = value
             guard let toggleSwitchViewModel = value else { return }
 
-            observe(PublisherExtensionsKt.distinctUntilChanged(toggleSwitchViewModel.isOn)) { [weak self] (value: Bool) in
+            observe(PublisherExtensionsKt.distinctUntilChanged(toggleSwitchViewModel.checked)) { [weak self] (value: Bool) in
                 self?.isOn = value
             }
 
@@ -42,7 +42,7 @@ extension UISwitch {
         }
         guard let toggleSwitchViewModel = toggleSwitchViewModel else { return }
         observe(toggleSwitchViewModel.toggleSwitchAction.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
-        PromiseCompanion().from(single: toggleSwitchViewModel.isOn, cancellableManager: nil).onSuccess(accept: { value in
+        PromiseCompanion().from(single: toggleSwitchViewModel.checked, cancellableManager: nil).onSuccess(accept: { value in
             let isOn = (value as! Bool)
             if self.isOn != isOn {
                 self.setOn(isOn, animated: true)

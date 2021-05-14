@@ -7,7 +7,7 @@ interface ToggleSwitchViewModel : ViewModel {
     /**
      * Currently selected state of the view
      */
-    val isOn: Publisher<Boolean>
+    val checked: Publisher<Boolean>
 
     /**
      * If the ToggleSwitch is enabled or disabled
