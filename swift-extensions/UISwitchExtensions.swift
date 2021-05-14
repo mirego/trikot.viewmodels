@@ -19,7 +19,7 @@ extension UISwitch {
                 self?.isOn = value
             }
 
-            bind(toggleSwitchViewModel.isEnabled, \UISwitch.isEnabled)
+            bind(toggleSwitchViewModel.enabled, \UISwitch.isEnabled)
             
             observe(toggleSwitchViewModel.toggleSwitchAction) {[weak self] (value: ViewModelAction) in
                 guard let self = self else { return }

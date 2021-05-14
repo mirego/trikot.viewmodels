@@ -46,7 +46,7 @@ object ToggleSwitchViewModelBinder {
                 toggleSwitch.isChecked = isOn
             }
 
-        toggleSwitchViewModel.isEnabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { isEnabled ->
+        toggleSwitchViewModel.enabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { isEnabled ->
             toggleSwitch.isEnabled = isEnabled
         }
     }

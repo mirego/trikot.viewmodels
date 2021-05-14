@@ -12,7 +12,7 @@ interface ToggleSwitchViewModel : ViewModel {
     /**
      * If the ToggleSwitch is enabled or disabled
      */
-    val isEnabled: Publisher<Boolean>
+    val enabled: Publisher<Boolean>
 
     /**
      * Specific action that activates on value changed instead of on click to handle swiping
