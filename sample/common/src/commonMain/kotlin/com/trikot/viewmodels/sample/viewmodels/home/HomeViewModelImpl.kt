@@ -39,7 +39,7 @@ class HomeViewModelImpl :
             it.title.text = "Views ->".just()
             it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.VIEWS) }.just()
             it.title.action = it.action
-        }
+        },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Labels ->".just()
