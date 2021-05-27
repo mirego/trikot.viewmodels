@@ -103,7 +103,7 @@ class LabelsViewModel :
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)
                     ),
                     RichTextRange(
-                        IntRange(72, 73),
+                        IntRange(70, 72),
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_SUPERSCRIPT)
                     )
                 )
