@@ -3,7 +3,6 @@ package com.mirego.trikot.viewmodels
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.observe
 
 object ListBinding {

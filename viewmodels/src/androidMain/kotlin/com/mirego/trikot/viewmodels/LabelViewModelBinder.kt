@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
