@@ -59,7 +59,6 @@ object InputTextViewModelBinder {
                 }
 
                 it.enabled
-                    .asLiveData()
                     .observe(lifecycleOwnerWrapper.lifecycleOwner) { editText.isEnabled = it }
 
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->

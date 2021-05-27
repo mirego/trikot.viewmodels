@@ -30,7 +30,7 @@ fun View.bindViewModel(
 
         bindAction(it, lifecycleOwnerWrapper)
 
-        it.backgroundColor.asLiveData()
+        it.backgroundColor
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (selector.isEmpty) {
                     return@observe

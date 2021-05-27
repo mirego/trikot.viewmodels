@@ -67,7 +67,7 @@ object ButtonViewModelBinder {
                     }
                 }
 
-            it.textColor.asLiveData()
+            it.textColor
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                     selector.default?.let {
                         textView.setTextColor(it.toIntColor())
@@ -85,12 +85,10 @@ object ButtonViewModelBinder {
 
             it.enabled
                 .distinctUntilChanged()
-                .asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isEnabled = it }
 
             it.selected
                 .distinctUntilChanged()
-                .asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isSelected = it }
         }
     }
