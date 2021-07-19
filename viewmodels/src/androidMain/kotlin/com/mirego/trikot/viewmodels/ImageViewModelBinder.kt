@@ -13,6 +13,7 @@ import com.mirego.trikot.streams.reactive.withCancellableManager
 import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
@@ -21,6 +22,17 @@ import com.squareup.picasso.Transformation
 object ImageViewModelBinder {
     private val NoImageViewModel = MutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
         .apply { hidden = true.just() } as ImageViewModel
+
+    @JvmStatic
+    @BindingAdapter(value = ["view_model", "transformation", "placeholderScaleType"], requireAll = false)
+    fun bind(
+        imageView: ImageView,
+        imageViewModel: ImageViewModel?,
+        transformation: Transformation? = null,
+        placeholderScaleType: ImageView.ScaleType? = null
+    ) {
+        bind(imageView, imageViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(imageView), transformation, placeholderScaleType)
+    }
 
     @JvmStatic
     @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
