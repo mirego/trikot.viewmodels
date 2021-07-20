@@ -8,11 +8,11 @@ import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
 internal object BindingUtils {
 
     fun getLifecycleOwnerWrapperFromView(view: View): LifecycleOwnerWrapper {
-        val binding = DataBindingUtil.findBinding<ViewDataBinding>(view) ?:
-        throw IllegalStateException(viewDataBindingNotFound(view))
+        val binding = DataBindingUtil.findBinding<ViewDataBinding>(view)
+            ?: throw IllegalStateException(viewDataBindingNotFound(view))
 
-        val lifecycleOwner = binding.lifecycleOwner ?:
-        throw IllegalStateException(lifecycleOwnerNotSet(binding::class.java.simpleName))
+        val lifecycleOwner = binding.lifecycleOwner
+            ?: throw IllegalStateException(lifecycleOwnerNotSet(binding::class.java.simpleName))
 
         return LifecycleOwnerWrapper(lifecycleOwner)
     }

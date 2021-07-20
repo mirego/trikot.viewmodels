@@ -24,35 +24,25 @@ object ImageViewModelBinder {
         .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic
-    @BindingAdapter(value = ["view_model", "transformation", "placeholderScaleType"], requireAll = false)
-    fun bind(
-        imageView: ImageView,
-        imageViewModel: ImageViewModel?,
-        transformation: Transformation? = null,
-        placeholderScaleType: ImageView.ScaleType? = null
-    ) {
-        bind(imageView, imageViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(imageView), transformation, placeholderScaleType)
-    }
-
-    @JvmStatic
     @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
     fun bind(
         imageView: ImageView,
         imageViewModel: ImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
         transformation: Transformation? = null,
         placeholderScaleType: ImageView.ScaleType? = null
     ) {
+        val safeLifecycleOwnerWrapper = lifecycleOwnerWrapper ?: BindingUtils.getLifecycleOwnerWrapperFromView(imageView)
         (imageViewModel ?: NoImageViewModel).let {
 
-            imageView.bindViewModel(imageViewModel, lifecycleOwnerWrapper)
+            imageView.bindViewModel(imageViewModel, safeLifecycleOwnerWrapper)
 
             val originalScaleType = imageView.scaleType
 
             OneShotPreDrawListener.add(imageView) {
                 it.imageFlow(ImageWidth(imageView.width), ImageHeight(imageView.height))
                     .withCancellableManager()
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
+                    .observe(safeLifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
                         processImageFlow(
                             it,
                             imageFlow,
