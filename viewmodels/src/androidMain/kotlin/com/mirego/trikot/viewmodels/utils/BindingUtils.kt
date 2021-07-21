@@ -5,7 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
 
-internal object BindingUtils {
+object BindingUtils {
 
     fun getLifecycleOwnerWrapperFromView(view: View): LifecycleOwnerWrapper {
         val binding = DataBindingUtil.findBinding<ViewDataBinding>(view)
