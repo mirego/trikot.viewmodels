@@ -199,6 +199,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 
+tasks.find { it.name == "check" }?.setMustRunAfter(listOf("build"))
+
 release {
     checkTasks = listOf("build", "check")
     buildTasks = listOf("publish")
