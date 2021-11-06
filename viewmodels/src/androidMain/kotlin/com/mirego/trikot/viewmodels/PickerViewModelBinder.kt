@@ -28,7 +28,7 @@ object PickerViewModelBinder {
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         pickerViewModel?.let { viewModel ->
-            picker.bindViewModel(viewModel as ViewModel, lifecycleOwnerWrapper)
+            picker.bindViewModel(viewModel as NDViewModel, lifecycleOwnerWrapper)
 
             val arrayAdapter = ArrayAdapter<String>(
                 picker.context,

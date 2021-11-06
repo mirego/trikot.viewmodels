@@ -3,7 +3,7 @@ package com.mirego.trikot.viewmodels
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
-interface ToggleSwitchViewModel : ViewModel {
+interface ToggleSwitchViewModel : NDViewModel {
     /**
      * Currently selected state of the view
      */

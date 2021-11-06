@@ -6,13 +6,13 @@ import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.streams.reactive.promise.Promise
-import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
+import com.mirego.trikot.viewmodels.mutable.NDMutableToggleSwitchViewModel
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object ToggleSwitchViewModelBinder {
     private val noSwitchViewModel =
-        MutableToggleSwitchViewModel().apply { hidden = true.just() } as ToggleSwitchViewModel
+        NDMutableToggleSwitchViewModel().apply { hidden = true.just() } as ToggleSwitchViewModel
 
     @JvmStatic
     @BindingAdapter("view_model")

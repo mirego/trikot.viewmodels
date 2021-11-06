@@ -4,11 +4,11 @@ import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.viewmodels.SliderViewModel
 import org.reactivestreams.Publisher
 
-open class MutableSliderViewModel(
+open class NDMutableSliderViewModel(
     final override val minValue: Int = 0,
     final override val maxValue: Int = 5,
     initialValue: Int = minValue
-) : MutableViewModel(), SliderViewModel {
+) : NDMutableViewModel(), SliderViewModel {
     private val internalPublisher = Publishers.behaviorSubject(
         if (initialValue in minValue..maxValue) initialValue else minValue
     )

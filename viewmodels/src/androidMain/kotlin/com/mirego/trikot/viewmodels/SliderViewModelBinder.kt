@@ -5,12 +5,12 @@ import android.widget.SeekBar
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
-import com.mirego.trikot.viewmodels.mutable.MutableSliderViewModel
+import com.mirego.trikot.viewmodels.mutable.NDMutableSliderViewModel
 import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object SliderViewModelBinder {
     val noSliderViewModel =
-        MutableSliderViewModel().apply { hidden = true.just() } as SliderViewModel
+        NDMutableSliderViewModel().apply { hidden = true.just() } as SliderViewModel
 
     @JvmStatic
     @BindingAdapter("view_model")
@@ -49,7 +49,7 @@ object SliderViewModelBinder {
                 seekBar.progress = it
             }
 
-            seekBar.bindViewModel(viewModel as ViewModel, lifecycleOwnerWrapper)
+            seekBar.bindViewModel(viewModel as NDViewModel, lifecycleOwnerWrapper)
         }
     }
 }

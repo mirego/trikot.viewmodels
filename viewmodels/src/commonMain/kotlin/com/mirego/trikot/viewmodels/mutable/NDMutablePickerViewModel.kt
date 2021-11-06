@@ -7,7 +7,7 @@ import com.mirego.trikot.viewmodels.factory.PropertyFactory
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
-open class MutablePickerViewModel<T> : MutableViewModel(), PickerViewModel<T> {
+open class NDMutablePickerViewModel<T> : NDMutableViewModel(), PickerViewModel<T> {
     override val selectedElementIndex = Publishers.behaviorSubject(0)
 
     override fun setSelectedElementIndex(index: Int) {

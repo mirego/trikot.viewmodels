@@ -8,18 +8,18 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
-import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
+import com.mirego.trikot.viewmodels.mutable.NDMutableLabelViewModel
 import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object LabelViewModelBinder {
 
-    private val NoLabelViewModel = MutableLabelViewModel().apply { hidden = true.just() } as LabelViewModel
+    private val NoLabelViewModel = NDMutableLabelViewModel().apply { hidden = true.just() } as NDLabelViewModel
 
     @JvmStatic
     @BindingAdapter("view_model")
     fun bind(
         textView: TextView,
-        labelViewModel: LabelViewModel?
+        labelViewModel: NDLabelViewModel?
     ) {
         bind(textView, labelViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(textView))
     }
@@ -28,7 +28,7 @@ object LabelViewModelBinder {
     @BindingAdapter("view_model", "hiddenVisibility", "lifecycleOwnerWrapper")
     fun bind(
         textView: TextView,
-        labelViewModel: LabelViewModel?,
+        labelViewModel: NDLabelViewModel?,
         hiddenVisibility: HiddenVisibility,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
@@ -57,7 +57,7 @@ object LabelViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         textView: TextView,
-        labelViewModel: LabelViewModel?,
+        labelViewModel: NDLabelViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         bind(textView, labelViewModel, HiddenVisibility.GONE, lifecycleOwnerWrapper)
@@ -66,7 +66,7 @@ object LabelViewModelBinder {
     @JvmStatic
     fun bindWithoutTextPublishers(
         textView: TextView,
-        labelViewModel: LabelViewModel?,
+        labelViewModel: NDLabelViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         bindExtraViewProperties(
@@ -80,7 +80,7 @@ object LabelViewModelBinder {
     @JvmStatic
     private fun bindExtraViewProperties(
         textView: TextView,
-        labelViewModel: LabelViewModel,
+        labelViewModel: NDLabelViewModel,
         hiddenVisibility: HiddenVisibility,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {

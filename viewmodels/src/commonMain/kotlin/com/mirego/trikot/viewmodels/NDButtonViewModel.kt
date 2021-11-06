@@ -6,7 +6,7 @@ import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
-interface ButtonViewModel : LabelViewModel {
+interface NDButtonViewModel : NDLabelViewModel {
     /**
      * Resource for the background image of the button
      */

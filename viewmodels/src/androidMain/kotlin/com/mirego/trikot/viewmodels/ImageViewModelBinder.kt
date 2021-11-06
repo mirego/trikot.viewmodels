@@ -10,7 +10,7 @@ import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.withCancellableManager
-import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
+import com.mirego.trikot.viewmodels.mutable.NDMutableImageViewModel
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.utils.BindingUtils
@@ -20,7 +20,7 @@ import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Transformation
 
 object ImageViewModelBinder {
-    private val NoImageViewModel = MutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
+    private val NoImageViewModel = NDMutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
         .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic

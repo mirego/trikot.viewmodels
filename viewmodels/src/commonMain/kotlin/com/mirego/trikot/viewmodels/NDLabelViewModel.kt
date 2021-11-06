@@ -5,7 +5,7 @@ import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.text.RichText
 import org.reactivestreams.Publisher
 
-interface LabelViewModel : ViewModel {
+interface NDLabelViewModel : NDViewModel {
     /**
      * Label text
      */

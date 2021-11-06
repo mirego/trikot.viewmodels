@@ -17,7 +17,7 @@ import org.reactivestreams.Publisher
  */
 typealias ImageFlowProvider = (width: ImageWidth, height: ImageHeight) -> Publisher<ImageFlow>
 
-open class MutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : MutableViewModel(), ImageViewModel {
+open class NDMutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : NDMutableViewModel(), ImageViewModel {
     override fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow> {
         return imageFlowProvider(width, height)
     }

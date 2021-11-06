@@ -7,23 +7,23 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
-import com.mirego.trikot.viewmodels.mutable.MutableViewModel
+import com.mirego.trikot.viewmodels.mutable.NDMutableViewModel
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.viewmodels.utils.BindingUtils
 
-private val NoViewModel = MutableViewModel()
-    .apply { hidden = true.just() } as ViewModel
+private val NoViewModel = NDMutableViewModel()
+    .apply { hidden = true.just() } as NDViewModel
 
 @BindingAdapter("view_model")
 fun View.bindViewModel(
-    viewModel: ViewModel?
+    viewModel: NDViewModel?
 ) {
     bindViewModel(viewModel, BindingUtils.getLifecycleOwnerWrapperFromView(this))
 }
 
 @BindingAdapter("view_model", "lifecycleOwnerWrapper")
 fun View.bindViewModel(
-    viewModel: ViewModel?,
+    viewModel: NDViewModel?,
     lifecycleOwnerWrapper: LifecycleOwnerWrapper
 ) {
     (viewModel ?: NoViewModel).let {
@@ -52,7 +52,7 @@ fun View.bindViewModel(
     }
 }
 
-fun View.bindAction(viewModel: ViewModel, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
+fun View.bindAction(viewModel: NDViewModel, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
     viewModel.action.observe(lifecycleOwnerWrapper.lifecycleOwner) { action ->
         when (action) {
             ViewModelAction.None -> {

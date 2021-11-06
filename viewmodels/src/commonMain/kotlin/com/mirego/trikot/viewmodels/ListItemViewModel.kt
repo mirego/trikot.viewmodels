@@ -1,6 +1,6 @@
 package com.mirego.trikot.viewmodels
 
-interface ListItemViewModel : ViewModel {
+interface ListItemViewModel : NDViewModel {
     var comparableId: String
 
     /**

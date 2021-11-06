@@ -12,21 +12,21 @@ import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.streams.reactive.processors.combine
-import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
+import com.mirego.trikot.viewmodels.mutable.NDMutableButtonViewModel
 import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object ButtonViewModelBinder {
 
-    val NoButtonViewModel = MutableButtonViewModel().apply { hidden = true.just() } as ButtonViewModel
+    val NoButtonViewModel = NDMutableButtonViewModel().apply { hidden = true.just() } as NDButtonViewModel
     val NoViewModelAction = Publishers.behaviorSubject(ViewModelAction {})
 
     @JvmStatic
     @BindingAdapter("view_model")
     fun bind(
         textView: TextView,
-        buttonViewModel: ButtonViewModel?
+        buttonViewModel: NDButtonViewModel?
     ) {
         bind(textView, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(textView))
     }
@@ -35,7 +35,7 @@ object ButtonViewModelBinder {
     @BindingAdapter("view_model")
     fun bind(
         view: View,
-        buttonViewModel: ButtonViewModel?
+        buttonViewModel: NDButtonViewModel?
     ) {
         bind(view, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(view))
     }
@@ -44,7 +44,7 @@ object ButtonViewModelBinder {
     @BindingAdapter("view_model")
     fun bind(
         imageView: ImageView,
-        buttonViewModel: ButtonViewModel?
+        buttonViewModel: NDButtonViewModel?
     ) {
         bind(imageView, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(imageView))
     }
@@ -53,7 +53,7 @@ object ButtonViewModelBinder {
     @BindingAdapter("view_model")
     fun bind(
         button: Button,
-        buttonViewModel: ButtonViewModel?
+        buttonViewModel: NDButtonViewModel?
     ) {
         bind(button, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(button))
     }
@@ -62,7 +62,7 @@ object ButtonViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         textView: TextView,
-        buttonViewModel: ButtonViewModel?,
+        buttonViewModel: NDButtonViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (buttonViewModel ?: NoButtonViewModel).let { it ->
@@ -114,7 +114,7 @@ object ButtonViewModelBinder {
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
-    fun bind(view: View, buttonViewModel: ButtonViewModel?, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
+    fun bind(view: View, buttonViewModel: NDButtonViewModel?, lifecycleOwnerWrapper: LifecycleOwnerWrapper) {
         (buttonViewModel ?: NoButtonViewModel).let { it ->
 
             view.bindViewModel(it, lifecycleOwnerWrapper)
@@ -133,7 +133,7 @@ object ButtonViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         imageView: ImageView,
-        buttonViewModel: ButtonViewModel?,
+        buttonViewModel: NDButtonViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (buttonViewModel ?: NoButtonViewModel).let { it ->
@@ -150,7 +150,7 @@ object ButtonViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         button: Button,
-        buttonViewModel: ButtonViewModel?,
+        buttonViewModel: NDButtonViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (buttonViewModel ?: NoButtonViewModel).let { it ->

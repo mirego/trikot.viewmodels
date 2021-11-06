@@ -2,7 +2,7 @@ package com.mirego.trikot.viewmodels
 
 import org.reactivestreams.Publisher
 
-interface PickerViewModel<T> : ViewModel {
+interface PickerViewModel<T> : NDViewModel {
     /**
      * List of elements in the spinner
      */

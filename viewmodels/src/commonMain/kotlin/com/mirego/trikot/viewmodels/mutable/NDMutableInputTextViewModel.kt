@@ -7,7 +7,7 @@ import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.mirego.trikot.viewmodels.properties.InputTextType
 
-open class MutableInputTextViewModel : MutableViewModel(), InputTextViewModel {
+open class NDMutableInputTextViewModel : NDMutableViewModel(), InputTextViewModel {
     override var userInput = Publishers.behaviorSubject("")
 
     override var inputType = PropertyFactory.create(InputTextType.TEXT)

@@ -5,6 +5,6 @@ import com.mirego.trikot.viewmodels.ListViewModel
 import com.mirego.trikot.viewmodels.factory.PropertyFactory
 import org.reactivestreams.Publisher
 
-open class MutableListViewModel<T : ListItemViewModel> : MutableViewModel(), ListViewModel<T> {
+open class NDMutableListViewModel<T : ListItemViewModel> : NDMutableViewModel(), ListViewModel<T> {
     override var elements: Publisher<List<T>> = PropertyFactory.create(listOf())
 }
