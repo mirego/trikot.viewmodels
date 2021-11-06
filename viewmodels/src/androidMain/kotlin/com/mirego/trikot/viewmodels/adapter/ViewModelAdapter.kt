@@ -10,7 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
-import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.NDListItemViewModel
 import com.mirego.trikot.viewmodels.bindViewModel
 
 typealias LayoutMapper<MLI> = (viewModel: MLI) -> Int
@@ -55,7 +55,7 @@ typealias LayoutMapper<MLI> = (viewModel: MLI) -> Int
  *  }
  *
  */
-open class ViewModelAdapter<MLI : ListItemViewModel>(
+open class ViewModelAdapter<MLI : NDListItemViewModel>(
     @IdRes private var viewModelVariableId: Int,
     @IdRes private var lifecycleVariableId: Int? = null,
     lifecycleOwner: LifecycleOwner,

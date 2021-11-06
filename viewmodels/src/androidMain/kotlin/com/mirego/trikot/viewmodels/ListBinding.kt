@@ -12,7 +12,7 @@ object ListBinding {
     @BindingAdapter("view_model")
     fun bind(
         recyclerView: RecyclerView,
-        listViewModel: ListViewModel<*>?
+        listViewModel: NDListViewModel<*>?
     ) {
         bindList(recyclerView, listViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(recyclerView))
     }
@@ -22,14 +22,14 @@ object ListBinding {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bindList(
         view: RecyclerView,
-        listViewModel: ListViewModel<*>?,
+        listViewModel: NDListViewModel<*>?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         view.bindViewModel(listViewModel, lifecycleOwnerWrapper)
         listViewModel?.elements
             ?.observe(lifecycleOwnerWrapper.lifecycleOwner) { items ->
                 view.adapter?.let {
-                    (it as? ListAdapter<ListItemViewModel, *>)?.submitList(items)
+                    (it as? ListAdapter<NDListItemViewModel, *>)?.submitList(items)
                 }
             }
     }

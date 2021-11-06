@@ -1,6 +1,6 @@
 package com.mirego.trikot.viewmodels
 
-interface ListItemViewModel : NDViewModel {
+interface NDListItemViewModel : NDViewModel {
     var comparableId: String
 
     /**
@@ -8,7 +8,7 @@ interface ListItemViewModel : NDViewModel {
      * <p>
      * For example, if your items have unique ids, this method should check their id equality.
      */
-    fun isTheSame(other: ListItemViewModel): Boolean {
+    fun isTheSame(other: NDListItemViewModel): Boolean {
         return comparableId == other.comparableId
     }
 
@@ -20,7 +20,7 @@ interface ListItemViewModel : NDViewModel {
      * This method to check equality instead of {@link Object#equals(Object)} so that you can
      * change its behavior depending on your UI.
      */
-    fun haveTheSameContent(other: ListItemViewModel): Boolean {
+    fun haveTheSameContent(other: NDListItemViewModel): Boolean {
         return true
     }
 }
