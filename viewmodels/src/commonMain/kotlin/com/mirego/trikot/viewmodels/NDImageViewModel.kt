@@ -8,7 +8,7 @@ import org.reactivestreams.Publisher
 data class ImageWidth(val value: Int)
 data class ImageHeight(val value: Int)
 
-interface ImageViewModel : NDViewModel {
+interface NDImageViewModel : NDViewModel {
     fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow>
     val imageState: Publisher<ImageState>
 

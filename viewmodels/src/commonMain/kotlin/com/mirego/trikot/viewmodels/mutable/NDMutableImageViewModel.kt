@@ -4,8 +4,8 @@ import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ImageFlow
 import com.mirego.trikot.viewmodels.ImageHeight
-import com.mirego.trikot.viewmodels.ImageViewModel
 import com.mirego.trikot.viewmodels.ImageWidth
+import com.mirego.trikot.viewmodels.NDImageViewModel
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
@@ -17,7 +17,7 @@ import org.reactivestreams.Publisher
  */
 typealias ImageFlowProvider = (width: ImageWidth, height: ImageHeight) -> Publisher<ImageFlow>
 
-open class NDMutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : NDMutableViewModel(), ImageViewModel {
+open class NDMutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : NDMutableViewModel(), NDImageViewModel {
     override fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow> {
         return imageFlowProvider(width, height)
     }

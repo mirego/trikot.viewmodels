@@ -21,18 +21,85 @@ import com.squareup.picasso.Transformation
 
 object ImageViewModelBinder {
     private val NoImageViewModel = NDMutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
-        .apply { hidden = true.just() } as ImageViewModel
+        .apply { hidden = true.just() } as NDImageViewModel
 
     @JvmStatic
-    @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
+    @BindingAdapter("view_model", "placeholderScaleType")
+    fun bindOptional(
+        imageView: ImageView,
+        imageViewModel: NDImageViewModel?,
+        placeholderScaleType: ImageView.ScaleType? = null
+    ) = bind(imageView, imageViewModel, placeholderScaleType = placeholderScaleType)
+
+    @JvmStatic
+    @BindingAdapter("view_model", "transformation")
+    fun bindOptional(
+        imageView: ImageView,
+        imageViewModel: NDImageViewModel?,
+        transformation: Transformation? = null
+    ) = bind(imageView, imageViewModel, transformation = transformation)
+
+    @JvmStatic
+    @BindingAdapter("view_model", "lifecycleOwnerWrapper")
+    fun bindOptional(
+        imageView: ImageView,
+        imageViewModel: NDImageViewModel?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null
+    ) = bind(imageView, imageViewModel, lifecycleOwnerWrapper = lifecycleOwnerWrapper)
+
+    @JvmStatic
+    @BindingAdapter("view_model", "lifecycleOwnerWrapper", "transformation")
+    fun bindOptional(
+        imageView: ImageView,
+        imageViewModel: NDImageViewModel?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
+        transformation: Transformation? = null
+    ) = bind(
+        imageView,
+        imageViewModel,
+        lifecycleOwnerWrapper = lifecycleOwnerWrapper,
+        transformation = transformation
+    )
+
+    @JvmStatic
+    @BindingAdapter("view_model", "lifecycleOwnerWrapper", "placeholderScaleType")
+    fun bindOptional(
+        imageView: ImageView,
+        imageViewModel: NDImageViewModel?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
+        placeholderScaleType: ImageView.ScaleType? = null
+    ) = bind(
+        imageView,
+        imageViewModel,
+        lifecycleOwnerWrapper = lifecycleOwnerWrapper,
+        placeholderScaleType = placeholderScaleType
+    )
+
+    @JvmStatic
+    @BindingAdapter("view_model", "transformation", "placeholderScaleType")
+    fun bindOptional(
+        imageView: ImageView,
+        imageViewModel: NDImageViewModel?,
+        transformation: Transformation? = null,
+        placeholderScaleType: ImageView.ScaleType? = null
+    ) = bind(
+        imageView,
+        imageViewModel,
+        transformation = transformation,
+        placeholderScaleType = placeholderScaleType
+    )
+
+    @JvmStatic
+    @BindingAdapter("view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType")
     fun bind(
         imageView: ImageView,
-        imageViewModel: ImageViewModel?,
+        imageViewModel: NDImageViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
         transformation: Transformation? = null,
         placeholderScaleType: ImageView.ScaleType? = null
     ) {
-        val safeLifecycleOwnerWrapper = lifecycleOwnerWrapper ?: BindingUtils.getLifecycleOwnerWrapperFromView(imageView)
+        val safeLifecycleOwnerWrapper =
+            lifecycleOwnerWrapper ?: BindingUtils.getLifecycleOwnerWrapperFromView(imageView)
         (imageViewModel ?: NoImageViewModel).let {
 
             imageView.bindViewModel(imageViewModel, safeLifecycleOwnerWrapper)
@@ -58,7 +125,7 @@ object ImageViewModelBinder {
     }
 
     private fun processImageFlow(
-        imageViewModel: ImageViewModel,
+        imageViewModel: NDImageViewModel,
         imageFlow: ImageFlow,
         imageView: ImageView,
         transformation: Transformation?,
