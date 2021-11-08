@@ -28,7 +28,7 @@ object ImageViewModelBinder {
     fun bindOptional(
         imageView: ImageView,
         imageViewModel: NDImageViewModel?,
-        placeholderScaleType: ImageView.ScaleType? = null
+        placeholderScaleType: ImageView.ScaleType?
     ) = bind(imageView, imageViewModel, placeholderScaleType = placeholderScaleType)
 
     @JvmStatic
@@ -36,7 +36,7 @@ object ImageViewModelBinder {
     fun bindOptional(
         imageView: ImageView,
         imageViewModel: NDImageViewModel?,
-        transformation: Transformation? = null
+        transformation: Transformation?
     ) = bind(imageView, imageViewModel, transformation = transformation)
 
     @JvmStatic
@@ -44,7 +44,7 @@ object ImageViewModelBinder {
     fun bindOptional(
         imageView: ImageView,
         imageViewModel: NDImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper?
     ) = bind(imageView, imageViewModel, lifecycleOwnerWrapper = lifecycleOwnerWrapper)
 
     @JvmStatic
@@ -52,8 +52,8 @@ object ImageViewModelBinder {
     fun bindOptional(
         imageView: ImageView,
         imageViewModel: NDImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
-        transformation: Transformation? = null
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper?,
+        transformation: Transformation?
     ) = bind(
         imageView,
         imageViewModel,
@@ -66,8 +66,8 @@ object ImageViewModelBinder {
     fun bindOptional(
         imageView: ImageView,
         imageViewModel: NDImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
-        placeholderScaleType: ImageView.ScaleType? = null
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper?,
+        placeholderScaleType: ImageView.ScaleType?
     ) = bind(
         imageView,
         imageViewModel,
@@ -80,8 +80,8 @@ object ImageViewModelBinder {
     fun bindOptional(
         imageView: ImageView,
         imageViewModel: NDImageViewModel?,
-        transformation: Transformation? = null,
-        placeholderScaleType: ImageView.ScaleType? = null
+        transformation: Transformation?,
+        placeholderScaleType: ImageView.ScaleType?
     ) = bind(
         imageView,
         imageViewModel,
