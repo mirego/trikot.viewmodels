@@ -2,7 +2,7 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 extension UILabel {
-    public var labelViewModel: LabelViewModel? {
+    public var labelViewModel: NDLabelViewModel? {
         get { return trikotViewModel() }
         set(value) {
             viewModel = value

@@ -15,7 +15,7 @@ extension UIButton {
         }
     }
 
-    public var buttonViewModel: ButtonViewModel? {
+    public var buttonViewModel: NDButtonViewModel? {
         get { return trikotViewModel() }
         set(value) {
             removeTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)

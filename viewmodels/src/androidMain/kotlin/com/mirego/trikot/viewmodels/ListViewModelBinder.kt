@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.utils.BindingUtils
 
-object ListBinding {
+object ListViewModelBinder {
 
     @JvmStatic
     @BindingAdapter("view_model")

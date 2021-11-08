@@ -3,7 +3,7 @@ import TRIKOT_FRAMEWORK_NAME
 import Trikot_streams
 
 extension UIView {
-    public var viewModel: ViewModel? {
+    public var viewModel: NDViewModel? {
         get { return trikotViewModel() }
         set(viewModel) {
             unsubscribeFromAllPublisher()
@@ -44,7 +44,7 @@ extension UIView {
 
     @objc
     private func trikotOnViewTouchUp() {
-        let localViewModel: ViewModel? = trikotViewModel()
+        let localViewModel: NDViewModel? = trikotViewModel()
         guard let viewModelModel = localViewModel else { return }
         observe(viewModelModel.action.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
     }
