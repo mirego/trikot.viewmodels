@@ -21,13 +21,13 @@ import com.squareup.picasso.Transformation
 
 object ImageViewModelBinder {
     private val NoImageViewModel = NDMutableImageViewModel { _, _ -> Publishers.behaviorSubject() }
-        .apply { hidden = true.just() } as NDImageViewModel
+        .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic
     @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
     fun bind(
         imageView: ImageView,
-        imageViewModel: NDImageViewModel?,
+        imageViewModel: ImageViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
         transformation: Transformation? = null,
         placeholderScaleType: ImageView.ScaleType? = null
@@ -58,8 +58,8 @@ object ImageViewModelBinder {
     }
 
     private fun processImageFlow(
-        imageViewModel: NDImageViewModel,
-        imageFlow: NDImageFlow,
+        imageViewModel: ImageViewModel,
+        imageFlow: ImageFlow,
         imageView: ImageView,
         transformation: Transformation?,
         originalScaleType: ImageView.ScaleType,

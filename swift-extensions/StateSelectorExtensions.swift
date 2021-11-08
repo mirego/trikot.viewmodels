@@ -18,7 +18,7 @@ extension StateSelector where T == Color {
     }
 }
 
-extension StateSelector where T == NDImageResource {
+extension StateSelector where T == ImageResource {
     public func defaultValue() -> T? {
         return stateSelectorDefaultValue(self)
     }

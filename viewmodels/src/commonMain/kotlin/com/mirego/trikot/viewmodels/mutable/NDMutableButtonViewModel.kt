@@ -5,16 +5,16 @@ import com.mirego.trikot.viewmodels.factory.PropertyFactory
 import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.viewmodels.resource.NDImageResource
+import com.mirego.trikot.viewmodels.resource.ImageResource
 
 open class NDMutableButtonViewModel : NDMutableLabelViewModel(), NDButtonViewModel {
-    override var backgroundImageResource = PropertyFactory.create(StateSelector<NDImageResource>())
+    override var backgroundImageResource = PropertyFactory.create(StateSelector<ImageResource>())
 
     override var enabled = PropertyFactory.create(true)
 
     override var imageAlignment = PropertyFactory.create(Alignment.CENTER)
 
-    override var imageResource = PropertyFactory.create(StateSelector<NDImageResource>())
+    override var imageResource = PropertyFactory.create(StateSelector<ImageResource>())
 
     override var selected = PropertyFactory.create(false)
 

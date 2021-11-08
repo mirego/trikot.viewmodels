@@ -2,28 +2,28 @@ package com.mirego.trikot.viewmodels
 
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ImageState
-import com.mirego.trikot.viewmodels.resource.NDImageResource
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
 data class ImageWidth(val value: Int)
 data class ImageHeight(val value: Int)
 
-interface NDImageViewModel : NDViewModel {
-    fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<NDImageFlow>
+interface ImageViewModel : NDViewModel {
+    fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow>
     val imageState: Publisher<ImageState>
 
     fun setImageState(imageState: ImageState)
 }
 
-interface NDImageFlow {
+interface ImageFlow {
     /**
      * Image resource to display
      */
-    val imageResource: NDImageResource?
+    val imageResource: ImageResource?
     /**
      * Image resource to display as placeholder
      */
-    val placeholderImageResource: NDImageResource?
+    val placeholderImageResource: ImageResource?
     /**
      * Tint color to apply to the imageResource
      */
@@ -40,10 +40,10 @@ interface NDImageFlow {
      * Next image flow to use when an url is provided and the image is successfully displayed. Useful when a low
      * quality image needs to be displayed before a full quality image.
      */
-    val onSuccess: Publisher<NDImageFlow>?
+    val onSuccess: Publisher<ImageFlow>?
     /**
      * Next image flow to use when an url is provided and the image could not be downloaded/displayed. Useful when a low
      * quality image needs to be displayed before a full quality image.
      */
-    val onError: Publisher<NDImageFlow>?
+    val onError: Publisher<ImageFlow>?
 }

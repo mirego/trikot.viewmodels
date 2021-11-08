@@ -3,14 +3,14 @@ package com.mirego.trikot.viewmodels
 import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.viewmodels.resource.NDImageResource
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
 interface NDButtonViewModel : NDLabelViewModel {
     /**
      * Resource for the background image of the button
      */
-    val backgroundImageResource: Publisher<StateSelector<NDImageResource>>
+    val backgroundImageResource: Publisher<StateSelector<ImageResource>>
     /**
      * If the button is enabled or disabled
      */
@@ -22,7 +22,7 @@ interface NDButtonViewModel : NDLabelViewModel {
     /**
      * Ressource of the button image. Can be associated with a text
      */
-    val imageResource: Publisher<StateSelector<NDImageResource>>
+    val imageResource: Publisher<StateSelector<ImageResource>>
     /**
      * Selected state of the view
      */

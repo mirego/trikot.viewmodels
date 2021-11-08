@@ -8,10 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.viewmodels.resource.NDImageResource
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import com.mirego.trikot.viewmodels.resources.ImageViewModelResourceManager
 
-fun StateSelector<NDImageResource>.asDrawable(
+fun StateSelector<ImageResource>.asDrawable(
     context: Context,
     tintColor: StateSelector<Color>?
 ): Drawable {
@@ -45,11 +45,11 @@ fun StateSelector<NDImageResource>.asDrawable(
     return stateListDrawable
 }
 
-fun NDImageResource.resourceId(context: Context): Int? {
+fun ImageResource.resourceId(context: Context): Int? {
     return ImageViewModelResourceManager.provider.resourceIdFromResource(this, context)
 }
 
-fun NDImageResource.asDrawable(
+fun ImageResource.asDrawable(
     context: Context,
     tintColors: StateSelector<Color>? = null
 ): Drawable? {
