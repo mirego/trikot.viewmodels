@@ -7,7 +7,7 @@ private let USER_PLACEHOLDER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.alloc
 private let USER_IMAGERESOURCE_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 
 public protocol ImageViewModelHandler {
-    func handleImage(imageViewModel: ImageViewModel?, on imageView: UIImageView)
+    func handleImage(imageViewModel: NDImageViewModel?, on imageView: UIImageView)
 }
 
 extension UIImageView {
@@ -52,7 +52,7 @@ extension UIImageView {
         }
     }
 
-    public var imageViewModel: ImageViewModel? {
+    public var imageViewModel: NDImageViewModel? {
         get { return trikotViewModel() }
         set(value) {
             viewModel = value
@@ -106,7 +106,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
         imageCache.removeAllObjects()
     }
 
-    public func handleImage(imageViewModel: ImageViewModel?, on imageView: UIImageView) {
+    public func handleImage(imageViewModel: NDImageViewModel?, on imageView: UIImageView) {
         if let imageViewModel = imageViewModel {
             let cancellableManagerProvider = CancellableManagerProvider()
 
@@ -139,7 +139,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
         }
     }
 
-    private func observeImageFlow(_ imageFlowPublisher: Publisher, cancellableManager: CancellableManager, imageViewModel: ImageViewModel, imageView: UIImageView) {
+    private func observeImageFlow(_ imageFlowPublisher: Publisher, cancellableManager: CancellableManager, imageViewModel: NDImageViewModel, imageView: UIImageView) {
         let cancellableManagerProvider = CancellableManagerProvider()
         cancellableManager.add(cancellable: cancellableManagerProvider)
 
@@ -148,7 +148,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
         }
     }
 
-    private func doLoadImageFlow(cancellableManager: CancellableManager, imageViewModel: ImageViewModel, imageFlow: ImageFlow, imageView: UIImageView) {
+    private func doLoadImageFlow(cancellableManager: CancellableManager, imageViewModel: NDImageViewModel, imageFlow: ImageFlow, imageView: UIImageView) {
         var unProcessedImage: UIImage?
         if let imageResource = imageFlow.imageResource {
             unProcessedImage = ImageViewModelResourceManager.shared.image(fromResource: imageResource)
@@ -172,7 +172,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
         downloadImageFlowIfNeeded(cancellableManager: cancellableManager, imageViewModel: imageViewModel, imageFlow: imageFlow, imageView: imageView)
     }
 
-    private func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, imageViewModel: ImageViewModel, imageFlow: ImageFlow, imageView: UIImageView) {
+    private func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, imageViewModel: NDImageViewModel, imageFlow: ImageFlow, imageView: UIImageView) {
         guard let urlString = imageFlow.url, let url = URL(string: urlString) else { return }
 
         if isImageCacheEnabled, let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {

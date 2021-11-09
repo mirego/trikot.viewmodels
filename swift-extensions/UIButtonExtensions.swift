@@ -47,7 +47,7 @@ extension UIButton {
 
                 bind(buttonViewModel.selected, \UIButton.isSelected)
 
-                observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector<ImageResource>) in
+                observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector<NDImageResource>) in
                     guard let self = self else { return }
 
                     self.setBackgroundImageResource(imageResourceSelector.defaultValue(), for: .normal)
@@ -63,7 +63,7 @@ extension UIButton {
                 let imageResourceCombineLatest = CombineLatestProcessorExtensionsKt.combine(buttonViewModel.imageResource, publishers: [buttonViewModel.tintColor])
                 observe(imageResourceCombineLatest) { [weak self] (value: [Any?]) in
                     guard let self = self else { return }
-                    guard let imageSelector = value[0] as? StateSelector<ImageResource>,
+                    guard let imageSelector = value[0] as? StateSelector<NDImageResource>,
                         let tintSelector = value[1] as? StateSelector<Color> else { return }
 
                     self.setImageResource(imageSelector.defaultValue(), tintColor: tintSelector.defaultValue()?.safeColor(), for: .normal)
@@ -117,7 +117,7 @@ extension UIButton {
         }
     }
 
-    private func setBackgroundImageResource(_ resource: ImageResource?, for state: UIControl.State) {
+    private func setBackgroundImageResource(_ resource: NDImageResource?, for state: UIControl.State) {
         if resource === ImageResourceCompanion().None {
             setBackgroundImage(nil, for: state)
         } else if let image = ImageViewModelResourceManager.shared.image(fromResource: resource) {
@@ -125,7 +125,7 @@ extension UIButton {
         }
     }
 
-    private func setImageResource(_ resource: ImageResource?, tintColor: UIColor?, for state: UIControl.State) {
+    private func setImageResource(_ resource: NDImageResource?, tintColor: UIColor?, for state: UIControl.State) {
         if resource === ImageResourceCompanion().None {
             setImage(nil, for: state)
         } else if let image = ImageViewModelResourceManager.shared.image(fromResource: resource) {
@@ -160,7 +160,7 @@ extension UIButton {
         guard let buttonViewModel = buttonViewModel else { return }
         guard let alignment = alignment, [Alignment.right, Alignment.left].contains(alignment) else { resetAlignment() ; return }
 
-        observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector<ImageResource>) in
+        observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector<NDImageResource>) in
 
             guard let titleLabel = self?.titleLabel, let image = ImageViewModelResourceManager.shared.image(fromResource: imageSelector.defaultValue()) else { return }
 
