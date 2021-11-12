@@ -5,7 +5,7 @@ import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.mirego.trikot.viewmodels.properties.InputTextType
 import org.reactivestreams.Publisher
 
-interface InputTextViewModel : NDViewModel {
+interface NDInputTextViewModel : NDViewModel {
     /**
      * Text input by the user
      */

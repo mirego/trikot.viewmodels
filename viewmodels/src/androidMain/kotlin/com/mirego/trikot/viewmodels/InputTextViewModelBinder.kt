@@ -29,13 +29,13 @@ import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object InputTextViewModelBinder {
 
-    val NoInputTextViewModel = NDMutableInputTextViewModel().apply { hidden = true.just() } as InputTextViewModel
+    val NoInputTextViewModel = NDMutableInputTextViewModel().apply { hidden = true.just() } as NDInputTextViewModel
 
     @JvmStatic
     @BindingAdapter("view_model")
     fun bind(
         editText: EditText,
-        InputTextViewModel: InputTextViewModel?
+        InputTextViewModel: NDInputTextViewModel?
     ) {
         bind(editText, InputTextViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(editText))
     }
@@ -44,7 +44,7 @@ object InputTextViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         editText: EditText,
-        InputTextViewModel: InputTextViewModel?,
+        InputTextViewModel: NDInputTextViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         editText.bindViewModel(InputTextViewModel, lifecycleOwnerWrapper)
@@ -136,7 +136,7 @@ object InputTextViewModelBinder {
     }
 
     private fun addTextWatcher(
-        InputTextViewModel: InputTextViewModel,
+        InputTextViewModel: NDInputTextViewModel,
         editText: EditText
     ) {
         val textWatcher = object : TextWatcher {

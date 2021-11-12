@@ -2,7 +2,7 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 extension UITextField {
-    public var inputTextViewModel: InputTextViewModel? {
+    public var inputTextViewModel: NDInputTextViewModel? {
         get { return trikotViewModel() }
         set(value) {
             removeTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
