@@ -5,8 +5,7 @@ plugins {
     kotlin("kapt")
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.release").version("2.0")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -31,7 +30,7 @@ kotlin {
             dependencies {
                 implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
                 implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-                implementation("com.mirego.trikot:viewmodels:${project.extra["trikot_viewmodels_version"]}")
+                implementation(project(":viewmodels"))
             }
         }
 
@@ -114,10 +113,4 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-}
-
-release {
-    checkTasks = listOf("build", "check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
 }

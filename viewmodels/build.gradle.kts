@@ -5,8 +5,7 @@ plugins {
     kotlin("kapt")
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.release").version("2.0")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -197,10 +196,4 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-}
-
-release {
-    checkTasks = listOf("build", "check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
 }

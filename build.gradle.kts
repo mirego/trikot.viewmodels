@@ -1,3 +1,8 @@
+plugins {
+    id("mirego.release").version("2.0")
+    id("mirego.publish").version("1.0")
+}
+
 buildscript {
     repositories {
         google()
@@ -23,4 +28,16 @@ allprojects {
         google()
         mavenCentral()
     }
+}
+
+release {
+    checkTasks = listOf(
+        ":viewmodels:check",
+        ":viewmodels-bridge:check"
+    )
+    buildTasks = listOf(
+        ":viewmodels:publish",
+        ":viewmodels-bridge:publish"
+    )
+    updateVersionPart = 2
 }
