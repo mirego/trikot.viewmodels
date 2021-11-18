@@ -12,13 +12,13 @@ import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object ToggleSwitchViewModelBinder {
     private val noSwitchViewModel =
-        NDMutableToggleSwitchViewModel().apply { hidden = true.just() } as ToggleSwitchViewModel
+        NDMutableToggleSwitchViewModel().apply { hidden = true.just() } as NDToggleSwitchViewModel
 
     @JvmStatic
     @BindingAdapter("view_model")
     fun bind(
         toggleSwitch: SwitchCompat,
-        toggleSwitchViewModel: ToggleSwitchViewModel
+        toggleSwitchViewModel: NDToggleSwitchViewModel
     ) {
         bind(toggleSwitch, toggleSwitchViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(toggleSwitch))
     }
@@ -27,7 +27,7 @@ object ToggleSwitchViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         toggleSwitch: SwitchCompat,
-        toggleSwitchViewModel: ToggleSwitchViewModel,
+        toggleSwitchViewModel: NDToggleSwitchViewModel,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         toggleSwitch.bindViewModel(toggleSwitchViewModel, lifecycleOwnerWrapper)

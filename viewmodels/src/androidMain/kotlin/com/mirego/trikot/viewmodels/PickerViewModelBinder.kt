@@ -14,7 +14,7 @@ object PickerViewModelBinder {
     @BindingAdapter("view_model")
     fun bind(
         spinner: Spinner,
-        pickerViewModel: PickerViewModel<*>?
+        pickerViewModel: NDPickerViewModel<*>?
     ) {
         bind(spinner, pickerViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(spinner))
     }
@@ -24,7 +24,7 @@ object PickerViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         picker: Spinner,
-        pickerViewModel: PickerViewModel<*>?,
+        pickerViewModel: NDPickerViewModel<*>?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         pickerViewModel?.let { viewModel ->

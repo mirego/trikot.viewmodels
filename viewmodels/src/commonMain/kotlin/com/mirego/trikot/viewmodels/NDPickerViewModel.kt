@@ -2,11 +2,11 @@ package com.mirego.trikot.viewmodels
 
 import org.reactivestreams.Publisher
 
-interface PickerViewModel<T> : NDViewModel {
+interface NDPickerViewModel<T> : NDViewModel {
     /**
      * List of elements in the spinner
      */
-    val elements: Publisher<List<PickerItemViewModel<T>>>
+    val elements: Publisher<List<NDPickerItemViewModel<T>>>
 
     /**
      * Appearing value on the spinner

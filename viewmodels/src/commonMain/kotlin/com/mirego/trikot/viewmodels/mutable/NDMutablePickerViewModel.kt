@@ -1,20 +1,20 @@
 package com.mirego.trikot.viewmodels.mutable
 
 import com.mirego.trikot.streams.reactive.Publishers
-import com.mirego.trikot.viewmodels.PickerItemViewModel
-import com.mirego.trikot.viewmodels.PickerViewModel
+import com.mirego.trikot.viewmodels.NDPickerItemViewModel
+import com.mirego.trikot.viewmodels.NDPickerViewModel
 import com.mirego.trikot.viewmodels.factory.PropertyFactory
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
-open class NDMutablePickerViewModel<T> : NDMutableViewModel(), PickerViewModel<T> {
+open class NDMutablePickerViewModel<T> : NDMutableViewModel(), NDPickerViewModel<T> {
     override val selectedElementIndex = Publishers.behaviorSubject(0)
 
     override fun setSelectedElementIndex(index: Int) {
         selectedElementIndex.value = index
     }
 
-    override var elements: Publisher<List<PickerItemViewModel<T>>> = PropertyFactory.create(
+    override var elements: Publisher<List<NDPickerItemViewModel<T>>> = PropertyFactory.create(
         listOf()
     )
 

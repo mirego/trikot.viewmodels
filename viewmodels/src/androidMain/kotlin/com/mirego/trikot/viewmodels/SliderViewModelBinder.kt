@@ -10,13 +10,13 @@ import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object SliderViewModelBinder {
     val noSliderViewModel =
-        NDMutableSliderViewModel().apply { hidden = true.just() } as SliderViewModel
+        NDMutableSliderViewModel().apply { hidden = true.just() } as NDSliderViewModel
 
     @JvmStatic
     @BindingAdapter("view_model")
     fun bind(
         seekBar: SeekBar,
-        sliderViewModel: SliderViewModel?
+        sliderViewModel: NDSliderViewModel?
     ) {
         bind(seekBar, sliderViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(seekBar))
     }
@@ -25,7 +25,7 @@ object SliderViewModelBinder {
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         seekBar: SeekBar,
-        sliderViewModel: SliderViewModel?,
+        sliderViewModel: NDSliderViewModel?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (sliderViewModel ?: noSliderViewModel).let { viewModel ->

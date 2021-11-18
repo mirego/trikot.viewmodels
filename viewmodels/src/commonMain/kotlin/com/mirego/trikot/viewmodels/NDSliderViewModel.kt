@@ -2,7 +2,7 @@ package com.mirego.trikot.viewmodels
 
 import org.reactivestreams.Publisher
 
-interface SliderViewModel : NDViewModel {
+interface NDSliderViewModel : NDViewModel {
     /**
      * Minimum value of the slider
      */
