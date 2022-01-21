@@ -1,3 +1,6 @@
+# :warning: Warning: this project as been moved
+See [the new trikot repository](https://github.com/mirego/trikot) for releases starting from 3.0.0.
+
 # Trikot.viewmodels
 ViewModels expose properties that can be binded to Android or iOS UI components. It allows 2 way interactions between Kotlin Multiplatform Common Code and platform UI.
 
